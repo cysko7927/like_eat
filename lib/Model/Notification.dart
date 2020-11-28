@@ -5,6 +5,6 @@ class Notification {
 
   Notification(this._referenceProduct);
 
-  Product get referenceProductGet => _referenceProduct;
-  set referenceProductSet(Product product) => _referenceProduct = product;
+  Product get referenceProduct => _referenceProduct;
+  set referenceProduct(Product product) => _referenceProduct = product;
 }

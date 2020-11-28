@@ -6,9 +6,13 @@ class StockUpdate extends Notification {
 
   StockUpdate(Product referenceProduct) : super(referenceProduct);
 
-  bool get stillActiveGet => _stillActive;
-  set stillActiveSet(bool value) => _stillActive = value;
+  //Getter
+  bool get stillActive => _stillActive;
 
+  //Setter
+  set stillActive(bool value) => _stillActive = value;
+
+  //Change method: Will Swapp the Still active attribute from true to false and viceversa
   change() {
     if (this._stillActive == true)
       this._stillActive = false;

@@ -5,17 +5,20 @@ class Product {
   double _price;
   int _quantity;
 
+  //Constructor
   Product(this._supplier, this._type, this._name, this._price, this._quantity);
 
-  String get supplierGet => _supplier;
-  String get typeGet => _type;
-  String get nameGet => _name;
-  double get priceGet => _price;
-  int get quantityGet => _quantity;
+  //Getter
+  String get supplier => _supplier;
+  String get type => _type;
+  String get name => _name;
+  double get price => _price;
+  int get quantity => _quantity;
 
-  set supplierSet(String supplier) => _supplier = supplier;
-  set typeSet(String type) => _type = type;
-  set nameSet(String name) => _name = name;
-  set priceSet(double price) => _price = price;
-  set quantitySet(int quantity) => _quantity = quantity;
+  //Setter
+  set supplier(String supplier) => _supplier = supplier;
+  set type(String type) => _type = type;
+  set name(String name) => _name = name;
+  set price(double price) => _price = price;
+  set quantity(int quantity) => _quantity = quantity;
 }

@@ -5,6 +5,9 @@ class Cereal extends Product {
   Cereal(supplier, type, name, price, quantity, this._read)
       : super(supplier, type, name, price, quantity);
 
-  bool get readGet => _read;
-  set readSet(bool value) => _read = value;
+  //Getter
+  bool get read => _read;
+
+  //Setter
+  set read(bool value) => _read = value;
 }

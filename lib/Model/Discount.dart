@@ -6,12 +6,15 @@ class Discount extends Notification {
   bool _stillActive;
   Discount(Product referenceProduct) : super(referenceProduct);
 
-  double get percentageGet => _percentage;
-  set percentageSet(double percentage) => _percentage = percentage;
+  //Getter
+  double get percentage => _percentage;
+  bool get stillActive => _stillActive;
 
-  bool get stillActiveGet => _stillActive;
-  set stillActiveSet(bool value) => _stillActive = value;
+  //Setter
+  set percentage(double percentage) => _percentage = percentage;
+  set stillActive(bool value) => _stillActive = value;
 
+  //Change method: Will Swapp the Still active attribute from true to false and viceversa
   change() {
     if (this._stillActive == true)
       this._stillActive = false;
