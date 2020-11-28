@@ -1,0 +1,67 @@
+import 'dart:convert';
+
+import 'package:like_eat/Model/Cart.dart';
+import 'package:like_eat/Model/CreditCard.dart';
+import 'package:like_eat/Model/Order.dart';
+import 'package:like_eat/Model/ShippingAddress.dart';
+
+class User {
+  final String _name;
+  final String _surname;
+  final String _nickname;
+  String _password;
+  var _listOfaddress;
+  var _listOfCreditCard;
+  var _listOfOrders;
+  final Cart _cartOfTheUser;
+
+  //Constructor
+  User(this._name, this._surname, this._nickname, this._password,
+      this._cartOfTheUser) {
+    _listOfaddress = [];
+    _listOfCreditCard = [];
+    _listOfOrders = [];
+  }
+
+  //Getter
+  String get name => _name;
+
+  String get surname => _surname;
+
+  String get nickname => _nickname;
+
+  String get password => _password;
+
+  get listOfAddress => [].addAll(_listOfaddress.iterator);
+
+  get listOfCreditCard => [].addAll(_listOfCreditCard.iterator);
+
+  get listOfOrders => [].addAll(_listOfOrders.iterator);
+
+  get cart => _cartOfTheUser;
+
+  //Setter
+  set password(String password) {
+    this._password = password;
+  }
+
+  set addShippingAddress(ShippingAddress address) {
+    _listOfaddress.add(address);
+  }
+
+  set removeShippingAddress(ShippingAddress address) {
+    _listOfaddress.remove(address);
+  }
+
+  set addCreditCard(CreditCard card) {
+    _listOfCreditCard.add(card);
+  }
+
+  set removeCreditCard(CreditCard card) {
+    _listOfCreditCard.remove(card);
+  }
+
+  set addOrder(Order order) {
+    _listOfOrders.add(order);
+  }
+}
