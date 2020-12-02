@@ -10,9 +10,9 @@ class User {
   final String _surname;
   final String _nickname;
   String _password;
-  var _listOfaddress;
-  var _listOfCreditCard;
-  var _listOfOrders;
+  List<ShippingAddress> _listOfaddress;
+  List<CreditCard> _listOfCreditCard;
+  List<Order> _listOfOrders;
   final Cart _cartOfTheUser;
 
   //Constructor
@@ -32,11 +32,11 @@ class User {
 
   String get password => _password;
 
-  get listOfAddress => [].addAll(_listOfaddress.iterator);
+  get listOfAddress => [].addAll(_listOfaddress);
 
-  get listOfCreditCard => [].addAll(_listOfCreditCard.iterator);
+  get listOfCreditCard => [].addAll(_listOfCreditCard);
 
-  get listOfOrders => [].addAll(_listOfOrders.iterator);
+  get listOfOrders => [].addAll(_listOfOrders);
 
   get cart => _cartOfTheUser;
 
