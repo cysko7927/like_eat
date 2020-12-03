@@ -13,6 +13,8 @@ class Cart {
 
   User get user => _user;
   Map<Product, int> get productAndQuantity => createMapProduct();
+  Set<Product> get productsInCart =>
+      _productsAndQuantity.keys; //Obtain all the products in the map
 
   //Setter
   void addProductAndQuantity(Product product, int quantity) {
