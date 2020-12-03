@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:like_eat/Model/Cart.dart';
 import 'package:like_eat/Model/CreditCard.dart';
+import 'package:like_eat/Model/Notification.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/ShippingAddress.dart';
 
@@ -14,6 +15,7 @@ class User {
   List<CreditCard> _listOfCreditCard;
   List<Order> _listOfOrders;
   final Cart _cartOfTheUser;
+  List<Notification> _listOfNotification;
 
   //Constructor
   User(this._name, this._surname, this._nickname, this._password,
@@ -21,6 +23,7 @@ class User {
     _listOfaddress = [];
     _listOfCreditCard = [];
     _listOfOrders = [];
+    _listOfNotification = [];
   }
 
   //Getter
@@ -39,6 +42,8 @@ class User {
   get listOfOrders => [].addAll(_listOfOrders);
 
   get cart => _cartOfTheUser;
+
+  get listOfNotification => [].addAll(_listOfNotification);
 
   //Setter
   set password(String password) {
@@ -63,5 +68,13 @@ class User {
 
   set addOrder(Order order) {
     _listOfOrders.add(order);
+  }
+
+  set addNotification(Notification notification) {
+    _listOfNotification.add(notification);
+  }
+
+  set removeNotification(Notification notification) {
+    _listOfNotification.remove(notification);
   }
 }
