@@ -15,7 +15,7 @@ class User {
   List<CreditCard> _listOfCreditCard;
   List<Order> _listOfOrders;
   final Cart _cartOfTheUser;
-  List<Notification> _listOfNotification;
+  List<Notifications> _listOfNotification;
 
   //Constructor
   User(this._name, this._surname, this._nickname, this._password,
@@ -70,11 +70,11 @@ class User {
     _listOfOrders.add(order);
   }
 
-  set addNotification(Notification notification) {
+  set addNotification(Notifications notification) {
     _listOfNotification.add(notification);
   }
 
-  set removeNotification(Notification notification) {
+  set removeNotification(Notifications notification) {
     _listOfNotification.remove(notification);
   }
 }
