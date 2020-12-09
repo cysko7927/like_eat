@@ -1,7 +1,7 @@
 import 'package:like_eat/Model/Notification.dart';
 import 'package:like_eat/Model/Product.dart';
 
-class Discount extends Notification {
+class Discount extends Notifications {
   double _percentage;
   bool _stillActive;
   Discount(Product referenceProduct) : super(referenceProduct);

@@ -1,7 +1,7 @@
 import 'package:like_eat/Model/Notification.dart';
 import 'package:like_eat/Model/Product.dart';
 
-class StockUpdate extends Notification {
+class StockUpdate extends Notifications {
   bool _stillActive;
 
   StockUpdate(Product referenceProduct) : super(referenceProduct);
