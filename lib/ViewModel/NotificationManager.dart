@@ -14,4 +14,6 @@ class NotificationManager extends ChangeNotifier {
     _notifications = result;
     notifyListeners(); //Commit the state to the view
   }
+
+  //Vedere se servono altre operazioni
 }
