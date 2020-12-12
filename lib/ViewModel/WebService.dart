@@ -29,7 +29,15 @@ class Webservice {
 
   Future<User> fetchUserData(String keyword) async {}
 
-  Future<void> postCart(String name, String type, String supplier,
+  Future<Cart> fetchCart(String nickname) async {}
+
+  Future<void> postAddCart(String name, String type, String supplier,
+      String nickname, int quantity) async {}
+
+  Future<void> postRemoveCart(
+      String name, String type, String supplier, String nickname) async {}
+
+  Future<void> postUpdateCart(String name, String type, String supplier,
       String nickname, int quantity) async {}
 
   Future<void> postNewNickName(String newNick, String oldNick) async {}
@@ -56,4 +64,9 @@ class Webservice {
 
   Future<void> postRemoveCreditCard(
       String number, String cvc, String expDate, String nick) async {}
+
+  Future<List<Product>> fetchObservedProducts(String nickname) async {}
+
+  Future<void> postFlagObservable(String name, String type, String supplier,
+      String nickname, bool observed) async {}
 }
