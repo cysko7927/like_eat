@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/View/SignInView.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(SignIn());
 }
 
 class MyApp extends StatelessWidget {
