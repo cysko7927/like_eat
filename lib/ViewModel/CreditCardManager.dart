@@ -42,4 +42,6 @@ class CreditCardManager extends ChangeNotifier {
     obtainCreditCards(); //Update the state
     notifyListeners(); //Notify the view
   }
+
+  get creditCards => _listOfCreditCards;
 }
