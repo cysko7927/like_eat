@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget{
+  @override
+  _State createState() => _State();
+}
+class _State extends State<SignIn>{
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,14 +27,30 @@ class SignIn extends StatelessWidget {
             Container(child: Text("Sign In")),
             Container(child: Text("Welcome Back")),
             Container(child: Text("Email")),
-            TextField(),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Email',
+              ),
+            ),
             Container(child: Text("Password")),
             TextField(
+              obscureText: _obscureText,
+              controller: passwordController,
               decoration: InputDecoration(
-                suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_off,
-                        color: Theme.of(context).primaryColorDark),
-                    onPressed: null),
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+                suffixIcon: InkWell(
+                    onTap: _toggle,
+                    child: Icon(
+                      _obscureText
+                          ? Icons.remove_red_eye
+                          : Icons.visibility_off,
+                      size: 15.0,
+                      color: Colors.black,
+                    ),
+                  ),
               ),
             ),
             Container(
@@ -38,7 +61,11 @@ class SignIn extends StatelessWidget {
                       disabledTextColor: Colors.black,
                       padding: EdgeInsets.all(8.0),
                       splashColor: Colors.redAccent,
-                      onPressed: () {},
+                      onPressed: () {
+                        //For now it just print the email and password on the terminal
+                        print(emailController.text);
+                        print(passwordController.text);
+                      },
                       child: Text("Sign In",style: TextStyle(fontSize: 20.0),
                       ),
                     ),
@@ -107,4 +134,11 @@ class SignIn extends StatelessWidget {
       ),
     );
   }
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 }
+
+
