@@ -47,4 +47,6 @@ class AddressDataManager extends ChangeNotifier {
     obtainShippingAddress(); //Update the state
     notifyListeners(); //Notify the view
   }
+
+  get address => _listOfShippingAddress;
 }
