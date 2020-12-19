@@ -10,6 +10,7 @@ class User {
   final String _name;
   final String _surname;
   final String _nickname;
+  final String _mail;
   String _password;
   List<ShippingAddress> _listOfaddress;
   List<CreditCard> _listOfCreditCard;
@@ -19,7 +20,7 @@ class User {
 
   //Constructor
   User(this._name, this._surname, this._nickname, this._password,
-      this._cartOfTheUser) {
+      this._cartOfTheUser, this._mail) {
     _listOfaddress = [];
     _listOfCreditCard = [];
     _listOfOrders = [];
@@ -34,6 +35,8 @@ class User {
   String get nickname => _nickname;
 
   String get password => _password;
+
+  String get mail => _mail;
 
   get listOfAddress => [].addAll(_listOfaddress);
 
