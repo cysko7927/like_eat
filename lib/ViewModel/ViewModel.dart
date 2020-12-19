@@ -1,5 +1,7 @@
 import 'package:like_eat/Model/User.dart';
+import 'package:like_eat/ViewModel/AddressDataManager.dart';
 import 'package:like_eat/ViewModel/CartManager.dart';
+import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
 import 'package:like_eat/ViewModel/NotificationManager.dart';
 import 'package:like_eat/ViewModel/ObservedProductManager.dart';
@@ -18,4 +20,6 @@ class ViewModel {
   static SearchManager searchManager;
   static UserDataManager userDataManager;
   static ObservedProductManager observedProductManager;
+  static AddressDataManager addressDataManager;
+  static CreditCardManager creditCardManager;
 }
