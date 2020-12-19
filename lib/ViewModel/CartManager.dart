@@ -39,4 +39,8 @@ class CartManager extends ChangeNotifier {
     obtainCart();
     notifyListeners();
   }
+
+  //Serve un metodo per ottenere i prodotti e la quantità del carello
+
+  get allTheCart => _cart.productAndQuantity;
 }
