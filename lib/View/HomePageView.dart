@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/View/SignInView.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HomePage',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Scaffold(
+    return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text('Home Page'),
@@ -51,11 +46,13 @@ class HomePage extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.exit_to_app),
-                  FlatButton(onPressed: null, child: Text("Logout"))
+                  FlatButton(onPressed: () {
+                    Navigator.pushNamed(context, 'SignIn');
+                  }, child: Text("Logout"))
                 ],
               )
             ],
-          )),
+          ),
     );
   }
 }
