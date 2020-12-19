@@ -69,4 +69,8 @@ class Webservice {
 
   Future<void> postFlagObservable(String name, String type, String supplier,
       String nickname, bool observed) async {}
+
+  Future<bool> postPayment(String numer, String cvc, String expDate) async {}
+
+  Future<void> postNewOrder(Map<Product, int> productsAndQuantity) async {}
 }
