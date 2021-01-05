@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "261287366900",
+    "firebase_url": "https://db-likeeat-default-rtdb.firebaseio.com",
+    "project_id": "db-likeeat",
+    "storage_bucket": "db-likeeat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261287366900:android:0828ecb2680bf20a888ea1",
+        "android_client_info": {
+          "package_name": "com.example.like_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261287366900-c080ogfi6b02kmml67uqhd4ujkqq5o64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQOHz8pBqPog6grCrziOXIae4UALUzjso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261287366900-c080ogfi6b02kmml67uqhd4ujkqq5o64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
