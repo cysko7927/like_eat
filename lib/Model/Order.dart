@@ -5,7 +5,7 @@ import 'package:like_eat/Model/User.dart';
 
 class Order {
   DateTime _time;
-  User _user;
+  UserApp _user;
   Map<Product, int> _productAndQuantity;
 
   Order(this._time, this._user, Map<Product, int> mapCart) {
@@ -15,7 +15,7 @@ class Order {
 
   //Getter
   DateTime get time => _time;
-  User get user => _user;
+  UserApp get user => _user;
   Map<Product, int> get productAndQuantity => createMapProduct();
 
   //Setter

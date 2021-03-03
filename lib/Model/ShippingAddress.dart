@@ -8,7 +8,7 @@ class ShippingAddress {
   String _city;
   int _cap;
   int _number;
-  final User _user;
+  final UserApp _user;
 
   //Constructor
   ShippingAddress(
@@ -27,7 +27,7 @@ class ShippingAddress {
   String get address => _address;
   int get cap => _cap;
   int get number => _number;
-  User get user => _user;
+  UserApp get user => _user;
 
   //Setter
 

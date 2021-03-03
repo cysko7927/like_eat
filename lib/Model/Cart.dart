@@ -2,7 +2,7 @@ import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/Model/User.dart';
 
 class Cart {
-  User _user;
+  UserApp _user;
   Map<Product, int> _productsAndQuantity;
 
   Cart(this._user) {
@@ -11,7 +11,7 @@ class Cart {
 
   //Getter
 
-  User get user => _user;
+  UserApp get user => _user;
   Map<Product, int> get productAndQuantity => createMapProduct();
   Set<Product> get productsInCart =>
       _productsAndQuantity.keys; //Obtain all the products in the map

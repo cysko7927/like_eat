@@ -6,7 +6,7 @@ import 'package:like_eat/Model/Notification.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/ShippingAddress.dart';
 
-class User {
+class UserApp {
   final String _name;
   final String _surname;
   final String _nickname;
@@ -15,16 +15,16 @@ class User {
   List<ShippingAddress> _listOfaddress;
   List<CreditCard> _listOfCreditCard;
   List<Order> _listOfOrders;
-  final Cart _cartOfTheUser;
+  Cart _cartOfTheUser;
   List<Notifications> _listOfNotification;
 
   //Constructor
-  User(this._name, this._surname, this._nickname, this._password,
-      this._cartOfTheUser, this._mail) {
+  UserApp(this._name, this._surname, this._nickname, this._mail) {
     _listOfaddress = [];
     _listOfCreditCard = [];
     _listOfOrders = [];
     _listOfNotification = [];
+    _cartOfTheUser = null;
   }
 
   //Getter
@@ -80,4 +80,10 @@ class User {
   set removeNotification(Notifications notification) {
     _listOfNotification.remove(notification);
   }
+}
+
+class UserAnon {
+  final String uid;
+
+  UserAnon(this.uid);
 }

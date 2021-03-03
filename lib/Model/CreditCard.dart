@@ -6,7 +6,7 @@ class CreditCard {
   String _number;
   String _cvc;
   String _expDate;
-  User _user;
+  UserApp _user;
 
   //Constructor
   CreditCard(
@@ -20,7 +20,7 @@ class CreditCard {
   String get number => _number;
   String get cvc => _cvc;
   String get expDate => _expDate;
-  User get user => _user;
+  UserApp get user => _user;
 
   //Setter
 
