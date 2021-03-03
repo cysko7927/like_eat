@@ -5,8 +5,9 @@ import 'dart:async';
 /**
  * This class being used for save in local the data of the user in the cache
  */
+/*
 class UserPreferences {
-  void saveUser(User user) async {
+  void saveUser(UserApp user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("nickname", user.nickname);
@@ -15,7 +16,7 @@ class UserPreferences {
     prefs.setString("surname", user.surname);
   }
 
-  Future<User> getUser() async {
+  Future<UserApp> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String nickname = prefs.getString("nickname");
@@ -23,7 +24,7 @@ class UserPreferences {
     String mail = prefs.getString("mail");
     String surname = prefs.getString("surname");
 
-    return User(name, surname, nickname, null, null,
+    return UserApp(name, surname, nickname, null, null,
         mail); //There aren't the password and the cart
   }
 
@@ -42,4 +43,4 @@ class UserPreferences {
     String token = prefs.getString("token");
     return token;
   }
-}
+}*/

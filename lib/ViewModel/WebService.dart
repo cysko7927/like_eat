@@ -27,7 +27,7 @@ class Webservice {
 
   Future<List<Order>> fetchHistory(String keyword) async {}
 
-  Future<User> fetchUserData(String keyword) async {}
+  Future<UserApp> fetchUserData(String keyword) async {}
 
   Future<Cart> fetchCart(String nickname) async {}
 

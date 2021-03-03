@@ -8,7 +8,7 @@ import 'package:like_eat/ViewModel/WebService.dart';
  * and the history of the orders
  */
 class UserDataManager extends ChangeNotifier {
-  User _user;
+  UserApp _user;
 
   /**
    * This method obtain the data of a user and save it for the view
@@ -26,7 +26,7 @@ class UserDataManager extends ChangeNotifier {
 
   //Getter
 
-  User get user => _user;
+  UserApp get user => _user;
 }
 
 //##########################################################################################################

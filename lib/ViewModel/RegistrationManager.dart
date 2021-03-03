@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -20,6 +21,45 @@ enum Status {
 }
 
 class RegistrationManager extends ChangeNotifier {
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+
+  /*
+    Add a new User in the Database inside a new Document
+    Precondition: In the database there isn't an user with the same email
+  */
+  Future<bool> addNewUser(String email, String password, String nickname,
+      String name, String surname) async {
+    return await users
+        .add({
+          'email': email,
+          'password': password,
+          'nickname': nickname,
+          'name': name,
+          'surname': surname,
+        })
+        .then((value) => true)
+        .catchError((error) => false);
+  }
+
+  /**
+   * Check if in the database there is an user with the email in input
+   * Returns false if there isn't the user
+   */
+  Future<bool> checkEmailUser(String email) async {
+    QuerySnapshot result = await users
+        .where('email', isEqualTo: email)
+        .get()
+        .catchError((error) => throw Exception("Error in access DB"));
+
+    if (result.size == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
+/*class RegistrationManager extends ChangeNotifier {
   Status _registeredInStatus = Status.NotRegistered;
 
   Status get registeredInStatus => _registeredInStatus;
@@ -59,7 +99,7 @@ class RegistrationManager extends ChangeNotifier {
     if (response.statusCode == 200) {
       var userData = responseData['data'];
 
-      User authUser/*=
+      UserApp authUser/*=
           User.fromJson(userData)*/
           ; //implementare metodo from json su User
 
@@ -84,4 +124,4 @@ class RegistrationManager extends ChangeNotifier {
     print("the error is $error.detail");
     return {'status': false, 'message': 'Unsuccessful Request', 'data': error};
   }
-}
+}*/
