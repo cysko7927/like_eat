@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:like_eat/View/HomePageView.dart';
 import 'package:like_eat/View/SignInView.dart';
 import 'package:like_eat/View/SignUpView.dart';
+import 'package:like_eat/View/SettingView.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

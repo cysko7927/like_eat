@@ -16,6 +16,9 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordControllerFirst = TextEditingController();
   TextEditingController passwordControllerSecond = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController surname = TextEditingController();
+  TextEditingController nickname = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +31,41 @@ class _SignUpState extends State<SignUp> {
           Image.asset(
             'assets/images/Logo.png',
           ),
+           Container(
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+            child: TextField(
+              controller: name,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your Name',
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+          ),
+           Container(
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+            child: TextField(
+              controller: surname,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your Surname',
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+          ),
+           Container(
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+            child: TextField(
+              controller: nickname,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your Nickname',
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+          ),
           Container(
-            margin: EdgeInsets.only(left: 30.0, right: 30, top: 15, bottom: 15),
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
             child: TextField(
               controller: emailController,
               decoration: InputDecoration(
@@ -40,7 +76,7 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 30.0, right: 30, top: 15, bottom: 15),
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
             child: TextField(
               obscureText: _obscureTextFirst,
               controller: passwordControllerFirst,
@@ -60,7 +96,7 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 30.0, right: 30, top: 15, bottom: 15),
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
             child: TextField(
               obscureText: _obscureTextSecond,
               controller: passwordControllerSecond,

@@ -8,9 +8,18 @@ class HomePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Home Page'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, 'Setting');
+            },
+          )
+        ],
       ),
       body: Container(
-        
         color: Colors.blue[100],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,16 +27,15 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(30.0),
               decoration:
-                  BoxDecoration(
-                    color: Colors.grey, 
-                    shape: BoxShape.circle),
+                  BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
               height: 50,
               child: ClipOval(
                 child: Image.asset('assets/images/Matteo.png'),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+              margin: const EdgeInsets.only(
+                  left: 30.0, right: 30, top: 5, bottom: 5),
               width: 200,
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -41,20 +49,22 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30, top: 5, bottom: 5),
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                ),
                 child: Row(
-              children: [
-                Icon(Icons.list),
-                FlatButton(onPressed: null, child: Text("Catalog"))
-              ],
-            )),
+                  children: [
+                    Icon(Icons.list),
+                    FlatButton(onPressed: null, child: Text("Catalog"))
+                  ],
+                )),
             Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+              margin: const EdgeInsets.only(
+                  left: 30.0, right: 30, top: 5, bottom: 5),
               width: 200,
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -68,7 +78,8 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+              margin: const EdgeInsets.only(
+                  left: 30.0, right: 30, top: 5, bottom: 5),
               width: 200,
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -81,38 +92,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.settings),
-                  FlatButton(onPressed: null, child: Text("Settings"))
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.exit_to_app),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'SignIn');
-                      },
-                      child: Text("Logout"))
-                ],
-              ),
-            )
           ],
         ),
       ),
