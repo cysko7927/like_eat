@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/View/HomePageView.dart';
-import 'package:like_eat/View/SignInView.dart';
-import 'package:like_eat/View/SignUpView.dart';
 import 'package:like_eat/View/SettingView.dart';
+import 'package:like_eat/View/CatalogView.dart';
+import 'package:like_eat/View/NotificationView.dart';
+import 'package:like_eat/View/ObservedProductView.dart';
+import 'package:like_eat/View/CartView.dart';
+import 'package:like_eat/View/HistoryView.dart';
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -44,6 +49,11 @@ class MyApp extends StatelessWidget {
               routes: {
                 'HomePage': (context) => HomePage(),
                 'Setting': (context) => Setting(),
+                'Catalog':(context)=> Catalog(),
+                'Observed':(context)=> ObservedProduct(),
+                'Notification' : (context) => Notifications(),
+                'History':(context) => History(),
+                'Cart':(context)=> Cart(),
               },
               home: Wrapper(),
             ),

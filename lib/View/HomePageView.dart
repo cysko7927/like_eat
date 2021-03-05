@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/View/SignInView.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +41,7 @@ class HomePage extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(
                     left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 200,
+                width: 300,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border.all(),
@@ -44,81 +49,120 @@ class HomePage extends StatelessWidget {
                 child: FlatButton(
                   color: Colors.blue,
                   textColor: Colors.white,
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
                   splashColor: Colors.blueAccent,
                   onPressed: () {
-                    Navigator.pushNamed(context, 'SignUp');
+                    Navigator.pushNamed(context, 'History');
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.home),
+                      Icon(Icons.history),
                       Text(
-                        "Home",
-                        style: TextStyle(fontSize: 20.0),
+                        "History",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ],
+                  ),
+                )),
+                Container(
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30, top: 5, bottom: 5),
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                ),
+                child: FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Cart');
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.shopping_cart),
+                      Text(
+                        "Cart",
+                        style: TextStyle(fontSize: 15.0),
                       ),
                     ],
                   ),
                 )),
             Container(
-              margin: const EdgeInsets.only(
-                  left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.home),
-                  FlatButton(onPressed: null, child: Text("Home"))
-                ],
-              ),
-            ),
-            Container(
                 margin: const EdgeInsets.only(
                     left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 200,
+                width: 300,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border.all(),
                 ),
-                child: Row(
-                  children: [
-                    Icon(Icons.list),
-                    FlatButton(onPressed: null, child: Text("Catalog"))
-                  ],
+                child: FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Catalog');
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.list),
+                      Text(
+                        "Catalog",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ],
+                  ),
                 )),
             Container(
-              margin: const EdgeInsets.only(
-                  left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.favorite),
-                  FlatButton(onPressed: null, child: Text("Observed Product"))
-                ],
-              ),
-            ),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30, top: 5, bottom: 5),
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                ),
+                child: FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Observed');
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.favorite),
+                      Text(
+                        "Observed Product",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ],
+                  ),
+                )),
             Container(
-              margin: const EdgeInsets.only(
-                  left: 30.0, right: 30, top: 5, bottom: 5),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.notifications),
-                  FlatButton(onPressed: null, child: Text("Notification"))
-                ],
-              ),
-            ),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30, top: 5, bottom: 5),
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                ),
+                child: FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                   onPressed: () {
+                    Navigator.pushNamed(context, 'Notification');
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.notifications),
+                      Text(
+                        "Notification",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ],
+                  ),
+                )),
           ],
         ),
       ),

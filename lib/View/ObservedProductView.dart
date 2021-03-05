@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:like_eat/View/SignInView.dart';
+
+
+class ObservedProduct extends StatefulWidget {
+   @override
+  _ObservedProductState createState() => _ObservedProductState();
+}
+class _ObservedProductState extends State<ObservedProduct>{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text('Observed Product'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, 'Setting');
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        
+      ), 
+    );
+  }
+}
