@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:like_eat/View/HomePageView.dart';
 import 'package:provider/provider.dart';
