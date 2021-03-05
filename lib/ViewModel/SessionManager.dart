@@ -24,7 +24,6 @@ enum Status {
 class AuthService {
   final FirebaseAuth _auth =
       FirebaseAuth.instance; //Interface of the FirebaseAuth
-  final RegistrationManager _registrationManager = new RegistrationManager();
 
   UserAnon _userAnonFromFirebaseUser(User user) {
     return user != null ? UserAnon(user.uid) : null;
@@ -66,14 +65,6 @@ class AuthService {
   Future registerUser(String email, String password, String nickname,
       String name, String surname) async {
     try {
-      bool isInDB = await _registrationManager
-          .checkEmailUser(email); //Check if an account with this email exist
-
-      if (isInDB) {
-        return Status
-            .AccountExists; //If exist say at the Caller that the account exist
-      }
-
       //Else create the Account in the DB of the authentication
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -81,13 +72,13 @@ class AuthService {
       User user = result.user;
 
       if (user == null) {
-        //Check if the creation was successful
+        //Check if the creation was unsuccessful
         return Status.Error;
       }
 
       //Add the data of the new User in DB model
-      bool esite = await _registrationManager.addNewUser(
-          email, password, nickname, name, surname);
+      bool esite = await RegistrationManager(user.uid)
+          .addNewUser(email, password, nickname, name, surname);
 
       //Todo Manca il check per vedere se l'inserimento dei dati nel DB model è riuscita
       //Se è fallita bisogna cancellare i procedimenti fatti prima e segnalare Errore
@@ -108,32 +99,31 @@ class AuthService {
           return Status.Error;
       }
     }
+  }
 
-    //Sign-in with email and Password
-    //Precondition: the user must Exist in the DB model with his Data
-    Future signInUser(String email, String password) async {
-      try {
-        //Try to login the user with the email and password in input
-        UserCredential result = await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
+  //Sign-in with email and Password
+  //Precondition: the user must Exist in the DB model with his Data
+  Future signInUser(String email, String password) async {
+    try {
+      //Try to login the user with the email and password in input
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
 
-        User user = result.user;
+      User user = result.user;
 
-        return Status
-            .UserLogged; //If there weren't exceptions return a code that says that the user is logged
-      } on FirebaseAuthException catch (e) {
-        switch (e.code) {
-          case "invalid-email":
-            return Status.WrongEmail;
-          case "user-disabled":
-            return Status.UserDisabled;
-          case "user-not-found":
-            return Status.AccountDoesntExist;
-          case "wrong-password":
-            return Status.WrongPassword;
-          default:
-            return Status.Error;
-        }
+      return user; //If there weren't exceptions return a code that says that the user is logged
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "invalid-email":
+          return Status.WrongEmail;
+        case "user-disabled":
+          return Status.UserDisabled;
+        case "user-not-found":
+          return Status.AccountDoesntExist;
+        case "wrong-password":
+          return Status.WrongPassword;
+        default:
+          return Status.Error;
       }
     }
   }
