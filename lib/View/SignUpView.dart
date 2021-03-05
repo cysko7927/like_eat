@@ -196,9 +196,10 @@ class _SignUpState extends State<SignUp> {
                             _privacyTermValue = value;
                           });
                         }),
-                    Container(
-                        child: Text(
-                            "I agree to the Terms of Services and Privacy Policy."))
+                   Expanded(
+                        child: Container(
+                            child: Text(
+                                "I agree to the Terms of Services and Privacy Policy."))),
                   ],
                 ),
                 Container(
