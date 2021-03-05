@@ -22,7 +22,9 @@ enum Status {
 
 class RegistrationManager extends ChangeNotifier {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  final String uid;
 
+  RegistrationManager(this.uid);
   /*
     Add a new User in the Database inside a new Document
     Precondition: In the database there isn't an user with the same email
@@ -30,7 +32,8 @@ class RegistrationManager extends ChangeNotifier {
   Future<bool> addNewUser(String email, String password, String nickname,
       String name, String surname) async {
     return await users
-        .add({
+        .doc(uid)
+        .set({
           'email': email,
           'password': password,
           'nickname': nickname,
