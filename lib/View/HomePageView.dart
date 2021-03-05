@@ -34,6 +34,33 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30, top: 5, bottom: 5),
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(),
+                ),
+                child: FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'SignUp');
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.home),
+                      Text(
+                        "Home",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ],
+                  ),
+                )),
+            Container(
               margin: const EdgeInsets.only(
                   left: 30.0, right: 30, top: 5, bottom: 5),
               width: 200,
