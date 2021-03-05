@@ -41,6 +41,10 @@ class MyApp extends StatelessWidget {
             //Every time that the state of the user logged changes the widget Wrapper will be rebuilded
             value: AuthService().userAnon, //Check if a user is logged
             child: MaterialApp(
+              routes: {
+                'HomePage': (context) => HomePage(),
+                'Setting': (context) => Setting(),
+              },
               home: Wrapper(),
             ),
           );

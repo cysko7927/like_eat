@@ -46,209 +46,218 @@ class _SignUpState extends State<SignUp> {
     bool passwordsEqual = password1 == password2;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('Sign Up'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/Logo.png',
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.isEmpty ? "Enter a name" : null,
-                onChanged: (val) {
-                  setState(() => name = val);
-                },
-                controller: nameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your Name',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.isEmpty ? "Enter a surname" : null,
-                onChanged: (val) {
-                  setState(() => surname = val);
-                },
-                controller: surnameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your Surname',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.isEmpty ? "Enter a nickname" : null,
-                onChanged: (val) {
-                  setState(() => nickname = val);
-                },
-                controller: nicknameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your Nickname',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.isEmpty || !emailValid
-                    ? "Enter a valid email"
-                    : null, //If the email is not valid print at the user to insert a valid Email
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
-                controller: emailController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your email',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.length < 8
-                    ? "Enter a Password greater at least 8 characters"
-                    : null, //The password must be greater of 8
-                onChanged: (val) {
-                  setState(() => password1 = val);
-                },
-                obscureText: _obscureTextFirst,
-                controller: passwordControllerFirst,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your Password',
-                  prefixIcon: Icon(Icons.security),
-                  suffixIcon: InkWell(
-                    onTap: _toggle1,
-                    child: Icon(
-                      _obscureTextFirst
-                          ? Icons.remove_red_eye
-                          : Icons.visibility_off,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
-              child: TextFormField(
-                validator: (value) => value.isEmpty || !passwordsEqual
-                    ? "The passwords must be equal"
-                    : null, //The two passowrd inserted by user in the form must be equal
-                onChanged: (val) {
-                  setState(() => password2 = val);
-                },
-                obscureText: _obscureTextSecond,
-                controller: passwordControllerSecond,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Confirm Password',
-                  prefixIcon: Icon(Icons.security),
-                  suffixIcon: InkWell(
-                    onTap: _toggle2,
-                    child: Icon(
-                      _obscureTextSecond
-                          ? Icons.remove_red_eye
-                          : Icons.visibility_off,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 12.0),
-            Text(error,
-                style: TextStyle(
-                    color: Colors.red,
-                    fontSize:
-                        14.0)), //Text error that will be printed if there are errors in the registration process
-            Row(
-              children: [
-                Checkbox(
-                    value:
-                        _privacyTermValue, //Todo:inserire un validator che controlla se l'utente ha accettato le normative
-                    onChanged: (value) {
-                      setState(() {
-                        _privacyTermValue = value;
-                      });
-                    }),
-                Container(
-                    child: Text(
-                        "I agree to the Terms of Services and Privacy Policy."))
-              ],
-            ),
-            Container(
-              child: FlatButton(
-                color: Colors.blue,
-                textColor: Colors.white,
-                disabledColor: Colors.grey,
-                disabledTextColor: Colors.black,
-                splashColor: Colors.blueAccent,
-                padding: EdgeInsets.all(8.0),
-                onPressed: () async {
-                  //If the form is valid
-                  if (_formKey.currentState.validate()) {
-                    //Try to register the user
-                    dynamic result = await _auth.registerUser(
-                        email, password1, nickname, name, surname);
-                    if (result is Status) {
-                      //If the operation of registration was unsuccessful
-                      setState(() => error = obtainStringError(
-                              result) //Obtain and print the error message at the user
-                          );
-                    }
-                    //If the registration was a successful the wrapper will obtain from the Provider
-                    //a user valid and will built the homepage
-                  }
-                  //check Input provided by the usere: two password the same and if email not already present in db ...
-                  //check also if agreed on privacy terms if everything ok go on Homepage
-
-                  //if not agreed on privacy term
-                  //POPUP to agree on check privacy
-
-                  //if password not same
-                  //POP UP with different password
-
-                  //if email already present
-                  //POPUP email already registered
-                },
-                child: Text(
-                  "Create account",
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(child: Text("Have an account?")),
-                FlatButton(
-                    onPressed: () {
-                      widget
-                          .goToSignIn(); //If the user press the button SignIn,ask to the widget Authenticate to built the SignIn widget
-                    },
-                    child: Text("Sign in"))
-              ],
-            ),
-          ],
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text('Sign Up'),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/Logo.png',
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) => value.isEmpty ? "Enter a name" : null,
+                    onChanged: (val) {
+                      setState(() => name = val);
+                    },
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your Name',
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? "Enter a surname" : null,
+                    onChanged: (val) {
+                      setState(() => surname = val);
+                    },
+                    controller: surnameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your Surname',
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? "Enter a nickname" : null,
+                    onChanged: (val) {
+                      setState(() => nickname = val);
+                    },
+                    controller: nicknameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your Nickname',
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) => value.isEmpty || !emailValid
+                        ? "Enter a valid email"
+                        : null, //If the email is not valid print at the user to insert a valid Email
+                    onChanged: (val) {
+                      setState(() => email = val);
+                    },
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your email',
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) => value.length < 8
+                        ? "Enter a Password greater at least 8 characters"
+                        : null, //The password must be greater of 8
+                    onChanged: (val) {
+                      setState(() => password1 = val);
+                    },
+                    obscureText: _obscureTextFirst,
+                    controller: passwordControllerFirst,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your Password',
+                      prefixIcon: Icon(Icons.security),
+                      suffixIcon: InkWell(
+                        onTap: _toggle1,
+                        child: Icon(
+                          _obscureTextFirst
+                              ? Icons.remove_red_eye
+                              : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) => value.isEmpty || !passwordsEqual
+                        ? "The passwords must be equal"
+                        : null, //The two passowrd inserted by user in the form must be equal
+                    onChanged: (val) {
+                      setState(() => password2 = val);
+                    },
+                    obscureText: _obscureTextSecond,
+                    controller: passwordControllerSecond,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Confirm Password',
+                      prefixIcon: Icon(Icons.security),
+                      suffixIcon: InkWell(
+                        onTap: _toggle2,
+                        child: Icon(
+                          _obscureTextSecond
+                              ? Icons.remove_red_eye
+                              : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 12.0),
+                Text(error,
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize:
+                            14.0)), //Text error that will be printed if there are errors in the registration process
+                Row(
+                  children: [
+                    Checkbox(
+                        value:
+                            _privacyTermValue, //Todo:inserire un validator che controlla se l'utente ha accettato le normative
+                        onChanged: (value) {
+                          setState(() {
+                            _privacyTermValue = value;
+                          });
+                        }),
+                    Container(
+                        child: Text(
+                            "I agree to the Terms of Services and Privacy Policy."))
+                  ],
+                ),
+                Container(
+                  child: FlatButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    splashColor: Colors.blueAccent,
+                    padding: EdgeInsets.all(8.0),
+                    onPressed: () async {
+                      //If the form is valid
+                      if (_formKey.currentState.validate()) {
+                        //Try to register the user
+                        dynamic result = await _auth.registerUser(
+                            email, password1, nickname, name, surname);
+                        if (result is Status) {
+                          //If the operation of registration was unsuccessful
+                          setState(() => error = obtainStringError(
+                                  result) //Obtain and print the error message at the user
+                              );
+                        }
+                        //If the registration was a successful the wrapper will obtain from the Provider
+                        //a user valid and will built the homepage
+                      }
+                      //check Input provided by the usere: two password the same and if email not already present in db ...
+                      //check also if agreed on privacy terms if everything ok go on Homepage
+
+                      //if not agreed on privacy term
+                      //POPUP to agree on check privacy
+
+                      //if password not same
+                      //POP UP with different password
+
+                      //if email already present
+                      //POPUP email already registered
+                    },
+                    child: Text(
+                      "Create account",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(child: Text("Have an account?")),
+                    FlatButton(
+                        onPressed: () {
+                          widget
+                              .goToSignIn(); //If the user press the button SignIn,ask to the widget Authenticate to built the SignIn widget
+                        },
+                        child: Text("Sign in"))
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
   void _toggle1() {
