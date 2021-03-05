@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/View/HomePageView.dart';
 import 'package:like_eat/View/SignInView.dart';
+import 'package:like_eat/ViewModel/SessionManager.dart';
 
-class Setting extends StatelessWidget {
+class Setting extends StatefulWidget {
+  @override
+  _SettingState createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
+  bool userIsOut = false;
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
+    // built the setting widget
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Setting'),
       ),
       body: Container(
-        margin: const EdgeInsets.only(
-                  left: 5.0),
+        margin: const EdgeInsets.only(left: 5.0),
         child: Column(children: [
           Container(
             child: Column(
@@ -60,10 +69,8 @@ class Setting extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                color: 
-                  Colors.grey[800].withOpacity(0.5),
-              ),
-            
+              color: Colors.grey[800].withOpacity(0.5),
+            ),
             alignment: Alignment.topLeft,
             child: Text(
               "Others",
@@ -90,10 +97,8 @@ class Setting extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                color: 
-                  Colors.grey[800].withOpacity(0.5),
-              ),
-            
+              color: Colors.grey[800].withOpacity(0.5),
+            ),
             alignment: Alignment.topLeft,
             child: Text(
               "Log Out",
@@ -102,13 +107,17 @@ class Setting extends StatelessWidget {
           ),
           Row(
             children: [
-                  Icon(Icons.exit_to_app),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'SignIn');
-                      },
-                      child: Text("Logout"))
-                ],
+              Icon(Icons.exit_to_app),
+              FlatButton(
+                  onPressed: () async {
+                    //The user has tapped the logout button
+                    await _auth
+                        .signOut(); //Ask to the Authenticatio widget to logout the user
+
+                    Navigator.pop(context); //Close the setting widget
+                  },
+                  child: Text("Logout"))
+            ],
           ),
         ]),
       ),
