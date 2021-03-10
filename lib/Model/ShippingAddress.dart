@@ -6,9 +6,9 @@ class ShippingAddress {
   String _state;
   String _address;
   String _city;
-  int _cap;
-  int _number;
-  final UserApp _user;
+  String _cap;
+  String _number;
+  final String _user;
 
   //Constructor
   ShippingAddress(
@@ -25,9 +25,9 @@ class ShippingAddress {
   String get state => _state;
   String get city => _city;
   String get address => _address;
-  int get cap => _cap;
-  int get number => _number;
-  UserApp get user => _user;
+  String get cap => _cap;
+  String get number => _number;
+  String get user => _user;
 
   //Setter
 
@@ -43,11 +43,11 @@ class ShippingAddress {
     _address = address;
   }
 
-  set cap(int cap) {
+  set cap(String cap) {
     _cap = cap;
   }
 
-  set number(int number) {
+  set number(String number) {
     _number = number;
   }
 }

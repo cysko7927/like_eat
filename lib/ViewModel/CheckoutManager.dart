@@ -17,7 +17,7 @@ class CheckOutManager extends ChangeNotifier {
 
   CheckOutManager() {
     //Obtain the data from the managers
-    _listOfShippingAddress = ViewModel.addressDataManager.address;
+    _listOfShippingAddress = ViewModel.addressDataManager.addressS;
     _listOfCreditCard = ViewModel.creditCardManager.creditCards;
     notifyListeners();
   }
