@@ -49,76 +49,146 @@ class _SettingState extends State<Setting> {
               style: TextStyle(fontSize: 20.0, color: Colors.blue),
             ),
           ),
-          Row(
-            children: [
-              Icon(Icons.security),
-              FlatButton(onPressed: null, child: Text("Change Password"))
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.email),
-              FlatButton(onPressed: null, child: Text("Change email"))
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.account_circle),
-              FlatButton(onPressed: null, child: Text("Change Profile Picture"))
-            ],
-          ),
+        
+           Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: null,
+                child: Row(
+                  children: [
+                    Icon(Icons.security),
+                    Text(
+                      "Change Password",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+               Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: null,
+                child: Row(
+                  children: [
+                    Icon(Icons.email),
+                    Text(
+                      "Change email",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[800].withOpacity(0.5),
-            ),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: null,
+                child: Row(
+                  children: [
+                    Icon(Icons.account_circle),
+                    Text(
+                      "Change Profile Picture",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'shippingAddress');
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.location_on),
+                    Text(
+                      "Change shipping address",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+          Container(
             alignment: Alignment.topLeft,
             child: Text(
               "Others",
               style: TextStyle(fontSize: 20.0, color: Colors.blue),
             ),
           ),
-          Row(
-            children: [
-              Icon(Icons.security),
-              FlatButton(onPressed: null, child: Text("Other option"))
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.email),
-              FlatButton(onPressed: null, child: Text("Other option"))
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.account_circle),
-              FlatButton(onPressed: null, child: Text("Other option"))
-            ],
-          ),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[800].withOpacity(0.5),
-            ),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: null,
+                child: Row(
+                  children: [
+                    Icon(Icons.location_on),
+                    Text(
+                      "Other option",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+          
+         
+          Container(
             alignment: Alignment.topLeft,
             child: Text(
               "Log Out",
               style: TextStyle(fontSize: 20.0, color: Colors.blue),
             ),
           ),
-          Row(
-            children: [
-              Icon(Icons.exit_to_app),
-              FlatButton(
-                  onPressed: () async {
+          Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: () async {
                     //The user has tapped the logout button
                     await _auth
                         .signOut(); //Ask to the Authenticatio widget to logout the user
 
                     Navigator.pop(context); //Close the setting widget
                   },
-                  child: Text("Logout"))
-            ],
-          ),
+                child: Row(
+                  children: [
+                    Icon(Icons.exit_to_app),
+                    Text(
+                      "Logout",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+          
         ]),
       ),
     );
