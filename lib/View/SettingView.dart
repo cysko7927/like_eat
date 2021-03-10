@@ -116,7 +116,7 @@ class _SettingState extends State<Setting> {
               child: FlatButton(
                 textColor: Colors.white,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'shippingAddress');
+                  Navigator.pushNamed(context, 'Address');
                 },
                 child: Row(
                   children: [
