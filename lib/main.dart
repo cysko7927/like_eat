@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
                 'Notification' : (context) => Notifications(),
                 'History':(context) => History(),
                 'Cart':(context)=> Cart(),
-                'shippingAddress' : (context) => ShippingAddress(),
+                'shippingAddress' : (context) => ShippingAddresses(),
               },
               home: Wrapper(),
             ),

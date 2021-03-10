@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/ViewModel/AddressDataManager.dart';
 
-class ShippingAddress extends StatefulWidget {
+class ShippingAddresses extends StatefulWidget {
   @override
-  _ShippingAddressState createState() => _ShippingAddressState();
+  _ShippingAddressesState createState() => _ShippingAddressesState();
 }
 
-class _ShippingAddressState extends State<ShippingAddress> {
+class _ShippingAddressesState extends State<ShippingAddresses> {
   List shippingAddresses = [];
+  TextEditingController state = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController cap = TextEditingController();
+  TextEditingController number = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +21,15 @@ class _ShippingAddressState extends State<ShippingAddress> {
       appBar: AppBar(
         title: Text('Shipping Address'),
       ),
-      body: Column(
-        children: [
-        Row(
-          children: [
+      body: Column(children: [
+        Row(children: [
           TextField(
+            controller: address,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),
           ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: null,
-          )
+          IconButton(icon: Icon(Icons.add), onPressed: null)
         ]),
         Expanded(
             child: ListView.builder(
