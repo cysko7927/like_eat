@@ -13,18 +13,13 @@ import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddressView.dart
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-<<<<<<< HEAD
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:like_eat/View/wrapper.dart';
-import 'package:like_eat/ViewModel/AddressDataManager.dart';
-=======
 import 'package:like_eat/View/Wrapper/wrapper.dart';
->>>>>>> 728a9024d5e90f884090c601372ecf7d7eda455f
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
 
 import 'Model/ShippingAddress.dart';
+import 'ViewModel/AddressDataManager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
