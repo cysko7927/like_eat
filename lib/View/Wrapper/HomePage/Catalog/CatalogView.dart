@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/SignInView.dart';
 
 
 class Catalog extends StatefulWidget {
