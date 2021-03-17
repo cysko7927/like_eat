@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:like_eat/View/HomePageView.dart';
 import 'package:like_eat/View/SettingView.dart';
@@ -12,9 +15,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:like_eat/View/wrapper.dart';
+import 'package:like_eat/ViewModel/AddressDataManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
+
+import 'Model/ShippingAddress.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,12 +55,17 @@ class MyApp extends StatelessWidget {
               routes: {
                 'HomePage': (context) => HomePage(),
                 'Setting': (context) => Setting(),
-                'Catalog':(context)=> Catalog(),
-                'Observed':(context)=> ObservedProduct(),
-                'Notification' : (context) => Notifications(),
-                'History':(context) => History(),
-                'Cart':(context)=> Cart(),
-                'Address':(context) => ShippingAddresses()
+                'Catalog': (context) => Catalog(),
+                'Observed': (context) => ObservedProduct(),
+                'Notification': (context) => Notifications(),
+                'History': (context) => History(),
+                'Cart': (context) => Cart(),
+                'Address': (context) =>
+                    StreamProvider<List<ShippingAddress>>.value(
+                        value: AddressDataManager(
+                                FirebaseAuth.instance.currentUser.uid)
+                            .address,
+                        child: ShippingAddresses())
               },
               home: Wrapper(),
             ),
