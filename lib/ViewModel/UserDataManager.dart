@@ -18,12 +18,6 @@ class UserDataManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  //This method ask to the historyManager to obtain and save the order done by the user for the
-  //view
-  void obtainHistory() {
-    ViewModel.historyManager.obtainHistory(user.nickname);
-  }
-
   //Getter
 
   UserApp get user => _user;
