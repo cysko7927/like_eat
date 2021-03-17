@@ -77,6 +77,25 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                               border: OutlineInputBorder(),
                               labelText: 'Enter your number')),
                     ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          border: Border.all(),
+                        ),
+                        child: FlatButton(
+                          textColor: Colors.white,
+                          onPressed: null,
+                          child: Row(
+                            children: [
+                              
+                              Text(
+                                "Insert new address",
+                                style: TextStyle(fontSize: 15.0),
+                              )
+                            ],
+                          ),
+                        )),
                   ],
                 )),
             Column(children: [
@@ -118,8 +137,8 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                   Container(
                       margin:
                           EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: IconButton(icon: Icon(Icons.delete),
-                      onPressed: null))
+                      child:
+                          IconButton(icon: Icon(Icons.delete), onPressed: null))
                 ],
               )
             ])

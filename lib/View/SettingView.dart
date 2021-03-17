@@ -20,7 +20,7 @@ class _SettingState extends State<Setting> {
         title: Text('Setting'),
       ),
       body: Container(
-        margin: const EdgeInsets.only(left: 5.0),
+        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
         child: Column(children: [
           Container(
             child: Column(
@@ -32,12 +32,25 @@ class _SettingState extends State<Setting> {
                     style: TextStyle(fontSize: 20.0, color: Colors.blue),
                   ),
                 ),
-                Row(
+                Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: null,
+                child: Row(
                   children: [
                     Icon(Icons.language),
-                    FlatButton(onPressed: null, child: Text("Language"))
+                    Text(
+                      "Language",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
                   ],
                 ),
+              )),
                 Row(),
               ],
             ),
