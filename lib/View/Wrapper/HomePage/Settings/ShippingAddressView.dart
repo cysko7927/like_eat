@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/AddressList.dart';
 import 'package:like_eat/ViewModel/AddressDataManager.dart';
 
 class ShippingAddresses extends StatefulWidget {
@@ -140,50 +141,11 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                         )),
                   ],
                 )),
-            Column(children: [
-              Container(
-                  child: Text("List Address",
-                      style: TextStyle(fontSize: 20.0, color: Colors.blue))),
-              Row(
-                children: [
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: Text("state, ",
-                          style:
-                              TextStyle(fontSize: 20.0, color: Colors.black))),
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: Text("address, ",
-                          style:
-                              TextStyle(fontSize: 20.0, color: Colors.black))),
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: Text("city, ",
-                          style:
-                              TextStyle(fontSize: 20.0, color: Colors.black))),
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: Text("cap, ",
-                          style:
-                              TextStyle(fontSize: 20.0, color: Colors.black))),
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child: Text("number",
-                          style:
-                              TextStyle(fontSize: 20.0, color: Colors.black))),
-                  Container(
-                      margin:
-                          EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 1),
-                      child:
-                          IconButton(icon: Icon(Icons.delete), onPressed: null))
-                ],
-              )
-            ])
+            Row(
+              children: [
+                Expanded(child: SizedBox(height: 200.0, child: AddressList())),
+              ],
+            ),
           ],
         )));
   }
