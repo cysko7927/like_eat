@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/ViewModel/AddressDataManager.dart';
 
 class ShippingAddresses extends StatefulWidget {
   @override
@@ -7,12 +9,22 @@ class ShippingAddresses extends StatefulWidget {
 
 class _ShippingAddressesState extends State<ShippingAddresses> {
   List shippingAddresses = [];
+  //State variables
+  String address = '';
+  String state = '';
+  String city = '';
+  String cap = '';
+  String number = '';
   final _formKey = GlobalKey<FormState>();
-  TextEditingController state = TextEditingController();
-  TextEditingController address = TextEditingController();
-  TextEditingController city = TextEditingController();
-  TextEditingController cap = TextEditingController();
-  TextEditingController number = TextEditingController();
+  //Controllers
+  TextEditingController stateController = new TextEditingController();
+  TextEditingController addressController = new TextEditingController();
+  TextEditingController cityController = new TextEditingController();
+  TextEditingController capController = new TextEditingController();
+  TextEditingController numberController = new TextEditingController();
+  //Manager of View-Model
+  AddressDataManager addressDataManager =
+      AddressDataManager(FirebaseAuth.instance.currentUser.uid);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +48,12 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
-                          controller: state,
+                          validator: (value) =>
+                              value.isEmpty ? "Enter a state" : null,
+                          onChanged: (val) {
+                            setState(() => state = val);
+                          },
+                          controller: stateController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Enter your State')),
@@ -45,7 +62,12 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
-                          controller: address,
+                          validator: (value) =>
+                              value.isEmpty ? "Enter an address" : null,
+                          onChanged: (val) {
+                            setState(() => address = val);
+                          },
+                          controller: addressController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Enter your address')),
@@ -54,7 +76,12 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
-                          controller: city,
+                          validator: (value) =>
+                              value.isEmpty ? "Enter a city" : null,
+                          onChanged: (val) {
+                            setState(() => city = val);
+                          },
+                          controller: cityController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Enter your city')),
@@ -63,19 +90,29 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
-                          controller: cap,
+                          validator: (value) =>
+                              value.isEmpty ? "Enter a CAP" : null,
+                          onChanged: (val) {
+                            setState(() => cap = val);
+                          },
+                          controller: capController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Enter your cap')),
+                              labelText: 'Enter your CAP')),
                     ),
                     Container(
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
-                          controller: number,
+                          validator: (value) =>
+                              value.isEmpty ? "Enter a phone number" : null,
+                          onChanged: (val) {
+                            setState(() => number = val);
+                          },
+                          controller: numberController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Enter your number')),
+                              labelText: 'Enter your phone number')),
                     ),
                     Container(
                         margin: const EdgeInsets.only(top: 5, bottom: 5),
@@ -85,10 +122,15 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                         ),
                         child: FlatButton(
                           textColor: Colors.white,
-                          onPressed: null,
+                          onPressed: () => {
+                            if (_formKey.currentState.validate())
+                              {
+                                addressDataManager.addShippingAddress(
+                                    state, address, city, cap, number)
+                              }
+                          },
                           child: Row(
                             children: [
-                              
                               Text(
                                 "Insert new address",
                                 style: TextStyle(fontSize: 15.0),
