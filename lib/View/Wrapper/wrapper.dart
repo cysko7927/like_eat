@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/HomePageView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
-import 'package:like_eat/View/Authenticate.dart';
+import 'package:like_eat/View/Wrapper/Authenticate/Authenticate.dart';
 
 class Wrapper extends StatelessWidget {
   @override

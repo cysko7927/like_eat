@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/SignInView.dart';
-import 'package:like_eat/View/SignUpView.dart';
+import 'package:like_eat/View/Wrapper/Authenticate/SignInView.dart';
+import 'package:like_eat/View/Wrapper/Authenticate/SignUpView.dart';
 
 class Authenticate extends StatefulWidget {
   @override

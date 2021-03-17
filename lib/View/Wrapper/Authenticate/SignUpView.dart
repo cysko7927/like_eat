@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/HomePageView.dart';
-import 'package:like_eat/View/SignInView.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 
 class SignUp extends StatefulWidget {

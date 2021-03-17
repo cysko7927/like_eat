@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/HomePageView.dart';
-import 'package:like_eat/View/SettingView.dart';
-import 'package:like_eat/View/CatalogView.dart';
-import 'package:like_eat/View/NotificationView.dart';
-import 'package:like_eat/View/ObservedProductView.dart';
-import 'package:like_eat/View/CartView.dart';
-import 'package:like_eat/View/HistoryView.dart';
-import 'package:like_eat/View/ShippingAddressView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/SettingView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Cart/CartView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddressView.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:like_eat/View/wrapper.dart';
+import 'package:like_eat/View/Wrapper/wrapper.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
