@@ -65,11 +65,11 @@ class AuthService {
   Future registerUser(String email, String password, String nickname,
       String name, String surname) async {
     try {
-      //Else create the Account in the DB of the authentication
+      // create the Account in the DB of the authentication
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      User user = result.user;
+      User user = result.user; //Obtain the data of the created user
 
       if (user == null) {
         //Check if the creation was unsuccessful
