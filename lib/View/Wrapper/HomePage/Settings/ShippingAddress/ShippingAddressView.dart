@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Settings/AddressList.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/AddressList.dart';
 import 'package:like_eat/ViewModel/AddressDataManager.dart';
 
 class ShippingAddresses extends StatefulWidget {

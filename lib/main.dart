@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Settings/SettingView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
@@ -7,11 +8,13 @@ import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dar
 import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Cart/CartView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddressView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/ShippingAddressView.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/ViewModel/ProductManager.dart';
+import 'package:like_eat/ViewModel/SearchManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';

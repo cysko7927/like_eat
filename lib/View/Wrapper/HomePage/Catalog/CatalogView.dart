@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:like_eat/View/Wrapper/HomePage/Catalog/ProductList.dart';
 
 class Catalog extends StatefulWidget {
    @override
@@ -24,8 +24,8 @@ class _CatalogState extends State<Catalog>{
         ],
       ),
       body: SingleChildScrollView(
-        
+        child: Expanded(child: SizedBox(height: 200.0, child: ProductList()),
       ), 
-    );
+    ));
   }
 }

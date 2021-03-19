@@ -9,162 +9,180 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('Home Page'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'Setting');
-            },
-          )
-        ],
-      ),
-      body: Container(
-        color: Colors.blue[100],
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.all(30.0),
-              decoration:
-                  BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-              height: 50,
-              child: ClipOval(
-                child: Image.asset('assets/images/Matteo.png'),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text('Home Page'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.settings,
               ),
-            ),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 300,
+              onPressed: () {
+                Navigator.pushNamed(context, 'Setting');
+              },
+            )
+          ],
+        ),
+        body: Container(
+          color: Colors.lightBlue[100],
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(20),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
+                    color: Colors.blue[300],
+                    border: Border.all(
+                      color: Colors.blue[300],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: ClipOval(
+                  child: Image.asset('assets/images/Matteo.png'),
                 ),
-                child: FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'History');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.history),
-                      Text(
-                        "History",
-                        style: TextStyle(fontSize: 15.0),
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[300],
+                      border: Border.all(
+                        color: Colors.blue[300],
                       ),
-                    ],
-                  ),
-                )),
-                Container(
-                margin: const EdgeInsets.only(
-                    left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
-                ),
-                child: FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'Cart');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.shopping_cart),
-                      Text(
-                        "Cart",
-                        style: TextStyle(fontSize: 15.0),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'Cart');
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                          size: 50,
+                        ),
+                        Text(
+                          "Cart",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[300],
+                      border: Border.all(
+                        color: Colors.blue[300],
                       ),
-                    ],
-                  ),
-                )),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
-                ),
-                child: FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'Catalog');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.list),
-                      Text(
-                        "Catalog",
-                        style: TextStyle(fontSize: 15.0),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'History');
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.history,
+                          color: Colors.white,
+                          size: 50,
+                        ),
+                        Text(
+                          "History",
+                          style: TextStyle(fontSize: 25.0, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[300],
+                      border: Border.all(
+                        color: Colors.blue[300],
                       ),
-                    ],
-                  ),
-                )),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 300,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'Catalog');
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.list,
+                          color: Colors.white,
+                          size: 50,
+                        ),
+                        Text(
+                          "Catalog",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )),
+              Container(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
-                ),
-                child: FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  splashColor: Colors.blueAccent,
+                    color: Colors.blue[300],
+                    border: Border.all(
+                      color: Colors.blue[300],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Container(
+                    child: FlatButton(
                   onPressed: () {
                     Navigator.pushNamed(context, 'Observed');
                   },
-                  child: Row(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.favorite),
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: 50,
+                      ),
                       Text(
-                        "Observed Product",
-                        style: TextStyle(fontSize: 15.0),
+                        "Observed\nProduct",
+                        style: TextStyle(fontSize: 20.0, color: Colors.white),
                       ),
                     ],
                   ),
                 )),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 30.0, right: 30, top: 5, bottom: 5),
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(),
-                ),
-                child: FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  splashColor: Colors.blueAccent,
-                   onPressed: () {
-                    Navigator.pushNamed(context, 'Notification');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.notifications),
-                      Text(
-                        "Notification",
-                        style: TextStyle(fontSize: 15.0),
+              ),
+              Container(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue[300],
+                        border: Border.all(
+                          color: Colors.blue[300],
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'Notification');
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.notifications,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                          Text(
+                            "Notification",
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )),
-          ],
-        ),
-      ),
-    );
+                    )),
+              ),
+            ],
+          ),
+        ));
   }
 }

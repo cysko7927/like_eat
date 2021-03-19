@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/Model/ShippingAddress.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Settings/AddressTile.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/AddressTile.dart';
 import 'package:provider/provider.dart';
 
 class AddressList extends StatefulWidget {
