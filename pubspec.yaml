@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^0.20.1
   flutter_easyloading: ^2.2.2
   provider: ^4.3.3
+  direct_select: "^1.0.0"
   
 
 
