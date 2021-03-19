@@ -15,7 +15,7 @@ class _CatalogState extends State<Catalog> {
   TextEditingController searchController = TextEditingController();
   String search = '';
   bool _available = false;
-  List<Product> products=new List<Product>();
+  List<Product> products = new List<Product>();
 
   SearchManager searchManager = new SearchManager();
 
@@ -53,29 +53,27 @@ class _CatalogState extends State<Catalog> {
         ),
         body: SingleChildScrollView(
             child: Column(
-              
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
-              
-              controller: searchController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Search Product',
-              ),
-              onChanged: (text) {
-                setState(() {
+                controller: searchController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Search Product',
+                ),
+                onChanged: (text) async {
                   search = text;
-                  searchManager.searchProduct(search,elements[selectedIndex],_available);
-                  products=new List<Product>();
-                  products.addAll(searchManager.products);
-                  
-                });
-              },
-            ),
+                  await searchManager.searchProduct(
+                      search, elements[selectedIndex], _available);
+                  setState(() {
+                    products = new List<Product>();
+                    products.addAll(searchManager.products);
+                  });
+                },
+              ),
             ),
             Row(
               children: [
@@ -92,18 +90,18 @@ class _CatalogState extends State<Catalog> {
               ],
             ),
             DirectSelect(
-                    itemExtent: 50.0,
-                    selectedIndex: selectedIndex,
-                    child: MySelectionItem(
-                      isForList: false,
-                      title: elements[selectedIndex],
-                    ),
-                    onSelectedItemChanged: (index) {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                    },
-                    items: _buildItems()),
+                itemExtent: 50.0,
+                selectedIndex: selectedIndex,
+                child: MySelectionItem(
+                  isForList: false,
+                  title: elements[selectedIndex],
+                ),
+                onSelectedItemChanged: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                items: _buildItems()),
             Container(
               child: SizedBox(height: 200.0, child: ProductList(products)),
             ),
@@ -142,6 +140,7 @@ class MySelectionItem extends StatelessWidget {
             ),
     );
   }
+
   _buildItem(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -150,5 +149,3 @@ class MySelectionItem extends StatelessWidget {
     );
   }
 }
-
-
