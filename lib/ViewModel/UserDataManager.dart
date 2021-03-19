@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:like_eat/Model/User.dart';
 import 'package:like_eat/ViewModel/ViewModel.dart';
@@ -9,16 +11,35 @@ import 'package:like_eat/ViewModel/WebService.dart';
  */
 class UserDataManager extends ChangeNotifier {
   UserApp _user;
+  CollectionReference userReference =
+      FirebaseFirestore.instance.collection('Users');
+  String _uid;
 
+  UserDataManager(this._uid);
   /**
    * This method obtain the data of a user and save it for the view
    */
-  void obtainUserData(String nickname) async {
-    _user = await Webservice().fetchUserData(nickname);
-    notifyListeners();
+  void obtainUserData(String uid) async {
+    DocumentSnapshot result = await userReference.doc(_uid).get();
+
+    _user = _userFromDocumentReference(result);
+  }
+
+  //Convert The Snapshot that contains the user in a object Useapp
+  //that contains the data of the user
+  //Precondition: The snapshot must contain the User with the correct parameters
+  UserApp _userFromDocumentReference(DocumentSnapshot snapshot) {
+    return UserApp(snapshot.data()["name"], snapshot.data()["surname"],
+        snapshot.data()["nickname"], snapshot.data()["email"]);
   }
 
   //Getter
+
+  //obtain the stream of the User  with uid = uidUser from this class
+  Stream<UserApp> get userStream {
+    obtainUserData(_uid); //Update the userApp inside the object
+    return userReference.doc(_uid).snapshots().map(_userFromDocumentReference);
+  }
 
   UserApp get user => _user;
 }
@@ -30,36 +51,36 @@ class UserDataManager extends ChangeNotifier {
  * and ask to the server to modify
  */
 class ModifyNickname extends ChangeNotifier {
-  bool _valid;
+  //bool _valid;
   bool _done;
+  CollectionReference usersReference =
+      FirebaseFirestore.instance.collection('Users');
+  String _uid;
 
-  ModifyNickname() {
-    _valid = false;
+  ModifyNickname(this._uid) {
+    //_valid = false;
     _done = false;
   }
 
   /**
    * Ask to the server if the new nickname is valid and notify the view
-  */
+  
   void nicknameIsValid(String newNick) async {
     _valid = await Webservice() //If the nick is valid returns true
         .checkNewNickName(newNick, ViewModel.userDataManager.user.nickname);
     notifyListeners();
-  }
+  }*/
 
   /**
-   * Ask to the server to modify the nickname of a user, update the data of the user and notify
+   * Ask to the DB to modify the nickname of a user, update the data of the user and notify
    * the view
    */
   void modifyNickname(String newNick) {
-    Webservice()
-        .postNewNickName(newNick, ViewModel.userDataManager.user.nickname);
-    ViewModel.userDataManager.obtainUserData(newNick);
+    usersReference.doc(_uid).update({'nickname': newNick});
     _done = true;
-    notifyListeners();
   }
 
-  bool get nickValid => _valid;
+  //bool get nickValid => _valid;
   bool get modificationDone => _done;
 }
 
@@ -70,8 +91,11 @@ class ModifyNickname extends ChangeNotifier {
  */
 class ModifyPassword extends ChangeNotifier {
   bool _done;
+  CollectionReference usersReference =
+      FirebaseFirestore.instance.collection('Users');
+  String _uid;
 
-  ModifyPassword() {
+  ModifyPassword(this._uid) {
     _done = false;
   }
 
@@ -98,8 +122,11 @@ class ModifyPassword extends ChangeNotifier {
  */
 class ModifyNameAndSurname extends ChangeNotifier {
   bool _done;
+  CollectionReference usersReference =
+      FirebaseFirestore.instance.collection('Users');
+  String _uid;
 
-  ModifyNameAndSurname() {
+  ModifyNameAndSurname(this._uid) {
     _done = false;
   }
 
@@ -108,12 +135,8 @@ class ModifyNameAndSurname extends ChangeNotifier {
    * the view
    */
   void modifyNameAndSurname(String newName, String newSurname) {
-    Webservice().postNewNameAndSurname(
-        newName, newSurname, ViewModel.userDataManager.user.nickname);
-    ViewModel.userDataManager
-        .obtainUserData(ViewModel.userDataManager.user.nickname);
+    usersReference.doc(_uid).update({'name': newName});
     _done = true;
-    notifyListeners();
   }
 
   bool get modificationDone => _done;
