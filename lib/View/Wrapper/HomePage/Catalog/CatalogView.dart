@@ -23,7 +23,7 @@ class _CatalogState extends State<Catalog> {
     "Cereal",
     "Fruit",
     "Legumes",
-    "casuale",
+    "Vegetables",
   ];
   int selectedIndex = 0;
 
@@ -79,9 +79,13 @@ class _CatalogState extends State<Catalog> {
               children: [
                 Checkbox(
                     value: _available,
-                    onChanged: (value) {
+                    onChanged: (value) async {
+                      await searchManager.searchProduct(
+                          search, elements[selectedIndex], _available);
                       setState(() {
                         _available = value;
+                        products = new List<Product>();
+                        products.addAll(searchManager.products);
                       });
                     }),
                 Expanded(
@@ -96,9 +100,13 @@ class _CatalogState extends State<Catalog> {
                   isForList: false,
                   title: elements[selectedIndex],
                 ),
-                onSelectedItemChanged: (index) {
+                onSelectedItemChanged: (index) async {
+                  await searchManager.searchProduct(
+                      search, elements[selectedIndex], _available);
                   setState(() {
                     selectedIndex = index;
+                    products = new List<Product>();
+                    products.addAll(searchManager.products);
                   });
                 },
                 items: _buildItems()),
