@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Settings/SettingView.dart';
@@ -13,6 +14,7 @@ import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/Shipping
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/ViewModel/HistoryManager.dart';
 import 'package:like_eat/ViewModel/ProductManager.dart';
 import 'package:like_eat/ViewModel/SearchManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
@@ -58,7 +60,11 @@ class MyApp extends StatelessWidget {
                 'Catalog': (context) => Catalog(),
                 'Observed': (context) => ObservedProduct(),
                 'Notification': (context) => Notifications(),
-                'History': (context) => History(),
+                'History': (context) => StreamProvider<List<Order>>.value(
+                        value: HistoryManager(
+                                FirebaseAuth.instance.currentUser.uid)
+                            .obtainHistory,
+                        child: History()),
                 'Cart': (context) => Cart(),
                 'Address': (context) =>
                     StreamProvider<List<ShippingAddress>>.value(
