@@ -14,7 +14,7 @@ class SearchManager extends ChangeNotifier {
         arrayContains:
             name); //Obtain the reference of the products that matches the name in input
 
-    if (type != Null) {
+    if (type != "All") {
       result = result.where('type',
           isEqualTo: type); //Filter the type of the product
     }

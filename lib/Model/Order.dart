@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/Model/User.dart';
 
 class Order {
-  String _time;
+  Timestamp _time;
   Map<Product, int> _productAndQuantity;
 
   Order(this._time, Map<Product, int> mapCart) {
@@ -13,7 +14,7 @@ class Order {
   }
 
   //Getter
-  String get time => _time;
+  Timestamp get time => _time;
   Map<Product, int> get productAndQuantity => createMapProduct();
 
   //Setter

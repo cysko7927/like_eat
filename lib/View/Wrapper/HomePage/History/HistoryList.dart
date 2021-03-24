@@ -31,7 +31,7 @@ class OrderTile extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
               title: Text(order.productAndQuantity.toString()),
-              subtitle: Text(order.time)),
+              subtitle: Text(order.time.toString())),
         ));
   }
 }

@@ -13,13 +13,17 @@ class Catalog extends StatefulWidget {
 class _CatalogState extends State<Catalog> {
   @override
   TextEditingController searchController = TextEditingController();
+
   String search = '';
-  bool _available = false;
+  bool _available = true;
   List<Product> products = new List<Product>();
 
   SearchManager searchManager = new SearchManager();
 
+  bool _visible = false;
+
   final elements = [
+    "All",
     "Cereal",
     "Fruit",
     "Legumes",
@@ -67,7 +71,7 @@ class _CatalogState extends State<Catalog> {
                 onChanged: (text) async {
                   search = text;
                   await searchManager.searchProduct(
-                      search, elements[selectedIndex], _available);
+                      search,elements[selectedIndex],_available);
                   setState(() {
                     products = new List<Product>();
                     products.addAll(searchManager.products);
@@ -77,15 +81,27 @@ class _CatalogState extends State<Catalog> {
             ),
             Row(
               children: [
+                FlatButton(
+                    child: Text("Avanced Research"),
+                    onPressed: () {
+                      setState(() {
+                        if (_visible)
+                          _visible = false;
+                        else
+                          _visible = true;
+                      });
+                    }),
+              ],
+            ),
+             if (_visible) Container(
+              child: Row(
+              
+              children: [
                 Checkbox(
                     value: _available,
-                    onChanged: (value) async {
-                      await searchManager.searchProduct(
-                          search, elements[selectedIndex], _available);
+                    onChanged: (value) {
                       setState(() {
                         _available = value;
-                        products = new List<Product>();
-                        products.addAll(searchManager.products);
                       });
                     }),
                 Expanded(
@@ -93,20 +109,18 @@ class _CatalogState extends State<Catalog> {
                         child: Text("Search only available product"))),
               ],
             ),
-            DirectSelect(
+            ),
+            
+            if (_visible) DirectSelect(
                 itemExtent: 50.0,
                 selectedIndex: selectedIndex,
                 child: MySelectionItem(
                   isForList: false,
                   title: elements[selectedIndex],
                 ),
-                onSelectedItemChanged: (index) async {
-                  await searchManager.searchProduct(
-                      search, elements[selectedIndex], _available);
+                onSelectedItemChanged: (index) {
                   setState(() {
                     selectedIndex = index;
-                    products = new List<Product>();
-                    products.addAll(searchManager.products);
                   });
                 },
                 items: _buildItems()),
@@ -128,7 +142,7 @@ class MySelectionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.0,
+      height: 60.0,
       child: isForList
           ? Padding(
               child: _buildItem(context),
