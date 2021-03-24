@@ -12,13 +12,22 @@ class _HistoryListState extends State<HistoryList> {
   Widget build(BuildContext context) {
     final orders = Provider.of<List<Order>>(context);
 
-    return ListView.builder(
-        itemCount: orders.length,
-        itemBuilder: (context, index) {
-          return OrderTile(orders[index]);
-        });
+    if (orders != null) {
+      return ListView.builder(
+          itemCount: orders.length,
+          itemBuilder: (context, index) {
+            return OrderTile(orders[index]);
+          });
+    } else {
+      return ListView.builder(
+          itemCount: new List<Order>().length,
+          itemBuilder: (context, index) {
+            return OrderTile(orders[index]);
+          });
+    }
   }
 }
+
 class OrderTile extends StatelessWidget {
   final Order order;
   OrderTile(this.order);
@@ -35,4 +44,3 @@ class OrderTile extends StatelessWidget {
         ));
   }
 }
-

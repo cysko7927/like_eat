@@ -6,23 +6,23 @@ import 'package:like_eat/Model/User.dart';
 
 class Order {
   Timestamp _time;
-  Map<Product, int> _productAndQuantity;
+  Map<String, dynamic> _productAndQuantity;
 
-  Order(this._time, Map<Product, int> mapCart) {
+  Order(this._time, Map<String, dynamic> mapCart) {
     _productAndQuantity = {};
     _productAndQuantity.addAll(mapCart);
   }
 
   //Getter
   Timestamp get time => _time;
-  Map<Product, int> get productAndQuantity => createMapProduct();
+  Map<String, dynamic> get productAndQuantity => createMapProduct();
 
   //Setter
 
   //Utility
 
-  Map<Product, int> createMapProduct() {
-    Map<Product, int> map = new Map<Product, int>();
+  Map<String, dynamic> createMapProduct() {
+    Map<String, dynamic> map = new Map<String, dynamic>();
     map.addAll(_productAndQuantity);
     return map;
   }

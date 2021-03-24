@@ -8,7 +8,7 @@ class HistoryManager extends ChangeNotifier {
 
   CollectionReference orderReference =
       FirebaseFirestore.instance.collection('Order');
-List<Order> _listOfOrder = [];
+  List<Order> _listOfOrder = [];
 
   HistoryManager(this.uidUser);
 
@@ -18,6 +18,7 @@ List<Order> _listOfOrder = [];
 
     _listOfOrder = _ordersListFromSnapshot(result);
   }
+
   //obtain the stream of the list of the orders of the user with uid = uidUser from this class
   Stream<List<Order>> get obtainHistory {
     obtainOrder();
