@@ -33,17 +33,31 @@ class _HomePageState extends State<HomePage> {
             crossAxisCount: 2,
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                    color: Colors.blue[300],
-                    border: Border.all(
+                  decoration: BoxDecoration(
                       color: Colors.blue[300],
+                      border: Border.all(
+                        color: Colors.blue[300],
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: FlatButton(
+                    onPressed: null,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: ClipOval(
+                            child:
+                                Image.asset('assets/images/ProfilePicture.png'),
+                          ),
+                          height: 50,
+                        ),
+                        Text(
+                          "Account",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        ),
+                      ],
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: ClipOval(
-                  child: Image.asset('assets/images/Matteo.png'),
-                ),
-              ),
+                  )),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.blue[300],

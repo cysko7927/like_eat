@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/Model/CreditCard.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
@@ -10,10 +11,12 @@ import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductVi
 import 'package:like_eat/View/Wrapper/HomePage/Cart/CartView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/ShippingAddressView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/CreditCard/CreditCardView.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
 import 'package:like_eat/ViewModel/ProductManager.dart';
 import 'package:like_eat/ViewModel/SearchManager.dart';
@@ -61,17 +64,22 @@ class MyApp extends StatelessWidget {
                 'Observed': (context) => ObservedProduct(),
                 'Notification': (context) => Notifications(),
                 'History': (context) => StreamProvider<List<Order>>.value(
-                        value: HistoryManager(
-                                FirebaseAuth.instance.currentUser.uid)
-                            .obtainHistory,
-                        child: History()),
+                    value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
+                        .obtainHistory,
+                    child: History()),
                 'Cart': (context) => Cart(),
                 'Address': (context) =>
                     StreamProvider<List<ShippingAddress>>.value(
                         value: AddressDataManager(
                                 FirebaseAuth.instance.currentUser.uid)
                             .address,
-                        child: ShippingAddresses())
+                        child: ShippingAddresses()),
+                'CreditCard': (context) =>
+                    StreamProvider<List<CreditCard>>.value(
+                        value: CreditCardManager(
+                                FirebaseAuth.instance.currentUser.uid)
+                            .creditCardsStream,
+                        child: CreditCards())
               },
               home: Wrapper(),
             ),

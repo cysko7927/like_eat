@@ -133,7 +133,28 @@ class _SettingState extends State<Setting> {
                   children: [
                     Icon(Icons.location_on),
                     Text(
-                      "Change shipping address",
+                      "Manage shipping address",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ],
+                ),
+              )),
+               Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(),
+              ),
+              child: FlatButton(
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'CreditCard');
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.credit_card),
+                    Text(
+                      "Manage credit cards",
                       style: TextStyle(fontSize: 15.0),
                     ),
                   ],

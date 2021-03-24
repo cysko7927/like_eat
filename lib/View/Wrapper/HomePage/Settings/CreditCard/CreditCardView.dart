@@ -1,38 +1,37 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Settings/ShippingAddress/AddressList.dart';
-import 'package:like_eat/ViewModel/AddressDataManager.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Settings/CreditCard/CreditCardList.dart';
+import 'package:like_eat/ViewModel/CreditCardManager.dart';
 
-class ShippingAddresses extends StatefulWidget {
+class CreditCards extends StatefulWidget {
   @override
-  _ShippingAddressesState createState() => _ShippingAddressesState();
+  _CreditCardsState createState() => _CreditCardsState();
 }
 
-class _ShippingAddressesState extends State<ShippingAddresses> {
-  List shippingAddresses = [];
+class _CreditCardsState extends State<CreditCards> {
+  List creditCards = [];
+
   //State variables
-  String address = '';
-  String state = '';
-  String city = '';
-  String cap = '';
+  String cvc = '';
+  String expDate = '';
   String number = '';
+  
   final _formKey = GlobalKey<FormState>();
   //Controllers
-  TextEditingController stateController = new TextEditingController();
-  TextEditingController addressController = new TextEditingController();
-  TextEditingController cityController = new TextEditingController();
-  TextEditingController capController = new TextEditingController();
+  TextEditingController cvcController = new TextEditingController();
+  TextEditingController expDateController = new TextEditingController();
   TextEditingController numberController = new TextEditingController();
+
   //Manager of View-Model
-  AddressDataManager addressDataManager =
-      AddressDataManager(FirebaseAuth.instance.currentUser.uid);
+  CreditCardManager creditCardManager =
+      CreditCardManager(FirebaseAuth.instance.currentUser.uid);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Shipping Address'),
+          title: Text('Credit Card'),
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -42,7 +41,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                 child: Column(
                   children: [
                     Container(
-                        child: Text("Add new Address",
+                        child: Text("Add new Credit Card",
                             style:
                                 TextStyle(fontSize: 20.0, color: Colors.blue))),
                     Container(
@@ -50,57 +49,30 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
                           validator: (value) =>
-                              value.isEmpty ? "Enter a state" : null,
+                              value.isEmpty ? "Enter the cvc" : null,
                           onChanged: (val) {
-                            setState(() => state = val);
+                            setState(() => cvc = val);
                           },
-                          controller: stateController,
+                          controller: cvcController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Enter your State')),
+                              labelText: 'Enter the CVC')),
                     ),
                     Container(
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
                       child: TextFormField(
                           validator: (value) =>
-                              value.isEmpty ? "Enter an address" : null,
+                              value.isEmpty ? "Enter the expiration Date" : null,
                           onChanged: (val) {
-                            setState(() => address = val);
+                            setState(() => expDate = val);
                           },
-                          controller: addressController,
+                          controller: expDateController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Enter your address')),
+                              labelText: 'Enter the expiration Date')),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 30.0, right: 30, top: 5, bottom: 5),
-                      child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter a city" : null,
-                          onChanged: (val) {
-                            setState(() => city = val);
-                          },
-                          controller: cityController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Enter your city')),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 30.0, right: 30, top: 5, bottom: 5),
-                      child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter a CAP" : null,
-                          onChanged: (val) {
-                            setState(() => cap = val);
-                          },
-                          controller: capController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Enter your CAP')),
-                    ),
+                    
                     Container(
                       margin: EdgeInsets.only(
                           left: 30.0, right: 30, top: 5, bottom: 5),
@@ -126,14 +98,13 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                           onPressed: () => {
                             if (_formKey.currentState.validate())
                               {
-                                addressDataManager.addShippingAddress(
-                                    state, address, city, cap, number)
+                                creditCardManager.addCreditCard(number,cvc,expDate)
                               }
                           },
                           child: Row(
                             children: [
                               Text(
-                                "Insert new address",
+                                "Insert new credit Card",
                                 style: TextStyle(fontSize: 15.0),
                               )
                             ],
@@ -143,7 +114,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                 )),
             Row(
               children: [
-                Expanded(child: SizedBox(height: 200.0, child: AddressList())),
+                Expanded(child: SizedBox(height: 200.0, child: CreditCardList())),
               ],
             ),
           ],
