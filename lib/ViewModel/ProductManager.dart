@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:like_eat/Model/Product.dart';
+import 'package:like_eat/ViewModel/ObservedProductManager.dart';
 import 'package:like_eat/ViewModel/ViewModel.dart';
 
 class ProductManager {
@@ -13,23 +14,63 @@ class ProductManager {
       FirebaseFirestore.instance.collection('Product');
   String _uid;
 
-  ProductManager(Product product) {
+  ProductManager(Product product, String uid, bool observed) {
     _productToShow = product; //Save the info of the product to show
+    _uid = uid;
+    _observed = observed;
   }
 
   //Add in the cart a product with a specified quantity choose by user
-  void addInTheCart(int quantity) {
-    ViewModel.cartManager.insertProductInTheCart(_productToShow.name,
-        _productToShow.type, _productToShow.supplier, quantity);
+  //Precondition: the quantity must be correct(>= 0 and <= quantity of the product in the magazine)
+  void addInTheCart(int quantity) async {
+    QuerySnapshot result = await productsReference
+        .where('name', isEqualTo: _productToShow.name)
+        .where('type', isEqualTo: _productToShow.type)
+        .where('supplier', isEqualTo: _productToShow.supplier)
+        .get(); //obtain the reference of the product from DB
+
+    productsReference.doc(result.docs.elementAt(0).id).update({
+      'quantity': _productToShow.quantity - quantity
+    }); //Update the quantity of the product in the DB
+
+    cartReference.add({
+      'name': _productToShow.name,
+      'price': _productToShow.price,
+      'quantity': quantity,
+      'supplier': _productToShow.supplier,
+      'type': _productToShow.type,
+      'uid': _uid,
+    }); //Add the product in the Cart of the user in the DB
   }
 
-  void modifyObservable() {
-    ViewModel.observedProductManager.insertOrRemoveProduct(
-        _productToShow.name,
-        _productToShow.type,
-        _productToShow.supplier,
-        ViewModel.userDataManager.user.nickname,
-        !_observed);
+  /**
+   * Change the state of the product to observable to not observable and so on,
+   * inserting the product in the list of the observed product of the user
+   */
+  void modifyObservable() async {
+    if (_observed) {
+      QuerySnapshot result = await productsObservedReference
+          .where('nameProduct', isEqualTo: _productToShow.name)
+          .where('typeProduct', isEqualTo: _productToShow.type)
+          .where('supplierProduct', isEqualTo: _productToShow.supplier)
+          .where('uid', isEqualTo: _uid)
+          .get(); //obtain the reference of the product observed from DB
+
+      productsReference
+          .doc(result.docs.elementAt(0).id)
+          .delete(); //Delete the product observed from the list in the DB
+
+      _observed = false;
+    } else {
+      productsObservedReference.add({
+        'nameProduct': _productToShow.name,
+        'supplierProduct': _productToShow.supplier,
+        'typeProduct': _productToShow.type,
+        'uid': _uid,
+      }); //Add the product in the list of observed product of the user in the DB
+
+      _observed = true;
+    }
   }
 
   //obtain the stream of the product with a specific name,type,supplier from this class

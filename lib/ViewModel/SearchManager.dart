@@ -32,13 +32,6 @@ class SearchManager extends ChangeNotifier {
         .addAll(allProducts); //Write the list complete and update the state
   }
 
-  ProductManager selectProductAndObtainAProductManager(int index) {
-    Product product = _listProductOfView.elementAt(index);
-
-    return ProductManager(
-        product); //Insert the product with the info to show and return it
-  }
-
   //Convert The querySnapshot that contains the Products in a list
   //that contains those Products
   //Precondition: The snapshot must contain the Products with the correct parameters
