@@ -23,9 +23,7 @@ class _HistoryState extends State<History>{
             icon: Icon(
               Icons.settings,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'Setting');
-            },
+            onPressed: null,
           )
         ],
       ),

@@ -1,67 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 
-class Setting extends StatefulWidget {
+class Account extends StatefulWidget {
   @override
-  _SettingState createState() => _SettingState();
+  _AccountState createState() => _AccountState();
 }
 
-class _SettingState extends State<Setting> {
+class _AccountState extends State<Account> {
   bool userIsOut = false;
-  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     // built the setting widget
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Setting'),
+        title: Text('Account'),
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 5.0, right: 5.0),
         child: Column(children: [
           Container(
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Common",
-                    style: TextStyle(fontSize: 20.0, color: Colors.blue),
-                  ),
-                ),
-                Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: FlatButton(
-                textColor: Colors.white,
-                onPressed: null,
-                child: Row(
-                  children: [
-                    Icon(Icons.language),
-                    Text(
-                      "Language",
-                      style: TextStyle(fontSize: 15.0),
-                    ),
-                  ],
-                ),
-              )),
-                Row(),
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Account",
-              style: TextStyle(fontSize: 20.0, color: Colors.blue),
-            ),
-          ),
-        
-           Container(
               margin: const EdgeInsets.only(top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -80,7 +38,7 @@ class _SettingState extends State<Setting> {
                   ],
                 ),
               )),
-               Container(
+          Container(
               margin: const EdgeInsets.only(top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -139,7 +97,7 @@ class _SettingState extends State<Setting> {
                   ],
                 ),
               )),
-               Container(
+          Container(
               margin: const EdgeInsets.only(top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -160,67 +118,6 @@ class _SettingState extends State<Setting> {
                   ],
                 ),
               )),
-          Container(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Others",
-              style: TextStyle(fontSize: 20.0, color: Colors.blue),
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: FlatButton(
-                textColor: Colors.white,
-                onPressed: null,
-                child: Row(
-                  children: [
-                    Icon(Icons.location_on),
-                    Text(
-                      "Other option",
-                      style: TextStyle(fontSize: 15.0),
-                    ),
-                  ],
-                ),
-              )),
-          
-         
-          Container(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Log Out",
-              style: TextStyle(fontSize: 20.0, color: Colors.blue),
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
-              child: FlatButton(
-                textColor: Colors.white,
-                onPressed: () async {
-                    //The user has tapped the logout button
-                    await _auth
-                        .signOut(); //Ask to the Authenticatio widget to logout the user
-
-                    Navigator.pop(context); //Close the setting widget
-                  },
-                child: Row(
-                  children: [
-                    Icon(Icons.exit_to_app),
-                    Text(
-                      "Logout",
-                      style: TextStyle(fontSize: 15.0),
-                    ),
-                  ],
-                ),
-              )),
-          
         ]),
       ),
     );

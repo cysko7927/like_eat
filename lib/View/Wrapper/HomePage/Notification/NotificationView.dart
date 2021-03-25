@@ -17,9 +17,7 @@ class _NotificationState extends State<Notifications>{
             icon: Icon(
               Icons.settings,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'Setting');
-            },
+            onPressed: null
           )
         ],
       ),

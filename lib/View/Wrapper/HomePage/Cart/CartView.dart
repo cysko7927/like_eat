@@ -17,9 +17,7 @@ class _CartState extends State<Cart>{
             icon: Icon(
               Icons.settings,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'Setting');
-            },
+            onPressed: null,
           )
         ],
       ),

@@ -18,9 +18,7 @@ class _ObservedProductState extends State<ObservedProduct>{
             icon: Icon(
               Icons.settings,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, 'Setting');
-            },
+            onPressed: null,
           )
         ],
       ),

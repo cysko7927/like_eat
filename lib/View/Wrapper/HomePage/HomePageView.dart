@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/ViewModel/SessionManager.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,6 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,10 +17,14 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             IconButton(
               icon: Icon(
-                Icons.settings,
+                Icons.exit_to_app,
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'Setting');
+              onPressed: () async {
+                //The user has tapped the logout button
+                await _auth
+                    .signOut(); //Ask to the Authenticatio widget to logout the user
+
+                 //Close the setting widget
               },
             )
           ],
@@ -40,16 +46,16 @@ class _HomePageState extends State<HomePage> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'Account');
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          child: ClipOval(
-                            child:
-                                Image.asset('assets/images/ProfilePicture.png'),
-                          ),
-                          height: 50,
+                        Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 50,
                         ),
                         Text(
                           "Account",
