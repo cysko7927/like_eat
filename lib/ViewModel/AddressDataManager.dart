@@ -46,18 +46,15 @@ class AddressDataManager extends ChangeNotifier {
    * Remove a Shipping Address from the DB using the index in input
    * Precondition: the selected address must be exist in the DB
    */
-  void removeShippingAddress(int index) async {
-    ShippingAddress selected = _listOfShippingAddress
-        .elementAt(index); //Take the address from the local list
-
+  void removeShippingAddress(ShippingAddress address) async {
     //obtain the reference to the address to remove
     QuerySnapshot result = await addressShipping
         .where('uidUser', isEqualTo: uidUser)
-        .where('address', isEqualTo: selected.address)
-        .where('cap', isEqualTo: selected.cap)
-        .where('city', isEqualTo: selected.city)
-        .where('number', isEqualTo: selected.number)
-        .where('state', isEqualTo: selected.state)
+        .where('address', isEqualTo: address.address)
+        .where('cap', isEqualTo: address.cap)
+        .where('city', isEqualTo: address.city)
+        .where('number', isEqualTo: address.number)
+        .where('state', isEqualTo: address.state)
         .get(); //obtain the reference of the selected address from DB
 
     addressShipping

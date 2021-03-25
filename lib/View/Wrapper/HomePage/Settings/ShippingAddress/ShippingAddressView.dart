@@ -143,7 +143,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                 )),
             Row(
               children: [
-                Expanded(child: SizedBox(height: 200.0, child: AddressList())),
+                Expanded(child: SizedBox(height: 400.0, child: AddressList())),
               ],
             ),
           ],

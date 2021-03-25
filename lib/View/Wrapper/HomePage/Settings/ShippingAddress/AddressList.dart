@@ -12,41 +12,31 @@ class AddressList extends StatefulWidget {
 class _AddressListState extends State<AddressList> {
   @override
   Widget build(BuildContext context) {
-    final address = Provider.of<List<ShippingAddress>>(context);
+    final List<ShippingAddress> address =
+        Provider.of<List<ShippingAddress>>(context);
 
-  if(address!=null){
-    return ListView.builder(
-        itemCount: address.length,
-        itemBuilder: (context, index) {
-          return AddressTile(address[index], index);
-        });
-  }
-  else{
-     return ListView.builder(
-        itemCount: new List<ShippingAddress>().length,
-        itemBuilder: (context, index) {
-          return AddressTile(address[index], index);
-        });
-  }
-    
+    if (address != null) {
+      return ListView.builder(
+          itemCount: address.length,
+          itemBuilder: (context, index) {
+            return AddressTile(address.elementAt(index), index);
+          });
+    } else {
+      return ListView.builder(
+          itemCount: new List<ShippingAddress>().length,
+          itemBuilder: (context, index) {
+            return AddressTile(address[index], index);
+          });
+    }
   }
 }
 
-class AddressTile extends StatefulWidget {
-  final ShippingAddress address;
-  final int index;
-  AddressTile(this.address, this.index);
-
-  @override
-  _AddressTileState createState() => _AddressTileState(address, index);
-}
-
-class _AddressTileState extends State<AddressTile> {
+class AddressTile extends StatelessWidget {
   final ShippingAddress address;
   final int index;
   AddressDataManager addressDataManager =
       AddressDataManager(FirebaseAuth.instance.currentUser.uid);
-  _AddressTileState(this.address, this.index);
+  AddressTile(this.address, this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +58,7 @@ class _AddressTileState extends State<AddressTile> {
                 IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      addressDataManager.removeShippingAddress(index);
+                      addressDataManager.removeShippingAddress(address);
                     })
               ],
             ),
