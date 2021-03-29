@@ -14,6 +14,7 @@ class ProductManager {
       FirebaseFirestore.instance.collection('Product');
   String _uid;
 
+  ProductManager.empty() {}
   ProductManager(Product product, String uid, bool observed) {
     _productToShow = product; //Save the info of the product to show
     _uid = uid;
