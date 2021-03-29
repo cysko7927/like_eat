@@ -4,6 +4,8 @@ import 'package:like_eat/Model/CreditCard.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/ProductView.dart';
+
 import 'package:like_eat/View/Wrapper/HomePage/Account/AccountView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
@@ -79,7 +81,8 @@ class MyApp extends StatelessWidget {
                         value: CreditCardManager(
                                 FirebaseAuth.instance.currentUser.uid)
                             .creditCardsStream,
-                        child: CreditCards())
+                        child: CreditCards()),
+                        ProductDetail.routeName: (context) => ProductDetail()
               },
               home: Wrapper(),
             ),
