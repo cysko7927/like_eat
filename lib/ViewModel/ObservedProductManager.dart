@@ -40,6 +40,20 @@ class ObservedProductManager extends ChangeNotifier {
     }
   }
 
+  Future<bool> productIsObserved(Product product) async {
+    QuerySnapshot result = await productsObservedReference
+        .where('nameProduct', isEqualTo: product.name)
+        .where('typeProduct', isEqualTo: product.type)
+        .where('supplierProduct', isEqualTo: product.supplier)
+        .where('uid', isEqualTo: _uid)
+        .get();
+
+    if (result.docs.isEmpty)
+      return false;
+    else
+      return true;
+  }
+
   //obtain the stream of the list of the observed products of the user with uid = _uid from this class
   Stream<List<Product>> get productsObserved {
     return productsObservedReference
