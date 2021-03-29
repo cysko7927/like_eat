@@ -12,8 +12,10 @@ class ProductDetail extends StatefulWidget {
 class ProductDetailState extends State<ProductDetail> {
   Product _product;
   bool observed;
+  bool isObserved;
   int counter = 0;
-ProductManager productManager;
+  ProductManager productManager;
+  ObservedProductManager observedManager;
 
   void setCounter(double val) {
     setState(() {
@@ -23,8 +25,15 @@ ProductManager productManager;
 
   @override
   Widget build(BuildContext context) {
-    _product = ModalRoute.of(context).settings.arguments;
-    productManager=new ProductManager(_product,FirebaseAuth.instance.currentUser.uid,true);
+    List<Object> obj = ModalRoute.of(context).settings.arguments;
+    _product = obj.elementAt(0);
+    isObserved = obj.elementAt(1);
+
+    observedManager =
+        new ObservedProductManager(FirebaseAuth.instance.currentUser.uid);
+    productManager = new ProductManager(
+        _product, FirebaseAuth.instance.currentUser.uid, isObserved);
+
     return new MaterialApp(
         home: Scaffold(
             appBar: new AppBar(
@@ -151,10 +160,13 @@ ProductManager productManager;
                         ),
                         child: FlatButton(
                           textColor: Colors.white,
-                          onPressed: 
+                          onPressed: () async {
+                            productManager.addInTheCart(counter);
+                            //POP UP put in the cart
+                          }
                           //TODO
                           //send product and quantity to the cart
-                          null,
+                          ,
                           child: Text(
                             "Add to Cart",
                             style: TextStyle(fontSize: 15.0),

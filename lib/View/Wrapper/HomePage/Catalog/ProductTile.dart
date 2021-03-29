@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ProductView.dart';
+import 'package:like_eat/ViewModel/ObservedProductManager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
+  
 
   ProductTile(this.product);
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -21,9 +25,14 @@ class ProductTile extends StatelessWidget {
                     "by: " +
                     product.supplier),
                 trailing: Text(product.price.toString()+"€"),
-                onTap: () => {
+                onTap: () async {
+                 var observedProduct= ObservedProductManager(FirebaseAuth.instance.currentUser.uid);
+                 
+                 List<Object> obj=[];
+                 obj.add(product);
+                 obj.add(await observedProduct.productIsObserved(product));
                       Navigator.pushNamed(context, ProductDetail.routeName,
-                          arguments: product)
+                          arguments: obj);
                     })));
   }
 }
