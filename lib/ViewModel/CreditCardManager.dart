@@ -44,16 +44,13 @@ class CreditCardManager extends ChangeNotifier {
    * Remove a Credit Card from the DB using the index in input
    * Precondition: the selected Credit Card must be exist in the DB
    */
-  void deleteCreditCard(int index) async {
-    CreditCard selected = _listOfCreditCards
-        .elementAt(index); //Take the credit card from the local list
-
+  void deleteCreditCard(CreditCard creditCard) async {
     //obtain the reference to the credit cards to remove
     QuerySnapshot result = await creditCardsReference
         .where('uidUser', isEqualTo: uidUser)
-        .where('number', isEqualTo: selected.number)
-        .where('cvc', isEqualTo: selected.cvc)
-        .where('expDate', isEqualTo: selected.expDate)
+        .where('number', isEqualTo: creditCard.number)
+        .where('cvc', isEqualTo: creditCard.cvc)
+        .where('expDate', isEqualTo: creditCard.expDate)
         .get(); //obtain the reference of the selected credits cards from DB
 
     creditCardsReference

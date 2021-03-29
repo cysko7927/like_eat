@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.list,
+                          Icons.shopping_basket,
                           color: Colors.white,
                           size: 50,
                         ),
