@@ -104,9 +104,6 @@ class MyApp extends StatelessWidget {
                         UserDataManager(FirebaseAuth.instance.currentUser.uid)
                             .userStream,
                     child: NicknameChange()),
-
-                'Product': (context) => StreamProvider<Product>.value(
-                    value: null, child: ProductDetail()),
               },
               home: Wrapper(),
             ),
