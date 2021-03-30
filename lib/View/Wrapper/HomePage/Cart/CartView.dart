@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/ViewModel/CartManager.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Cart/CartList.dart';
 
 
 class Cart extends StatefulWidget {
@@ -6,6 +9,9 @@ class Cart extends StatefulWidget {
   _CartState createState() => _CartState();
 }
 class _CartState extends State<Cart>{
+
+CartManager cartManager=CartManager(FirebaseAuth.instance.currentUser.uid);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +28,16 @@ class _CartState extends State<Cart>{
         ],
       ),
       body: SingleChildScrollView(
-        
-      ), 
+        child: Column(
+          children: [
+            Text("Cart"),
+             Row(
+            children: [
+              Expanded(child: SizedBox(height: 400.0, child: CartList())),
+            ],
+          ),
+
+          ]) )
     );
   }
 }

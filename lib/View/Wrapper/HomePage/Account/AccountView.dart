@@ -12,6 +12,7 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     // built the setting widget
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Account'),
@@ -27,7 +28,9 @@ class _AccountState extends State<Account> {
               ),
               child: FlatButton(
                 textColor: Colors.white,
-                onPressed: null,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'Password');
+                },
                 child: Row(
                   children: [
                     Icon(Icons.security),
@@ -46,7 +49,9 @@ class _AccountState extends State<Account> {
               ),
               child: FlatButton(
                 textColor: Colors.white,
-                onPressed: null,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'Email');
+                },
                 child: Row(
                   children: [
                     Icon(Icons.email),

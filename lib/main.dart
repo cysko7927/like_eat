@@ -6,22 +6,26 @@ import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ProductView.dart';
 
+//Import for Account
 import 'package:like_eat/View/Wrapper/HomePage/Account/AccountView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Account/Password/PasswordView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Account/ShippingAddress/ShippingAddressView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Account/CreditCard/CreditCardView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Account/Email/EmailView.dart';
+
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Cart/CartView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Account/ShippingAddress/ShippingAddressView.dart';
-import 'package:like_eat/View/Wrapper/HomePage/Account/CreditCard/CreditCardView.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/ViewModel/CartManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
-import 'package:like_eat/ViewModel/ProductManager.dart';
-import 'package:like_eat/ViewModel/SearchManager.dart';
+import 'package:like_eat/ViewModel/UserDataManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
@@ -61,7 +65,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               routes: {
                 'HomePage': (context) => HomePage(),
-                'Account': (context) => Account(),
+
                 'Catalog': (context) => Catalog(),
                 'Observed': (context) => ObservedProduct(),
                 'Notification': (context) => Notifications(),
@@ -69,7 +73,13 @@ class MyApp extends StatelessWidget {
                     value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
                         .obtainHistory,
                     child: History()),
-                'Cart': (context) => Cart(),
+                'Cart': (context) => StreamProvider<List<Product>>.value(
+                    value: CartManager(FirebaseAuth.instance.currentUser.uid)
+                        .productsInCart,
+                    child: Cart()),
+
+                //Account Page
+                'Account': (context) => Account(),
                 'Address': (context) =>
                     StreamProvider<List<ShippingAddress>>.value(
                         value: AddressDataManager(
@@ -82,7 +92,15 @@ class MyApp extends StatelessWidget {
                                 FirebaseAuth.instance.currentUser.uid)
                             .creditCardsStream,
                         child: CreditCards()),
-                        ProductDetail.routeName: (context) => ProductDetail()
+                'Password': (context) => StreamProvider<UserApp>.value(
+                    value:
+                        UserDataManager(FirebaseAuth.instance.currentUser.uid)
+                            .userStream,
+                    child: PasswordChange()),
+                'Email': (context) => EmailChange(),
+
+                'Product': (context) => StreamProvider<Product>.value(
+                    value: null, child: ProductDetail()),
               },
               home: Wrapper(),
             ),
