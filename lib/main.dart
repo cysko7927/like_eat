@@ -13,7 +13,6 @@ import 'package:like_eat/View/Wrapper/HomePage/Account/ShippingAddress/ShippingA
 import 'package:like_eat/View/Wrapper/HomePage/Account/CreditCard/CreditCardView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/Email/EmailView.dart';
 
-
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
@@ -74,10 +73,9 @@ class MyApp extends StatelessWidget {
                     value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
                         .obtainHistory,
                     child: History()),
-                'Cart': (context) =>StreamProvider<List<Product>>.value(
-                    value:
-                        CartManager(FirebaseAuth.instance.currentUser.uid)
-                            .productsInCart,
+                'Cart': (context) => StreamProvider<List<Product>>.value(
+                    value: CartManager(FirebaseAuth.instance.currentUser.uid)
+                        .productsInCart,
                     child: Cart()),
 
                 //Account Page
@@ -99,11 +97,10 @@ class MyApp extends StatelessWidget {
                         UserDataManager(FirebaseAuth.instance.currentUser.uid)
                             .userStream,
                     child: PasswordChange()),
-                'Email' : (context) => EmailChange(),
+                'Email': (context) => EmailChange(),
 
                 'Product': (context) => StreamProvider<Product>.value(
-                        value: null,
-                        child: ProductDetail()),
+                    value: null, child: ProductDetail()),
               },
               home: Wrapper(),
             ),

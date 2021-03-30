@@ -4,6 +4,7 @@ import 'package:like_eat/View/Wrapper/HomePage/Catalog/ProductList.dart';
 
 import 'package:direct_select/direct_select.dart';
 import 'package:like_eat/ViewModel/SearchManager.dart';
+import 'package:provider/provider.dart';
 
 class Catalog extends StatefulWidget {
   @override
@@ -71,7 +72,7 @@ class _CatalogState extends State<Catalog> {
                 onChanged: (text) async {
                   search = text;
                   await searchManager.searchProduct(
-                      search,elements[selectedIndex],_available);
+                      search, elements[selectedIndex], _available);
                   setState(() {
                     products = new List<Product>();
                     products.addAll(searchManager.products);
@@ -93,37 +94,37 @@ class _CatalogState extends State<Catalog> {
                     }),
               ],
             ),
-             if (_visible) Container(
-              child: Row(
-              
-              children: [
-                Checkbox(
-                    value: _available,
-                    onChanged: (value) {
-                      setState(() {
-                        _available = value;
-                      });
-                    }),
-                Expanded(
-                    child: Container(
-                        child: Text("Search only available product"))),
-              ],
-            ),
-            ),
-            
-            if (_visible) DirectSelect(
-                itemExtent: 50.0,
-                selectedIndex: selectedIndex,
-                child: MySelectionItem(
-                  isForList: false,
-                  title: elements[selectedIndex],
+            if (_visible)
+              Container(
+                child: Row(
+                  children: [
+                    Checkbox(
+                        value: _available,
+                        onChanged: (value) {
+                          setState(() {
+                            _available = value;
+                          });
+                        }),
+                    Expanded(
+                        child: Container(
+                            child: Text("Search only available product"))),
+                  ],
                 ),
-                onSelectedItemChanged: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                },
-                items: _buildItems()),
+              ),
+            if (_visible)
+              DirectSelect(
+                  itemExtent: 50.0,
+                  selectedIndex: selectedIndex,
+                  child: MySelectionItem(
+                    isForList: false,
+                    title: elements[selectedIndex],
+                  ),
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                  items: _buildItems()),
             Container(
               child: SizedBox(height: 200.0, child: ProductList(products)),
             ),
