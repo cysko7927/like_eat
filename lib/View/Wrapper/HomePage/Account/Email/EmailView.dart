@@ -36,8 +36,9 @@ class _EmailChangeState extends State<EmailChange> {
               key: _formKey,
               child: Column(children: [
                 Container(
-                  margin:
-                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  color: Colors.white,
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 20, bottom: 5),
                   child: TextFormField(
                     validator: (value) => value.isEmpty || !oldEmailValid
                         ? "Wrong old email"
@@ -54,6 +55,7 @@ class _EmailChangeState extends State<EmailChange> {
                   ),
                 ),
                 Container(
+                  color: Colors.white,
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(

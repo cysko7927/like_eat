@@ -21,11 +21,12 @@ class _AccountState extends State<Account> {
         margin: const EdgeInsets.only(left: 5.0, right: 5.0),
         child: Column(children: [
           Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 10),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
                 textColor: Colors.white,
                 onPressed: () {
@@ -34,6 +35,7 @@ class _AccountState extends State<Account> {
                 child: Row(
                   children: [
                     Icon(Icons.security),
+                    SizedBox(width: 10),
                     Text(
                       "Change Password",
                       style: TextStyle(fontSize: 15.0),
@@ -42,11 +44,12 @@ class _AccountState extends State<Account> {
                 ),
               )),
           Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
                 textColor: Colors.white,
                 onPressed: () {
@@ -55,6 +58,7 @@ class _AccountState extends State<Account> {
                 child: Row(
                   children: [
                     Icon(Icons.email),
+                    SizedBox(width: 10),
                     Text(
                       "Change email",
                       style: TextStyle(fontSize: 15.0),
@@ -63,30 +67,35 @@ class _AccountState extends State<Account> {
                 ),
               )),
           Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
                 textColor: Colors.white,
-                onPressed: null,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'Nickname');
+                },
                 child: Row(
                   children: [
                     Icon(Icons.account_circle),
+                    SizedBox(width: 10),
                     Text(
-                      "Change Profile Picture",
+                      "Change Nickname",
                       style: TextStyle(fontSize: 15.0),
                     ),
                   ],
                 ),
               )),
           Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
                 textColor: Colors.white,
                 onPressed: () {
@@ -95,6 +104,7 @@ class _AccountState extends State<Account> {
                 child: Row(
                   children: [
                     Icon(Icons.location_on),
+                    SizedBox(width: 10),
                     Text(
                       "Manage shipping address",
                       style: TextStyle(fontSize: 15.0),
@@ -103,11 +113,12 @@ class _AccountState extends State<Account> {
                 ),
               )),
           Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                border: Border.all(),
-              ),
+                  color: Colors.blue,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
                 textColor: Colors.white,
                 onPressed: () {
@@ -116,6 +127,7 @@ class _AccountState extends State<Account> {
                 child: Row(
                   children: [
                     Icon(Icons.credit_card),
+                    SizedBox(width: 10),
                     Text(
                       "Manage credit cards",
                       style: TextStyle(fontSize: 15.0),

@@ -15,6 +15,7 @@ class _PasswordChangeState extends State<PasswordChange> {
       new ModifyPassword(FirebaseAuth.instance.currentUser.uid);
   //attribute for the form
   final _formKey = GlobalKey<FormState>();
+  String rightOldPassword;
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController passwordControllerFirst = TextEditingController();
   TextEditingController passwordControllerSecond = TextEditingController();
@@ -30,8 +31,7 @@ class _PasswordChangeState extends State<PasswordChange> {
 
   @override
   Widget build(BuildContext context) {
-    final UserApp user = Provider.of<UserApp>(context);
-
+    final userApp = Provider.of<UserApp>(context);
     //Check if the passwords are equal
     bool passwordsEqual = password1 == password2;
     return Scaffold(
@@ -45,11 +45,14 @@ class _PasswordChangeState extends State<PasswordChange> {
               key: _formKey,
               child: Column(children: [
                 Container(
-                  margin:
-                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  color: Colors.white,
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 20, bottom: 5),
                   child: TextFormField(
                     validator: (value) =>
-                        value.isEmpty ? "Wrong old password" : null,
+                        value.isEmpty || value.compareTo(userApp.password) != 0
+                            ? "Wrong old password"
+                            : null,
                     onChanged: (val) {
                       setState(() => oldPassword = val);
                     },
@@ -71,6 +74,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                   ),
                 ),
                 Container(
+                  color: Colors.white,
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
@@ -98,6 +102,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                   ),
                 ),
                 Container(
+                  color: Colors.white,
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
@@ -136,7 +141,53 @@ class _PasswordChangeState extends State<PasswordChange> {
                       if (_formKey.currentState.validate()) {
                         //TODO
                         //modify the password stored with the new one
+                        modifyPassword.modifyPassword(password1);
 
+                        Widget okButton = FlatButton(
+                          child: Text("Ok"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        );
+
+                        // Create AlertDialog
+                        AlertDialog alert = AlertDialog(
+                          title: Text("Password modified"),
+                          actions: [
+                            okButton,
+                          ],
+                        );
+
+                        // show the dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      } else {
+                        Widget okButton = FlatButton(
+                          child: Text("Ok"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        );
+
+                        // Create AlertDialog
+                        AlertDialog alert = AlertDialog(
+                          title: Text("Password NOT modified"),
+                          actions: [
+                            okButton,
+                          ],
+                        );
+
+                        // show the dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
                       }
                     },
                     child: Text(

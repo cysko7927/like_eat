@@ -43,12 +43,13 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
               child: Column(
                 children: [
                   Container(
-                   
+                      margin: EdgeInsets.only(
+                          left: 30.0, right: 30, top: 20, bottom: 5),
                       child: Text("Add new Address",
                           style:
                               TextStyle(fontSize: 20.0, color: Colors.black))),
                   Container(
-                    
+                    color: Colors.white,
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
@@ -63,7 +64,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                             labelText: 'Enter your State')),
                   ),
                   Container(
-                    
+                    color: Colors.white,
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
@@ -78,7 +79,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                             labelText: 'Enter your address')),
                   ),
                   Container(
-                    
+                    color: Colors.white,
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
@@ -93,11 +94,10 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                             labelText: 'Enter your city')),
                   ),
                   Container(
-                    
+                    color: Colors.white,
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
-                      
                         validator: (value) =>
                             value.isEmpty ? "Enter a CAP" : null,
                         onChanged: (val) {
@@ -105,13 +105,12 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                         },
                         controller: capController,
                         decoration: InputDecoration(
-                          
-                            border: OutlineInputBorder(),
-                            labelText: 'Enter your CAP',
-                            )),
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter your CAP',
+                        )),
                   ),
                   Container(
-                    
+                    color: Colors.white,
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
@@ -126,11 +125,12 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                             labelText: 'Enter the number')),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(left:30.0, right: 30,top: 5, bottom: 5),
+                      margin: const EdgeInsets.only(
+                          left: 30.0, right: 30, top: 5, bottom: 5),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        border: Border.all(),
-                      ),
+                          color: Colors.blue,
+                          border: Border.all(),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: FlatButton(
                         textColor: Colors.white,
                         onPressed: () => {
@@ -151,10 +151,13 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                       )),
                 ],
               )),
-          Row(
-            children: [
-              Expanded(child: SizedBox(height: 400.0, child: AddressList())),
-            ],
+          Container(
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            child: Row(
+              children: [
+                Expanded(child: SizedBox(height: 400.0, child: AddressList())),
+              ],
+            ),
           ),
         ],
       )),

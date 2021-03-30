@@ -15,7 +15,7 @@ class _CreditCardsState extends State<CreditCards> {
   String cvc = '';
   String expDate = '';
   String number = '';
-  
+
   final _formKey = GlobalKey<FormState>();
   //Controllers
   TextEditingController cvcController = new TextEditingController();
@@ -29,6 +29,7 @@ class _CreditCardsState extends State<CreditCards> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Credit Card'),
@@ -36,87 +37,115 @@ class _CreditCardsState extends State<CreditCards> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Container(
-                        child: Text("Add new Credit Card",
-                            style:
-                                TextStyle(fontSize: 20.0, color: Colors.blue))),
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 30.0, right: 30, top: 5, bottom: 5),
-                      child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter the cvc" : null,
-                          onChanged: (val) {
-                            setState(() => cvc = val);
-                          },
-                          controller: cvcController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Enter the CVC')),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 30.0, right: 30, top: 5, bottom: 5),
-                      child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter the expiration Date" : null,
-                          onChanged: (val) {
-                            setState(() => expDate = val);
-                          },
-                          controller: expDateController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Enter the expiration Date')),
-                    ),
-                    
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 30.0, right: 30, top: 5, bottom: 5),
-                      child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter the number" : null,
-                          onChanged: (val) {
-                            setState(() => number = val);
-                          },
-                          controller: numberController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Enter the number')),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.only(top: 5, bottom: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          border: Border.all(),
-                        ),
-                        child: FlatButton(
-                          textColor: Colors.white,
-                          onPressed: () => {
-                            if (_formKey.currentState.validate())
-                              {
-                                creditCardManager.addCreditCard(number,cvc,expDate)
-                              }
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                "Insert new credit Card",
-                                style: TextStyle(fontSize: 15.0),
-                              )
-                            ],
-                          ),
-                        )),
-                  ],
-                )),
-            Row(
-              children: [
-                Expanded(child: SizedBox(height: 200.0, child: CreditCardList())),
-              ],
+            Container(
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 5),
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(
+                              left: 30.0, right: 30, top: 20, bottom: 5),
+                          child: Text("Add new Credit Card",
+                              style: TextStyle(
+                                  fontSize: 20.0, color: Colors.black))),
+                      Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.only(
+                            left: 30.0, right: 30, top: 5, bottom: 5),
+                        child: TextFormField(
+                            validator: (value) =>
+                                value.isEmpty ? "Enter the cvc" : null,
+                            onChanged: (val) {
+                              setState(() => cvc = val);
+                            },
+                            controller: cvcController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Enter the CVC')),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.only(
+                            left: 30.0, right: 30, top: 5, bottom: 5),
+                        child: TextFormField(
+                            validator: (value) => value.isEmpty
+                                ? "Enter the expiration Date"
+                                : null,
+                            onChanged: (val) {
+                              setState(() => expDate = val);
+                            },
+                            controller: expDateController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Enter the expiration Date')),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.only(
+                            left: 30.0, right: 30, top: 5, bottom: 5),
+                        child: TextFormField(
+                            validator: (value) =>
+                                value.isEmpty ? "Enter the number" : null,
+                            onChanged: (val) {
+                              setState(() => number = val);
+                            },
+                            controller: numberController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Enter the number')),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.only(
+                              left: 30.0, right: 30, top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              border: Border.all(),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: FlatButton(
+                            textColor: Colors.white,
+                            onPressed: () => {
+                              if (_formKey.currentState.validate())
+                                {
+                                  creditCardManager.addCreditCard(
+                                      number, cvc, expDate)
+                                }
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Insert new credit Card",
+                                  style: TextStyle(fontSize: 15.0),
+                                )
+                              ],
+                            ),
+                          )),
+                    ],
+                  )),
             ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 20),
+              child: Column(children: [
+                Text("List of Credit Card",
+                    style: TextStyle(fontSize: 20.0, color: Colors.black)),
+                Row(
+                  children: [
+                    Expanded(
+                        child:
+                            SizedBox(height: 300.0, child: CreditCardList())),
+                  ],
+                )
+              ]),
+            )
           ],
         )));
   }

@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/Model/User.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
+import 'package:like_eat/ViewModel/UserDataManager.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                 await _auth
                     .signOut(); //Ask to the Authenticatio widget to logout the user
 
-                 //Close the setting widget
+                //Close the setting widget
               },
             )
           ],

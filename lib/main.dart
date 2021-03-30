@@ -12,6 +12,7 @@ import 'package:like_eat/View/Wrapper/HomePage/Account/Password/PasswordView.dar
 import 'package:like_eat/View/Wrapper/HomePage/Account/ShippingAddress/ShippingAddressView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/CreditCard/CreditCardView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/Email/EmailView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Account/Nickname/NicknameView.dart';
 
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
@@ -98,6 +99,11 @@ class MyApp extends StatelessWidget {
                             .userStream,
                     child: PasswordChange()),
                 'Email': (context) => EmailChange(),
+                'Nickname': (context) => StreamProvider<UserApp>.value(
+                    value:
+                        UserDataManager(FirebaseAuth.instance.currentUser.uid)
+                            .userStream,
+                    child: NicknameChange()),
 
                 'Product': (context) => StreamProvider<Product>.value(
                     value: null, child: ProductDetail()),
