@@ -31,7 +31,7 @@ class ProductTile extends StatelessWidget {
                  List<Object> obj=[];
                  obj.add(product);
                  obj.add(await observedProduct.productIsObserved(product));
-                      Navigator.pushNamed(context, ProductDetail.routeName,
+                      Navigator.pushNamed(context, 'Product',
                           arguments: obj);
                     })));
   }

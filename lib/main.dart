@@ -23,10 +23,10 @@ import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/ViewModel/CartManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
 import 'package:like_eat/ViewModel/UserDataManager.dart';
-import 'package:like_eat/ViewModel/SearchManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
@@ -74,7 +74,11 @@ class MyApp extends StatelessWidget {
                     value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
                         .obtainHistory,
                     child: History()),
-                'Cart': (context) => Cart(),
+                'Cart': (context) =>StreamProvider<List<Product>>.value(
+                    value:
+                        CartManager(FirebaseAuth.instance.currentUser.uid)
+                            .productsInCart,
+                    child: Cart()),
 
                 //Account Page
                 'Account': (context) => Account(),
@@ -96,7 +100,10 @@ class MyApp extends StatelessWidget {
                             .userStream,
                     child: PasswordChange()),
                 'Email' : (context) => EmailChange(),
-                ProductDetail.routeName: (context) => ProductDetail(),
+
+                'Product': (context) => StreamProvider<Product>.value(
+                        value: null,
+                        child: ProductDetail()),
               },
               home: Wrapper(),
             ),
