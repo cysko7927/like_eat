@@ -126,7 +126,11 @@ class _CatalogState extends State<Catalog> {
                   },
                   items: _buildItems()),
             Container(
-              child: SizedBox(height: 200.0, child: ProductList(products)),
+              child: SizedBox(
+                  height: 200.0,
+                  child: StreamProvider<List<Product>>.value(
+                      value: searchManager.productsStream,
+                      child: ProductList(products))),
             ),
           ],
         )));

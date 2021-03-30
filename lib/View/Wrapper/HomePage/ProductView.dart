@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/ViewModel/ObservedProductManager.dart';
 import 'package:like_eat/ViewModel/ProductManager.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   static const routeName = "/product";
+  bool isObserved;
+
+  ProductDetail(this.isObserved);
   ProductDetailState createState() => ProductDetailState();
 }
 
@@ -25,12 +29,17 @@ class ProductDetailState extends State<ProductDetail> {
 
   @override
   Widget build(BuildContext context) {
-    List<Object> obj = ModalRoute.of(context).settings.arguments;
-    _product = obj.elementAt(0);
-    isObserved = obj.elementAt(1);
+    //List<Object> obj = ModalRoute.of(context).settings.arguments;
+    //_product = obj.elementAt(0);
+    //isObserved = obj.elementAt(1);
+    _product = Provider.of<Product>(
+        context); //Obtain the data of the product from the provider
+
+    isObserved = widget.isObserved;
 
     observedManager =
         new ObservedProductManager(FirebaseAuth.instance.currentUser.uid);
+
     productManager = new ProductManager(
         _product, FirebaseAuth.instance.currentUser.uid, isObserved);
 

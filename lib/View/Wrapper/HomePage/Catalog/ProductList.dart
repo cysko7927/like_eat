@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:like_eat/Model/Product.dart';
 
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/ProductTile.dart';
+import 'package:provider/provider.dart';
 
 class ProductList extends StatefulWidget {
   final List<Product> products;
@@ -13,10 +14,10 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   @override
-
   Widget build(BuildContext context) {
-    List<Product> products = widget.products;
+    List<Product> products = Provider.of<List<Product>>(context);
 
+    if (products == null) products = new List<Product>();
     return ListView.builder(
         itemCount: products.length,
         itemBuilder: (context, index) {
