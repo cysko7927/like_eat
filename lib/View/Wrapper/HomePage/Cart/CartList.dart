@@ -18,13 +18,13 @@ class _CartListState extends State<CartList> {
       return ListView.builder(
           itemCount: products.length,
           itemBuilder: (context, index) {
-            return CartTile(products.elementAt(index),index);
+            return CartTile(products.elementAt(index), index);
           });
     } else {
       return ListView.builder(
           itemCount: new List<Product>().length,
           itemBuilder: (context, index) {
-            return CartTile(products[index],index);
+            return CartTile(products[index], index);
           });
     }
   }
@@ -32,12 +32,8 @@ class _CartListState extends State<CartList> {
 
 class CartTile extends StatelessWidget {
   final Product products;
-final int index;
-  CartTile(this.products,this.index);
-
-
-
-
+  final int index;
+  CartTile(this.products, this.index);
 
   CartManager cartManager = CartManager(FirebaseAuth.instance.currentUser.uid);
 
@@ -53,7 +49,7 @@ final int index;
                   products.quantity.toString() +
                   "\t" +
                   "by: " +
-                 products.supplier),
+                  products.supplier),
               trailing: Row(children: [
                 Text(products.price.toString() + "€"),
                 Wrap(
