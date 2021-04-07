@@ -87,7 +87,7 @@ class CartManager extends ChangeNotifier {
   //obtain the stream of the list of the products in the cart of the user with uid = _uid from this class
   Stream<List<Product>> get productsInCart {
     return cartReference
-        .where('uidUser', isEqualTo: _uid)
+        .where('uid', isEqualTo: _uid)
         .snapshots()
         .map(_productsInTheCartListFromSnapshot);
   }
