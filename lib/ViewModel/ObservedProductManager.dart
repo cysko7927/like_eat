@@ -66,14 +66,14 @@ class ObservedProductManager extends ChangeNotifier {
   //that contains those products
   //Precondition: The snapshot must contain the products with the correct parameters
   List<Product> _productsObservedListFromSnapshot(QuerySnapshot snapshot) {
+    var a = snapshot.docs.elementAt(0).data()['price'];
     return snapshot.docs
         .map((doc) => Product(
-              doc.data()['supplier'] ?? '',
-              doc.data()['type'] ?? '',
-              doc.data()['name'] ?? '',
-              doc.data()['price'] ?? '',
-              0,
-            ))
+            doc.data()['supplier'] ?? '',
+            doc.data()['type'] ?? '',
+            doc.data()['name'] ?? '',
+            doc.data()['price'] ?? 0,
+            0))
         .toList();
   }
 }
