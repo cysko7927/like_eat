@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedList.dart';
 
 class ObservedProduct extends StatefulWidget {
-   @override
+  @override
   _ObservedProductState createState() => _ObservedProductState();
 }
-class _ObservedProductState extends State<ObservedProduct>{
+
+class _ObservedProductState extends State<ObservedProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +23,15 @@ class _ObservedProductState extends State<ObservedProduct>{
         ],
       ),
       body: SingleChildScrollView(
-        
-      ), 
+        child: Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          child: Row(
+            children: [
+              Expanded(child: SizedBox(height: 400.0, child: ObservedList())),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

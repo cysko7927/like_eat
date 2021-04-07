@@ -49,19 +49,19 @@ class CartTile extends StatelessWidget {
                   products.quantity.toString() +
                   "\t" +
                   "by: " +
-                  products.supplier),
-              trailing: Row(children: [
-                Text(products.price.toString() + "€"),
-                Wrap(
-                  children: [
-                    IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          cartManager.removeProductInTheCart(products);
-                        })
-                  ],
-                )
-              ])),
+                  products.supplier +
+                  "\t" +
+                  products.price.toString() +
+                  "€"),
+              trailing: Wrap(
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        cartManager.removeProductInTheCart(products);
+                      })
+                ],
+              )),
         ));
   }
 }

@@ -26,6 +26,7 @@ import 'package:like_eat/View/Wrapper/wrapper.dart';
 import 'package:like_eat/ViewModel/CartManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
+import 'package:like_eat/ViewModel/ObservedProductManager.dart';
 import 'package:like_eat/ViewModel/UserDataManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,11 @@ class MyApp extends StatelessWidget {
                 'HomePage': (context) => HomePage(),
 
                 'Catalog': (context) => Catalog(),
-                'Observed': (context) => ObservedProduct(),
+                'Observed': (context) => StreamProvider<List<Product>>.value(
+                    value: ObservedProductManager(
+                            FirebaseAuth.instance.currentUser.uid)
+                        .productsObserved,
+                    child: ObservedProduct()),
                 'Notification': (context) => Notifications(),
                 'History': (context) => StreamProvider<List<Order>>.value(
                     value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
