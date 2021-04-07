@@ -57,7 +57,7 @@ class ObservedProductManager extends ChangeNotifier {
   //obtain the stream of the list of the observed products of the user with uid = _uid from this class
   Stream<List<Product>> get productsObserved {
     return productsObservedReference
-        .where('uidUser', isEqualTo: _uid)
+        .where('uid', isEqualTo: _uid)
         .snapshots()
         .map(_productsObservedListFromSnapshot);
   }
