@@ -33,14 +33,31 @@ class ProductManager {
       'quantity': _productToShow.quantity - quantity
     }); //Update the quantity of the product in the DB
 
-    cartReference.add({
-      'name': _productToShow.name,
-      'price': _productToShow.price,
-      'quantity': quantity,
-      'supplier': _productToShow.supplier,
-      'type': _productToShow.type,
-      'uid': _uid,
-    }); //Add the product in the Cart of the user in the DB
+    _addProductInTheCart(quantity);
+  }
+
+  void _addProductInTheCart(int quantity) async {
+    QuerySnapshot result = await cartReference
+        .where('name', isEqualTo: _productToShow.name)
+        .where('type', isEqualTo: _productToShow.type)
+        .where('supplier', isEqualTo: _productToShow.supplier)
+        .where('uid', isEqualTo: _uid)
+        .get(); //Search if in the cart there is the product
+
+    if (result.docs.length == 1) {
+      //If it is present update only the quantity
+      cartReference.doc(result.docs.elementAt(0).id).update(
+          {'quantity': result.docs.elementAt(0).data()['quantity'] + quantity});
+    } else {
+      cartReference.add({
+        'name': _productToShow.name,
+        'price': _productToShow.price,
+        'quantity': quantity,
+        'supplier': _productToShow.supplier,
+        'type': _productToShow.type,
+        'uid': _uid,
+      }); //Else Add the product in the Cart of the user in the DB
+    }
   }
 
   /**
