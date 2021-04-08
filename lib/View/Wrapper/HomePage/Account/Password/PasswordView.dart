@@ -164,11 +164,12 @@ class _PasswordChangeState extends State<PasswordChange> {
                     disabledTextColor: Colors.black,
                     splashColor: Colors.blueAccent,
                     padding: EdgeInsets.all(8.0),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         //TODO
                         //modify the password stored with the new one
-                        modifyPassword.modifyPassword(password1);
+                        StatusModify status = await modifyPassword
+                            .modifyPassword(email, oldPassword, password1);
 
                         Widget okButton = FlatButton(
                           child: Text("Ok"),
@@ -176,45 +177,46 @@ class _PasswordChangeState extends State<PasswordChange> {
                             Navigator.of(context).pop();
                           },
                         );
+                        if (obtainStringError(status) == "Okay") {
+                          // Create AlertDialog
+                          AlertDialog alert = AlertDialog(
+                            title: Text("Password modified"),
+                            actions: [
+                              okButton,
+                            ],
+                          );
 
-                        // Create AlertDialog
-                        AlertDialog alert = AlertDialog(
-                          title: Text("Password modified"),
-                          actions: [
-                            okButton,
-                          ],
-                        );
+                          // show the dialog
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            },
+                          );
+                        } else {
+                          Widget okButton = FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
 
-                        // show the dialog
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
-                      } else {
-                        Widget okButton = FlatButton(
-                          child: Text("Ok"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        );
+                          // Create AlertDialog
+                          AlertDialog alert = AlertDialog(
+                            title: Text(obtainStringError(status)),
+                            actions: [
+                              okButton,
+                            ],
+                          );
 
-                        // Create AlertDialog
-                        AlertDialog alert = AlertDialog(
-                          title: Text("Password NOT modified"),
-                          actions: [
-                            okButton,
-                          ],
-                        );
-
-                        // show the dialog
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
+                          // show the dialog
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            },
+                          );
+                        }
                       }
                     },
                     child: Text(
@@ -243,5 +245,28 @@ class _PasswordChangeState extends State<PasswordChange> {
     setState(() {
       _obscureTextOld = !_obscureTextOld;
     });
+  }
+
+  String obtainStringError(StatusModify status) {
+    switch (status) {
+      case StatusModify.PasswordWeak:
+        return "Password is weak try a new password more long";
+      case StatusModify.UserMismatch:
+        return "The credentials of the user are mismatched";
+      case StatusModify.UserNotFound:
+        return "The user with this email doesn't exist";
+      case StatusModify.InvalidCredentials:
+        return "The credentials are invalid";
+      case StatusModify.InvalidEmail:
+        return "The email is wrong";
+      case StatusModify.WrongPassword:
+        return "The old Password is wrong";
+      case StatusModify.Error:
+        return "Error of connection";
+      case StatusModify.EmailAlreadyUsed:
+        return "The email inserted is already used";
+      case StatusModify.Okay:
+        return "Okay";
+    }
   }
 }

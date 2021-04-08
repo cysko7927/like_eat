@@ -193,6 +193,8 @@ class ModifyEmail extends ChangeNotifier {
           return StatusModify.Error;
       }
     }
+
+    return StatusModify.Okay;
   }
 
   bool get modificationDone => _done;
@@ -234,4 +236,5 @@ enum StatusModify {
   WrongPassword,
   Error,
   EmailAlreadyUsed,
+  Okay
 }
