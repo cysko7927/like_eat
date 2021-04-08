@@ -73,7 +73,7 @@ class ProductManager {
           .where('uid', isEqualTo: _uid)
           .get(); //obtain the reference of the product observed from DB
 
-      productsReference
+      productsObservedReference
           .doc(result.docs.elementAt(0).id)
           .delete(); //Delete the product observed from the list in the DB
 

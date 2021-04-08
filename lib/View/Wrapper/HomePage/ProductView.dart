@@ -56,11 +56,14 @@ class ProductDetailState extends State<ProductDetail> {
                 IconButton(
                   icon: Icon(
                     Icons.favorite,
-                    color: Colors.white,
+                    color: isObserved ? Colors.red : Colors.white,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     // TODO
                     //put the product into the observable product of the user
+                    await productManager.modifyObservable();
+                    setState(
+                        () => widget.isObserved = productManager.isObserved);
                   },
                 ),
                 IconButton(
