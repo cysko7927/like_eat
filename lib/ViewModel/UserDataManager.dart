@@ -13,6 +13,7 @@ class UserDataManager extends ChangeNotifier {
   UserApp _user;
   CollectionReference userReference =
       FirebaseFirestore.instance.collection('Users');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String _uid;
 
   UserDataManager(this._uid);
@@ -93,6 +94,7 @@ class ModifyPassword extends ChangeNotifier {
   bool _done;
   CollectionReference usersReference =
       FirebaseFirestore.instance.collection('Users');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String _uid;
 
   ModifyPassword(this._uid) {
@@ -103,13 +105,94 @@ class ModifyPassword extends ChangeNotifier {
    * Ask to the server to modify the nickname of a user, update the data of the user and notify
    * the view
    */
-  void modifyPassword(String newPassword) {
-    Webservice()
-        .postNewPassword(newPassword, ViewModel.userDataManager.user.nickname);
-    ViewModel.userDataManager
-        .obtainUserData(ViewModel.userDataManager.user.nickname);
-    _done = true;
-    notifyListeners();
+  Future<StatusModify> modifyPassword(
+      String email, String oldPassword, String newPassword) async {
+    User userReference = _auth.currentUser;
+
+    try {
+      EmailAuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: oldPassword);
+
+      await userReference.reauthenticateWithCredential(credential);
+
+      await userReference.updatePassword(newPassword);
+
+      await usersReference.doc(_uid).update({'password': newPassword});
+
+      _done = true;
+    } catch (e) {
+      switch (e.code) {
+        case "user-mismatch":
+          return StatusModify.UserMismatch;
+        case "user-not-found":
+          return StatusModify.UserNotFound;
+        case "invalid-credential":
+          return StatusModify.InvalidCredentials;
+        case "invalid-email":
+          return StatusModify.InvalidCredentials;
+        case "wrong-password":
+          return StatusModify.WrongPassword;
+        case "weak-password":
+          return StatusModify.PasswordWeak;
+        default:
+          return StatusModify.Error;
+      }
+    }
+  }
+
+  bool get modificationDone => _done;
+}
+
+class ModifyEmail extends ChangeNotifier {
+  bool _done;
+  CollectionReference usersReference =
+      FirebaseFirestore.instance.collection('Users');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _uid;
+
+  ModifyEmail(this._uid) {
+    _done = false;
+  }
+
+  /**
+   * Ask to the server to modify the nickname of a user, update the data of the user and notify
+   * the view
+   */
+  Future<StatusModify> modifyEmail(
+      String oldEmail, String password, String newEmail) async {
+    User userReference = _auth.currentUser;
+
+    try {
+      EmailAuthCredential credential =
+          EmailAuthProvider.credential(email: oldEmail, password: password);
+
+      await userReference.reauthenticateWithCredential(credential);
+
+      await userReference.updateEmail(newEmail);
+
+      await usersReference.doc(_uid).update({'email': newEmail});
+
+      _done = true;
+    } catch (e) {
+      switch (e.code) {
+        case "user-mismatch":
+          return StatusModify.UserMismatch;
+        case "user-not-found":
+          return StatusModify.UserNotFound;
+        case "invalid-credential":
+          return StatusModify.InvalidCredentials;
+        case "invalid-email":
+          return StatusModify.InvalidCredentials;
+        case "wrong-password":
+          return StatusModify.WrongPassword;
+        case "weak-password":
+          return StatusModify.PasswordWeak;
+        case "email-already-in-use":
+          return StatusModify.EmailAlreadyUsed;
+        default:
+          return StatusModify.Error;
+      }
+    }
   }
 
   bool get modificationDone => _done;
@@ -135,9 +218,20 @@ class ModifyNameAndSurname extends ChangeNotifier {
    * the view
    */
   void modifyNameAndSurname(String newName, String newSurname) {
-    usersReference.doc(_uid).update({'name': newName});
+    usersReference.doc(_uid).update({'name': newName, 'surname': newSurname});
     _done = true;
   }
 
   bool get modificationDone => _done;
+}
+
+enum StatusModify {
+  PasswordWeak,
+  UserMismatch,
+  UserNotFound,
+  InvalidCredentials,
+  InvalidEmail,
+  WrongPassword,
+  Error,
+  EmailAlreadyUsed,
 }
