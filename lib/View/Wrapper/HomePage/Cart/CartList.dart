@@ -39,27 +39,39 @@ class CartTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double totalPrice = products.price * products.quantity;
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
-              title: Text(products.name),
+              title: Text(products.name +
+                  "\t\t\t\ttotal price: " +
+                  (totalPrice).toString() +
+                  "€"),
               subtitle: Text("Qty: " +
                   products.quantity.toString() +
                   "\t" +
-                  "by: " +
-                  products.supplier +
-                  "\t" +
+                  "Unitary price: " +
                   products.price.toString() +
-                  "€"),
+                  "€" +
+                  "\n" +
+                  "by: " +
+                  products.supplier),
               trailing: Wrap(
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        cartManager.removeProductInTheCart(products);
-                      })
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                    ),
+                    child: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          cartManager.removeProductInTheCart(products);
+                        }),
+                  )
                 ],
               )),
         ));

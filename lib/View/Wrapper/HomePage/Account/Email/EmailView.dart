@@ -8,13 +8,17 @@ class EmailChange extends StatefulWidget {
 class _EmailChangeState extends State<EmailChange> {
   //attribute for the form
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController oldEmailController = TextEditingController();
   TextEditingController newEmailController = TextEditingController();
-  TextEditingController passwordControllerSecond = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   //State
+  String password = '';
   String oldEmail = '';
   String newEmail = '';
+
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,8 @@ class _EmailChangeState extends State<EmailChange> {
                   margin: EdgeInsets.only(
                       left: 30.0, right: 30, top: 20, bottom: 5),
                   child: TextFormField(
-                    validator: (value) => value.isEmpty || !oldEmailValid
+                    validator: (value) => value.isEmpty ||
+                            !oldEmailValid //|| Check if old email is the same
                         ? "Wrong old email"
                         : null,
                     onChanged: (val) {
@@ -50,7 +55,7 @@ class _EmailChangeState extends State<EmailChange> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter your old email',
-                      prefixIcon: Icon(Icons.security),
+                      prefixIcon: Icon(Icons.email),
                     ),
                   ),
                 ),
@@ -69,7 +74,36 @@ class _EmailChangeState extends State<EmailChange> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter a new email',
+                      prefixIcon: Icon(Icons.email),
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.white,
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty //|| Check if password is correct
+                            ? "Wrong Password"
+                            : null,
+                    onChanged: (val) {
+                      setState(() => password = val);
+                    },
+                    obscureText: _obscureText,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your Password',
                       prefixIcon: Icon(Icons.security),
+                      suffixIcon: InkWell(
+                        onTap: _toggle,
+                        child: Icon(
+                          _obscureText
+                              ? Icons.remove_red_eye
+                              : Icons.visibility_off,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -95,5 +129,11 @@ class _EmailChangeState extends State<EmailChange> {
                 ),
               ])),
         ));
+  }
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 }

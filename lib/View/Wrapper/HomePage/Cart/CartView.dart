@@ -14,6 +14,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Cart'),
@@ -28,11 +29,30 @@ class _CartState extends State<Cart> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
-          Text("Cart"),
           Container(
             child: SizedBox(
               height: 400.0,
               child: CartList(),
+            ),
+          ),
+          Container(
+            child: Text("TOTAL: ..."),
+            //TODO:
+            //Create a function in the cartManager that gives back the total of the cart
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              border: Border.all(),
+            ),
+            child: FlatButton(
+              textColor: Colors.white,
+              onPressed: () async {},
+              child: Text(
+                "Proceed with the payment",
+                style: TextStyle(fontSize: 15.0),
+              ),
             ),
           ),
         ])));

@@ -19,6 +19,7 @@ class _PasswordChangeState extends State<PasswordChange> {
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController passwordControllerFirst = TextEditingController();
   TextEditingController passwordControllerSecond = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   bool _obscureTextFirst = true;
   bool _obscureTextSecond = true;
@@ -28,12 +29,18 @@ class _PasswordChangeState extends State<PasswordChange> {
   String oldPassword = '';
   String password1 = '';
   String password2 = '';
+  String email = '';
 
   @override
   Widget build(BuildContext context) {
     final userApp = Provider.of<UserApp>(context);
     //Check if the passwords are equal
     bool passwordsEqual = password1 == password2;
+
+    //Check if the email is valid in the format with this regular expression
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
@@ -48,6 +55,26 @@ class _PasswordChangeState extends State<PasswordChange> {
                   color: Colors.white,
                   margin: EdgeInsets.only(
                       left: 30.0, right: 30, top: 20, bottom: 5),
+                  child: TextFormField(
+                    validator: (value) => value.isEmpty ||
+                            !emailValid //|| Check if old email is the same
+                        ? "Wrong email"
+                        : null,
+                    onChanged: (val) {
+                      setState(() => email = val);
+                    },
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your email',
+                      prefixIcon: Icon(Icons.email),
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.white,
+                  margin:
+                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty || value.compareTo(userApp.password) != 0
@@ -116,7 +143,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                     controller: passwordControllerSecond,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Confirm Password',
+                      labelText: 'Confirm the new Password',
                       prefixIcon: Icon(Icons.security),
                       suffixIcon: InkWell(
                         onTap: _toggle2,

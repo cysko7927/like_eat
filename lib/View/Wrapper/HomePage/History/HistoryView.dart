@@ -15,6 +15,7 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('History'),
