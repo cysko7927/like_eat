@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:like_eat/View/Wrapper/HomePage/History/HistoryList.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
 
-
 class History extends StatefulWidget {
-   @override
+  @override
   _HistoryState createState() => _HistoryState();
 }
-class _HistoryState extends State<History>{
+
+class _HistoryState extends State<History> {
   HistoryManager historyManager =
       HistoryManager(FirebaseAuth.instance.currentUser.uid);
 
@@ -28,8 +28,15 @@ class _HistoryState extends State<History>{
         ],
       ),
       body: SingleChildScrollView(
-        child: Expanded(child: SizedBox(height: 200.0, child: HistoryList())),
-      ), 
+        child: Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          child: Row(
+            children: [
+              Expanded(child: SizedBox(height: 400.0, child: HistoryList())),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -46,7 +46,7 @@ class ObservedTile extends StatelessWidget {
           child: ListTile(
             title: Text(product.name),
             subtitle: Text(product.supplier),
-            /*trailing: Wrap(
+            trailing: Wrap(
               children: [
                 IconButton(
                     icon: Icon(Icons.delete),
@@ -55,7 +55,7 @@ class ObservedTile extends StatelessWidget {
                           product, true);
                     }),
               ],
-            ),*/
+            ),
           ),
         ));
   }
