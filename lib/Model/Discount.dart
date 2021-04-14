@@ -4,7 +4,8 @@ import 'package:like_eat/Model/Product.dart';
 class Discount extends Notifications {
   double _percentage;
   bool _stillActive;
-  Discount(Product referenceProduct) : super(referenceProduct);
+  Discount(Product referenceProduct, String message)
+      : super(referenceProduct, message);
 
   //Getter
   double get percentage => _percentage;

@@ -4,7 +4,8 @@ import 'package:like_eat/Model/Product.dart';
 class StockUpdate extends Notifications {
   bool _stillActive;
 
-  StockUpdate(Product referenceProduct) : super(referenceProduct);
+  StockUpdate(Product referenceProduct, String message)
+      : super(referenceProduct, message);
 
   //Getter
   bool get stillActive => _stillActive;
