@@ -138,6 +138,7 @@ class ModifyPassword extends ChangeNotifier {
           return StatusModify.Error;
       }
     }
+    return StatusModify.Okay;
   }
 
   bool get modificationDone => _done;

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_eat/ViewModel/UserDataManager.dart';
 
 class EmailChange extends StatefulWidget {
   @override
@@ -6,6 +8,9 @@ class EmailChange extends StatefulWidget {
 }
 
 class _EmailChangeState extends State<EmailChange> {
+  // user ModifyEmail to modify the email in firestore
+  ModifyEmail modifyEmail =
+      new ModifyEmail(FirebaseAuth.instance.currentUser.uid);
   //attribute for the form
   final _formKey = GlobalKey<FormState>();
 
@@ -44,8 +49,7 @@ class _EmailChangeState extends State<EmailChange> {
                   margin: EdgeInsets.only(
                       left: 30.0, right: 30, top: 20, bottom: 5),
                   child: TextFormField(
-                    validator: (value) => value.isEmpty ||
-                            !oldEmailValid //|| Check if old email is the same
+                    validator: (value) => value.isEmpty || !oldEmailValid
                         ? "Wrong old email"
                         : null,
                     onChanged: (val) {
@@ -84,9 +88,7 @@ class _EmailChangeState extends State<EmailChange> {
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
                     validator: (value) =>
-                        value.isEmpty //|| Check if password is correct
-                            ? "Wrong Password"
-                            : null,
+                        value.isEmpty ? "Wrong Password" : null,
                     onChanged: (val) {
                       setState(() => password = val);
                     },
@@ -115,11 +117,51 @@ class _EmailChangeState extends State<EmailChange> {
                     disabledTextColor: Colors.black,
                     splashColor: Colors.blueAccent,
                     padding: EdgeInsets.all(8.0),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        //TODO: Change email for the current user
+                        StatusModify status = await modifyEmail.modifyEmail(
+                            oldEmail, password, newEmail);
 
-                      } else {}
+                        Widget okButton = FlatButton(
+                          child: Text("Ok"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        );
+                        if (obtainStringError(status) == "Okay") {
+                          // Create AlertDialog
+                          AlertDialog alert = AlertDialog(
+                            title: Text("Email modified"),
+                            actions: [
+                              okButton,
+                            ],
+                          );
+
+                          // show the dialog
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            },
+                          );
+                        } else {
+                          // Create AlertDialog
+                          AlertDialog alert = AlertDialog(
+                            title: Text(obtainStringError(status)),
+                            actions: [
+                              okButton,
+                            ],
+                          );
+
+                          // show the dialog
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            },
+                          );
+                        }
+                      }
                     },
                     child: Text(
                       "Change Email",
@@ -135,5 +177,28 @@ class _EmailChangeState extends State<EmailChange> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  String obtainStringError(StatusModify status) {
+    switch (status) {
+      case StatusModify.PasswordWeak:
+        return "Password is weak try a new password more long";
+      case StatusModify.UserMismatch:
+        return "The credentials of the user are mismatched";
+      case StatusModify.UserNotFound:
+        return "The user with this email doesn't exist";
+      case StatusModify.InvalidCredentials:
+        return "The credentials are invalid";
+      case StatusModify.InvalidEmail:
+        return "The email is wrong";
+      case StatusModify.WrongPassword:
+        return "The old Password is wrong";
+      case StatusModify.Error:
+        return "Error of connection";
+      case StatusModify.EmailAlreadyUsed:
+        return "The email inserted is already used";
+      case StatusModify.Okay:
+        return "Okay";
+    }
   }
 }

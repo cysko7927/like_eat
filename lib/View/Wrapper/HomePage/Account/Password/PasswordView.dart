@@ -77,9 +77,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
                     validator: (value) =>
-                        value.isEmpty || value.compareTo(userApp.password) != 0
-                            ? "Wrong old password"
-                            : null,
+                        value.isEmpty ? "Insert the old password" : null,
                     onChanged: (val) {
                       setState(() => oldPassword = val);
                     },
@@ -194,13 +192,6 @@ class _PasswordChangeState extends State<PasswordChange> {
                             },
                           );
                         } else {
-                          Widget okButton = FlatButton(
-                            child: Text("Ok"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-
                           // Create AlertDialog
                           AlertDialog alert = AlertDialog(
                             title: Text(obtainStringError(status)),
