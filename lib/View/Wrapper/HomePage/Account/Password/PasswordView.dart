@@ -33,7 +33,6 @@ class _PasswordChangeState extends State<PasswordChange> {
 
   @override
   Widget build(BuildContext context) {
-    final userApp = Provider.of<UserApp>(context);
     //Check if the passwords are equal
     bool passwordsEqual = password1 == password2;
 

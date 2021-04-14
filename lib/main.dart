@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:like_eat/Model/CreditCard.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/Product.dart';
+import 'package:like_eat/Model/Notification.dart';
 import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ProductView.dart';
 
@@ -33,7 +34,9 @@ import 'package:provider/provider.dart';
 import 'package:like_eat/Model/User.dart';
 
 import 'Model/ShippingAddress.dart';
+import 'View/Wrapper/HomePage/Notification/NotificationView.dart';
 import 'ViewModel/AddressDataManager.dart';
+import 'ViewModel/NotificationManager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +77,12 @@ class MyApp extends StatelessWidget {
                             FirebaseAuth.instance.currentUser.uid)
                         .productsObserved,
                     child: ObservedProduct()),
-                'Notification': (context) => Notifications(),
+                'Notification': (context) =>
+                    StreamProvider<List<Notifications>>.value(
+                        value: NotificationManager(
+                                FirebaseAuth.instance.currentUser.uid)
+                            .notificationsStream,
+                        child: NotificationView()),
                 'History': (context) => StreamProvider<List<Order>>.value(
                     value: HistoryManager(FirebaseAuth.instance.currentUser.uid)
                         .obtainHistory,
@@ -98,11 +106,7 @@ class MyApp extends StatelessWidget {
                                 FirebaseAuth.instance.currentUser.uid)
                             .creditCardsStream,
                         child: CreditCards()),
-                'Password': (context) => StreamProvider<UserApp>.value(
-                    value:
-                        UserDataManager(FirebaseAuth.instance.currentUser.uid)
-                            .userStream,
-                    child: PasswordChange()),
+                'Password': (context) => PasswordChange(),
                 'Email': (context) => EmailChange(),
                 'Nickname': (context) => StreamProvider<UserApp>.value(
                     value:

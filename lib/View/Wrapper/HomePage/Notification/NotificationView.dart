@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationList.dart';
 
-
-class Notifications extends StatefulWidget {
-   @override
-  _NotificationState createState() => _NotificationState();
+class NotificationView extends StatefulWidget {
+  @override
+  _NotificationViewState createState() => _NotificationViewState();
 }
-class _NotificationState extends State<Notifications>{
+
+class _NotificationViewState extends State<NotificationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.lightBlue[100],
       appBar: AppBar(
         title: Text('Notification'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
-              Icons.settings,
-            ),
-            onPressed: null
-          )
+              icon: Icon(
+                Icons.settings,
+              ),
+              onPressed: null)
         ],
       ),
       body: SingleChildScrollView(
-        
-      ), 
+        child: Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          child: Row(
+            children: [
+              Expanded(
+                  child: SizedBox(height: 400.0, child: NotificationList())),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
