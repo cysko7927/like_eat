@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:like_eat/ViewModel/CartManager.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Cart/CartList.dart';
+import 'package:like_eat/View/Wrapper/HomePage/CheckOutView.dart';
+import 'package:like_eat/ViewModel/CheckoutManager.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -10,7 +12,8 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   CartManager cartManager = CartManager(FirebaseAuth.instance.currentUser.uid);
-
+  CheckOutManager checkOutManager =
+      CheckOutManager(FirebaseAuth.instance.currentUser.uid);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +51,14 @@ class _CartState extends State<Cart> {
             ),
             child: FlatButton(
               textColor: Colors.white,
-              onPressed: () async {},
+              onPressed: () async {
+                await checkOutManager.obtainAllDataForCheckout();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CheckOut(checkOutManager)),
+                );
+              },
               child: Text(
                 "Proceed with the payment",
                 style: TextStyle(fontSize: 15.0),
