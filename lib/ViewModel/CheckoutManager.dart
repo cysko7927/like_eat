@@ -48,7 +48,7 @@ class CheckOutManager extends ChangeNotifier {
         .toList();
   }
 
-  selectAddress(int index) {
+  void selectAddress(int index) {
     _selectedShippingAddress = _listOfShippingAddress.elementAt(index);
   }
 
@@ -75,7 +75,7 @@ class CheckOutManager extends ChangeNotifier {
         .toList();
   }
 
-  selectCreditCard(int index) {
+  void selectCreditCard(int index) {
     _selectedCreditCard = _listOfCreditCard.elementAt(index);
   }
 
@@ -101,6 +101,10 @@ class CheckOutManager extends ChangeNotifier {
         .toList();
   }
 
+  /**
+   * This method is the first to call after that the checkout
+   * manager has been created and it
+   */
   void obtainAllDataForCheckout() async {
     await _obtainAllProductInTheCart();
     await _obtainCreditCards();

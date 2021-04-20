@@ -137,4 +137,24 @@ class AuthService {
       return Status.Error;
     }
   }
+
+  /**
+   * Send a mail at address in input with the link to reset the password of the user
+   * with
+   */
+  void resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  /**
+   * Send a mail with the link to reset verify the account of the user with the email
+   * in input
+   */
+  void sendVerificationEmailLink(String email) async {
+    User user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
 }
