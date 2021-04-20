@@ -1,12 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+
+//Model Import
 import 'package:like_eat/Model/CreditCard.dart';
 import 'package:like_eat/Model/Order.dart';
 import 'package:like_eat/Model/Product.dart';
 import 'package:like_eat/Model/Notification.dart';
-import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
-import 'package:like_eat/View/Wrapper/HomePage/ProductView.dart';
+import 'package:like_eat/Model/User.dart';
+import 'package:like_eat/Model/ShippingAddress.dart';
 
+//Import View
 //Import for Account
 import 'package:like_eat/View/Wrapper/HomePage/Account/AccountView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/Password/PasswordView.dart';
@@ -15,28 +22,24 @@ import 'package:like_eat/View/Wrapper/HomePage/Account/CreditCard/CreditCardView
 import 'package:like_eat/View/Wrapper/HomePage/Account/Email/EmailView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/Nickname/NicknameView.dart';
 
+import 'package:like_eat/View/Wrapper/wrapper.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Cart/CartView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/History/HistoryView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/HomePageView.dart';
+import 'package:like_eat/View/Wrapper/HomePage/CheckOutView.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:like_eat/View/Wrapper/wrapper.dart';
+//Import ViewModel
 import 'package:like_eat/ViewModel/CartManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:like_eat/ViewModel/HistoryManager.dart';
 import 'package:like_eat/ViewModel/ObservedProductManager.dart';
 import 'package:like_eat/ViewModel/UserDataManager.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
-import 'package:provider/provider.dart';
-import 'package:like_eat/Model/User.dart';
-
-import 'Model/ShippingAddress.dart';
-import 'View/Wrapper/HomePage/Notification/NotificationView.dart';
-import 'ViewModel/AddressDataManager.dart';
-import 'ViewModel/NotificationManager.dart';
+import 'package:like_eat/ViewModel/AddressDataManager.dart';
+import 'package:like_eat/ViewModel/NotificationManager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

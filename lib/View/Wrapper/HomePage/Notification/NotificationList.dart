@@ -46,7 +46,20 @@ class NotificationTile extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
             child: ListTile(
               title: Text(notification.message.toString()),
-              subtitle: Text(notification.referenceProduct.name),
+              subtitle: Text("Product observed: " +
+                  notification.referenceProduct.name +
+                  "\nMessage type: " +
+                  notification.runtimeType.toString()),
+              trailing: Wrap(
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        notificationManager.removeNotification(
+                            notification, notification.runtimeType.toString());
+                      })
+                ],
+              ),
             )));
   }
 }
