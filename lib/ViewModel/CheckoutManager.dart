@@ -134,9 +134,33 @@ class CheckOutManager extends ChangeNotifier {
       await orderReference.add({
         'productAndQuantity': productAndQuantity,
         'time': stamp,
+        'shippingAddress': _selectedShippingAddress.state +
+            ' ' +
+            _selectedShippingAddress.city +
+            ' ' +
+            _selectedShippingAddress.address +
+            ' ' +
+            _selectedShippingAddress.number +
+            ' ' +
+            _selectedShippingAddress.cap,
         'totalPrice': totalPrice,
         'uidUser': _uid
       });
+
+      //Once created the order delete the item in the cart
+      QuerySnapshot result = await orderReference
+          .where('uid', isEqualTo: _uid)
+          .get(); //obtain the reference of the products in the cart from DB
+
+      List<String> documentsIdToDelete = result.docs
+          .map((e) => e.id)
+          .toList(); //obtain the id of the documents to delete
+
+      for (int i = 0; i < documentsIdToDelete.length; i++) {
+        await orderReference
+            .doc(documentsIdToDelete.elementAt(i))
+            .delete(); //Remove the document one by one
+      }
 
       return StatusPayment.Done;
     } else {
