@@ -148,7 +148,7 @@ class CheckOutManager extends ChangeNotifier {
       });
 
       //Once created the order delete the item in the cart
-      QuerySnapshot result = await orderReference
+      QuerySnapshot result = await cartReference
           .where('uid', isEqualTo: _uid)
           .get(); //obtain the reference of the products in the cart from DB
 
@@ -157,7 +157,7 @@ class CheckOutManager extends ChangeNotifier {
           .toList(); //obtain the id of the documents to delete
 
       for (int i = 0; i < documentsIdToDelete.length; i++) {
-        await orderReference
+        await cartReference
             .doc(documentsIdToDelete.elementAt(i))
             .delete(); //Remove the document one by one
       }
