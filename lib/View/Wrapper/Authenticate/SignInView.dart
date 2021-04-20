@@ -172,7 +172,9 @@ class _State extends State<SignIn> {
                       disabledColor: Colors.grey,
                       disabledTextColor: Colors.black,
                       splashColor: Colors.redAccent,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'LostPassword');
+                      },
                       child: Text(
                         "Forgot password",
                         style: TextStyle(fontSize: 20.0),

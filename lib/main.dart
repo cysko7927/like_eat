@@ -23,6 +23,8 @@ import 'package:like_eat/View/Wrapper/HomePage/Account/Email/EmailView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Account/Nickname/NicknameView.dart';
 
 import 'package:like_eat/View/Wrapper/wrapper.dart';
+import 'package:like_eat/View/Wrapper/Authenticate/LostPasswordView.dart';
+
 import 'package:like_eat/View/Wrapper/HomePage/Catalog/CatalogView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/Notification/NotificationView.dart';
 import 'package:like_eat/View/Wrapper/HomePage/ObservedProduct/ObservedProductView.dart';
@@ -72,6 +74,7 @@ class MyApp extends StatelessWidget {
             value: AuthService().userAnon, //Check if a user is logged
             child: MaterialApp(
               routes: {
+                'LostPassword': (context) => LostPassword(),
                 'HomePage': (context) => HomePage(),
 
                 'Catalog': (context) => Catalog(),
