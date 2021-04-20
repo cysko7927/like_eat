@@ -8,6 +8,9 @@ import 'package:like_eat/ViewModel/CheckoutManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:provider/provider.dart';
 
+int globalCardIndex;
+int globalAddressIndex;
+
 class CheckOut extends StatefulWidget {
   CheckOutManager checkOutManager;
   CheckOut(this.checkOutManager);
@@ -69,7 +72,7 @@ class _CheckOutState extends State<CheckOut> {
                         children: [
                           Expanded(
                               child: SizedBox(
-                            height: 400.0,
+                            height: 200.0,
                             child: CreditCardListCheckOut(cards),
                           )),
                         ],
@@ -88,10 +91,73 @@ class _CheckOutState extends State<CheckOut> {
                         children: [
                           Expanded(
                               child: SizedBox(
-                            height: 400.0,
+                            height: 200.0,
                             child: AddressListCheckOut(addresses),
                           )),
                         ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        border: Border.all(),
+                      ),
+                      child: FlatButton(
+                        textColor: Colors.white,
+                        onPressed: () async {
+                          checkOutManager.selectCreditCard(globalCardIndex);
+                          checkOutManager.selectAddress(globalAddressIndex);
+
+                          StatusPayment status =
+                              await checkOutManager.performPayment();
+
+                          Widget okButton = FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  'HomePage', ModalRoute.withName('HomePage'));
+                            },
+                          );
+                          if (obtainString(status) == "Payment Done") {
+                            // Create AlertDialog
+                            AlertDialog alert = AlertDialog(
+                              title: Text("Order Accepted"),
+                              actions: [
+                                okButton,
+                              ],
+                            );
+
+                            // show the dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          } else {
+                            // Create AlertDialog
+                            AlertDialog alert = AlertDialog(
+                              title: Text(obtainString(status)),
+                              actions: [
+                                okButton,
+                              ],
+                            );
+
+                            // show the dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          }
+                        },
+                        child: Text(
+                          "Pay and Order",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
                       ),
                     ),
                   ])))
@@ -102,45 +168,32 @@ class _CheckOutState extends State<CheckOut> {
 class CreditCardListCheckOut extends StatefulWidget {
   List<CreditCard> cards;
   CreditCardListCheckOut(this.cards);
+
   @override
   _CreditCardListCheckOutState createState() => _CreditCardListCheckOutState();
 }
 
 class _CreditCardListCheckOutState extends State<CreditCardListCheckOut> {
+  int indexSelected;
   @override
   Widget build(BuildContext context) {
     final List<CreditCard> creditCard = widget.cards;
     return ListView.builder(
-        itemCount: creditCard.length,
-        itemBuilder: (context, index) {
-          return CreditCardCheckOutTile(creditCard.elementAt(index), index);
-        });
-  }
-}
-
-class CreditCardCheckOutTile extends StatelessWidget {
-  final CreditCard creditCard;
-  final int index;
-
-  CreditCardCheckOutTile(this.creditCard, this.index);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(top: 8.0),
-        child: Card(
-          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-          child: ListTile(
-            title: Text(creditCard.number),
-            subtitle: Text(creditCard.cvc + " " + creditCard.expDate),
-            trailing: Wrap(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.check_box_outline_blank), onPressed: () {})
-              ],
-            ),
-          ),
-        ));
+      itemCount: creditCard.length,
+      itemBuilder: (context, index) {
+        return RadioListTile(
+          groupValue: indexSelected,
+          title: Text(creditCard.elementAt(index).number),
+          value: index,
+          onChanged: (val) {
+            setState(() {
+              indexSelected = val;
+              globalCardIndex = val;
+            });
+          },
+        );
+      },
+    );
   }
 }
 
@@ -152,6 +205,7 @@ class AddressListCheckOut extends StatefulWidget {
 }
 
 class _AddressListCheckOutState extends State<AddressListCheckOut> {
+  int indexSelected;
   @override
   Widget build(BuildContext context) {
     final List<ShippingAddress> address = widget.address;
@@ -159,32 +213,36 @@ class _AddressListCheckOutState extends State<AddressListCheckOut> {
     return ListView.builder(
         itemCount: address.length,
         itemBuilder: (context, index) {
-          return AddressTileCheckOut(address.elementAt(index), index);
+          return RadioListTile(
+            groupValue: indexSelected,
+            title: Text(address.elementAt(index).address +
+                " " +
+                address.elementAt(index).number +
+                " " +
+                address.elementAt(index).city +
+                " " +
+                address.elementAt(index).cap +
+                " " +
+                address.elementAt(index).state),
+            value: index,
+            onChanged: (val) {
+              setState(() {
+                indexSelected = val;
+                globalAddressIndex = val;
+              });
+            },
+          );
         });
   }
 }
 
-class AddressTileCheckOut extends StatelessWidget {
-  final ShippingAddress address;
-  final int index;
-  AddressTileCheckOut(this.address, this.index);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(top: 8.0),
-        child: Card(
-          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-          child: ListTile(
-            title: Text(address.address),
-            subtitle: Text(address.number +
-                " " +
-                address.city +
-                " " +
-                address.cap +
-                " " +
-                address.state),
-          ),
-        ));
+String obtainString(StatusPayment status) {
+  switch (status) {
+    case StatusPayment.Error:
+      return "Payment Error";
+      break;
+    case StatusPayment.Done:
+      return "Payment Done";
+      break;
   }
 }
