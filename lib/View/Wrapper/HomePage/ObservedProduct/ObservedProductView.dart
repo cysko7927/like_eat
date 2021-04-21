@@ -10,6 +10,7 @@ class _ObservedProductState extends State<ObservedProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Observed Product'),

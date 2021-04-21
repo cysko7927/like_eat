@@ -42,6 +42,7 @@ class _CatalogState extends State<Catalog> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Catalog'),
