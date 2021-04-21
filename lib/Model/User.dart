@@ -84,6 +84,8 @@ class UserApp {
 
 class UserAnon {
   final String uid;
+  final bool isverified;
+  final String email;
 
-  UserAnon(this.uid);
+  UserAnon(this.uid, this.isverified, this.email);
 }

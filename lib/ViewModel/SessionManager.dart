@@ -26,7 +26,9 @@ class AuthService {
       FirebaseAuth.instance; //Interface of the FirebaseAuth
 
   UserAnon _userAnonFromFirebaseUser(User user) {
-    return user != null ? UserAnon(user.uid) : null;
+    return user != null
+        ? UserAnon(user.uid, user.emailVerified, user.email)
+        : null;
   }
 
   /*If the firebase User is Null then the login or the 
@@ -38,7 +40,7 @@ class AuthService {
     return user != null ? UserApp(name, surname, nickname, user.email) : null;
   }
 
-  //auth changes userAnon stream
+  //auth state changes userAnon stream
   Stream<UserAnon> get userAnon {
     return _auth
         .authStateChanges()
