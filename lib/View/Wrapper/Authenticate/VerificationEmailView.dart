@@ -22,6 +22,16 @@ class _VerificationEmailState extends State<VerificationEmail> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Email Not Verified'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () async {
+            //The user has tapped the logout button
+            await _auth
+                .signOut(); //Ask to the Authenticatio widget to logout the user
+
+            //Close the setting widget
+          },
+        ),
       ),
       body: SingleChildScrollView(
           child: Column(children: [
