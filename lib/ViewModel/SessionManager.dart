@@ -83,6 +83,10 @@ class AuthService {
       //Todo Manca il check per vedere se l'inserimento dei dati nel DB model è riuscita
       //Se è fallita bisogna cancellare i procedimenti fatti prima e segnalare Errore
 
+      if (!user.emailVerified) {
+        await user.sendEmailVerification(); //Send the email verification link
+      }
+
       return _userFromFirebaseUser(user, nickname, name,
           surname); //Return the data of the new User inside a class
     } on FirebaseAuthException catch (e) {
