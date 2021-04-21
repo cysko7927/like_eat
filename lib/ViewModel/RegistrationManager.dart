@@ -35,7 +35,6 @@ class RegistrationManager extends ChangeNotifier {
         .doc(uid)
         .set({
           'email': email,
-          'password': password,
           'nickname': nickname,
           'name': name,
           'surname': surname,

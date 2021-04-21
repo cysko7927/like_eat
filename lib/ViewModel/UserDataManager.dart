@@ -117,8 +117,6 @@ class ModifyPassword extends ChangeNotifier {
 
       await userReference.updatePassword(newPassword);
 
-      await usersReference.doc(_uid).update({'password': newPassword});
-
       _done = true;
     } catch (e) {
       switch (e.code) {
