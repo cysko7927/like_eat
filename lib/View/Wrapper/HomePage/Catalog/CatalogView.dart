@@ -46,16 +46,6 @@ class _CatalogState extends State<Catalog> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Catalog'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'Setting');
-              },
-            )
-          ],
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -63,12 +53,15 @@ class _CatalogState extends State<Catalog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              padding: const EdgeInsets.all(15.0),
+              color: Colors.white,
+              margin:
+                  EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 5),
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Search Product',
+                  prefixIcon: Icon(Icons.search),
                 ),
                 onChanged: (text) async {
                   search = text;
@@ -83,16 +76,25 @@ class _CatalogState extends State<Catalog> {
             ),
             Row(
               children: [
-                FlatButton(
-                    child: Text("Avanced Research"),
-                    onPressed: () {
-                      setState(() {
-                        if (_visible)
-                          _visible = false;
-                        else
-                          _visible = true;
-                      });
-                    }),
+                Container(
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: FlatButton(
+                      textColor: Colors.white,
+                      child: Text("Avanced Research"),
+                      onPressed: () {
+                        setState(() {
+                          if (_visible)
+                            _visible = false;
+                          else
+                            _visible = true;
+                        });
+                      }),
+                )
               ],
             ),
             if (_visible)

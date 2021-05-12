@@ -19,14 +19,6 @@ class _HistoryState extends State<History> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('History'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-            ),
-            onPressed: null,
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(

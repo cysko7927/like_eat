@@ -21,14 +21,6 @@ class _CartState extends State<Cart> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Cart'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-              ),
-              onPressed: null,
-            )
-          ],
         ),
         body: SingleChildScrollView(
             child: Column(children: [
@@ -44,11 +36,11 @@ class _CartState extends State<Cart> {
             //Create a function in the cartManager that gives back the total of the cart
           ),
           Container(
-            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            margin: EdgeInsets.only(left: 30.0, right: 30, top: 10, bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.blue,
-              border: Border.all(),
-            ),
+                color: Colors.blue,
+                border: Border.all(),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
             child: FlatButton(
               textColor: Colors.white,
               onPressed: () async {

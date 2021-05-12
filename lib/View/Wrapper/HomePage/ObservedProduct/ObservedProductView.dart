@@ -14,14 +14,6 @@ class _ObservedProductState extends State<ObservedProduct> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Observed Product'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-            ),
-            onPressed: null,
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(

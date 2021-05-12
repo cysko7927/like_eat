@@ -45,6 +45,7 @@ class ProductDetailState extends State<ProductDetail> {
 
     return new MaterialApp(
         home: Scaffold(
+            backgroundColor: Colors.lightBlue[100],
             appBar: new AppBar(
               automaticallyImplyLeading: true,
               title: new Text(_product.name),
@@ -167,9 +168,10 @@ class ProductDetailState extends State<ProductDetail> {
                       Container(
                         margin: const EdgeInsets.only(top: 5, bottom: 5),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
-                          border: Border.all(),
-                        ),
+                            color: Colors.blue,
+                            border: Border.all(),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         child: FlatButton(
                           textColor: Colors.white,
                           onPressed: () async {

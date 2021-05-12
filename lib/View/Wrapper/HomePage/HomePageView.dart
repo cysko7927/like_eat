@@ -52,18 +52,18 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'Account');
+                      Navigator.pushNamed(context, 'Catalog');
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.person,
+                          Icons.shopping_basket,
                           color: Colors.white,
                           size: 50,
                         ),
                         Text(
-                          "Account",
+                          "Catalog",
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                       ],
@@ -115,8 +115,8 @@ class _HomePageState extends State<HomePage> {
                           size: 50,
                         ),
                         Text(
-                          "History",
-                          style: TextStyle(fontSize: 25.0, color: Colors.white),
+                          "Order\nHistory",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                       ],
                     ),
@@ -130,18 +130,18 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'Catalog');
+                      Navigator.pushNamed(context, 'Account');
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.shopping_basket,
+                          Icons.person,
                           color: Colors.white,
                           size: 50,
                         ),
                         Text(
-                          "Catalog",
+                          "Account",
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                       ],

@@ -14,13 +14,6 @@ class _NotificationViewState extends State<NotificationView> {
       backgroundColor: Colors.lightBlue[100],
       appBar: AppBar(
         title: Text('Notification'),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-              ),
-              onPressed: null)
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(

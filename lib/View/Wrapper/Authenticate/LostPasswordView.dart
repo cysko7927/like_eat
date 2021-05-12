@@ -90,7 +90,7 @@ class _LostPasswordState extends State<LostPassword> {
                       }
                     },
                     child: Text(
-                      "Change Email",
+                      "Send Email",
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
