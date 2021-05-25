@@ -86,6 +86,7 @@ class AuthService {
       //Se è fallita bisogna cancellare i procedimenti fatti prima e segnalare Errore
 
       if (!user.emailVerified) {
+        //If user is not verified
         await user.sendEmailVerification(); //Send the email verification link
       }
 

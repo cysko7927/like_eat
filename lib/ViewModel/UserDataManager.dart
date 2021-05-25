@@ -102,7 +102,7 @@ class ModifyPassword extends ChangeNotifier {
   }
 
   /**
-   * Ask to the server to modify the nickname of a user, update the data of the user and notify
+   * Ask to the server to modify the password of a user, update the data of the user and notify
    * the view
    */
   Future<StatusModify> modifyPassword(
@@ -154,7 +154,7 @@ class ModifyEmail extends ChangeNotifier {
   }
 
   /**
-   * Ask to the server to modify the nickname of a user, update the data of the user and notify
+   * Ask to the server to modify the email of a user, update the data of the user and notify
    * the view
    */
   Future<StatusModify> modifyEmail(
