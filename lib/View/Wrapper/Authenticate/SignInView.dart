@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:like_eat/ViewModel/SessionManager.dart';
 
+class EmailValidator {
+  static String validator(String value) {
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value);
+    return value.isEmpty || !emailValid
+        ? "Enter a valid email"
+        : null; //If the email is not valid print at the user to insert a valid Email
+  }
+}
+
+class PasswordValidator {
+  static String validator(String value) {
+    return value.length < 8
+        ? "Enter a Password greater at least 8 characters"
+        : null; //The password must be greater of 8
+  }
+}
+
 class SignIn extends StatefulWidget {
   final Function goToSignUp;
 

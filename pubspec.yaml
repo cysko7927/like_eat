@@ -32,6 +32,7 @@ dependencies:
   provider: ^4.3.3
   direct_select: "^1.0.0"
   async_builder: ^1.2.0
+  integration_test: ^1.0.0
   
 
 
