@@ -57,6 +57,7 @@ class _CatalogState extends State<Catalog> {
               margin:
                   EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 5),
               child: TextField(
+                key: ValueKey("Catalog_product_inputText"),
                 controller: searchController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

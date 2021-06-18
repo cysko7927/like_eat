@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
+                    key: ValueKey("Home_catalogButton"),
                     onPressed: () {
                       Navigator.pushNamed(context, 'Catalog');
                     },
@@ -129,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
+                    key: ValueKey("Home_AccountButton"),
                     onPressed: () {
                       Navigator.pushNamed(context, 'Account');
                     },

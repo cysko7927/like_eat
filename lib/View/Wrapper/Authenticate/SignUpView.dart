@@ -60,6 +60,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_name_text"),
                     validator: (value) => value.isEmpty ? "Enter a name" : null,
                     onChanged: (val) {
                       setState(() => name = val);
@@ -76,6 +77,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_surname_text"),
                     validator: (value) =>
                         value.isEmpty ? "Enter a surname" : null,
                     onChanged: (val) {
@@ -93,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_nickname_text"),
                     validator: (value) =>
                         value.isEmpty ? "Enter a nickname" : null,
                     onChanged: (val) {
@@ -110,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_email_textForm"),
                     validator: (value) => value.isEmpty || !emailValid
                         ? "Enter a valid email"
                         : null, //If the email is not valid print at the user to insert a valid Email
@@ -128,6 +132,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_password1_textForm"),
                     validator: (value) => value.length < 8
                         ? "Enter a Password greater at least 8 characters"
                         : null, //The password must be greater of 8
@@ -155,6 +160,7 @@ class _SignUpState extends State<SignUp> {
                   margin:
                       EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
                   child: TextFormField(
+                    key: ValueKey("sign_up_password2_textForm"),
                     validator: (value) => value.isEmpty || !passwordsEqual
                         ? "The passwords must be equal"
                         : null, //The two passowrd inserted by user in the form must be equal
@@ -184,24 +190,45 @@ class _SignUpState extends State<SignUp> {
                         color: Colors.red,
                         fontSize:
                             14.0)), //Text error that will be printed if there are errors in the registration process
-                Row(
-                  children: [
-                    Checkbox(
-                        value:
-                            _privacyTermValue, //Todo:inserire un validator che controlla se l'utente ha accettato le normative
-                        onChanged: (value) {
-                          setState(() {
-                            _privacyTermValue = value;
-                          });
-                        }),
-                   Expanded(
-                        child: Container(
-                            child: Text(
-                                "I agree to the Terms of Services and Privacy Policy."))),
-                  ],
+                FormField<bool>(
+                  initialValue: _privacyTermValue,
+                  builder: (FormFieldState<bool> state) {
+                    return Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Checkbox(
+                              key: ValueKey("sign_up_checkbox"),
+                              // 3
+                              value: state.value,
+                              onChanged: (bool val) => setState(() {
+                                // 4
+                                _privacyTermValue = val;
+                                // 5
+                                state.didChange(val);
+                              }),
+                            ),
+                            const Text(
+                                "I agree to the Terms of Services and Privacy Policy."),
+                          ],
+                        ),
+                        // 6
+                        state.errorText == null
+                            ? Text("")
+                            : Text(state.errorText,
+                                style: TextStyle(color: Colors.red)),
+                      ],
+                    );
+                  },
+                  // 7
+                  validator: (value) => !value
+                      ? "You must agree before proceeding"
+                      : null, //The two passowrd inserted by user in the form must be equal
                 ),
+
                 Container(
                   child: FlatButton(
+                    key: ValueKey("sign_up_register_button"),
                     color: Colors.blue,
                     textColor: Colors.white,
                     disabledColor: Colors.grey,
@@ -214,6 +241,7 @@ class _SignUpState extends State<SignUp> {
                         //Try to register the user
                         dynamic result = await _auth.registerUser(
                             email, password1, nickname, name, surname);
+
                         if (result is Status) {
                           //If the operation of registration was unsuccessful
                           setState(() => error = obtainStringError(

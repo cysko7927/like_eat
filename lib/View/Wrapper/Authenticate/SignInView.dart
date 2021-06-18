@@ -151,39 +151,6 @@ class _State extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: FlatButton(
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        disabledColor: Colors.grey,
-                        disabledTextColor: Colors.black,
-                        splashColor: Colors.blueAccent,
-                        onPressed: () {},
-                        child: Text(
-                          "Twitter",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: FlatButton(
-                        color: Colors.blueAccent,
-                        textColor: Colors.white,
-                        disabledColor: Colors.grey,
-                        disabledTextColor: Colors.black,
-                        splashColor: Colors.blueAccent,
-                        onPressed: () {},
-                        child: Text(
-                          "Facebook",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      )),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
                     padding: EdgeInsets.all(8.0),
                     child: FlatButton(
                       color: Colors.red[200],

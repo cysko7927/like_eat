@@ -18,6 +18,7 @@ class ProductTile extends StatelessWidget {
         child: Card(
             margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
             child: ListTile(
+                key: ValueKey("Product_product_tile"),
                 title: Text(product.name),
                 subtitle: Text("Qty: " +
                     product.quantity.toString() +

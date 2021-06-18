@@ -27,6 +27,12 @@ class ProductDetailState extends State<ProductDetail> {
     });
   }
 
+  void resetCounter() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //List<Object> obj = ModalRoute.of(context).settings.arguments;
@@ -55,6 +61,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               actions: <Widget>[
                 IconButton(
+                  key: ValueKey("Product_observed_icon"),
                   icon: Icon(
                     Icons.favorite,
                     color: isObserved ? Colors.red : Colors.white,
@@ -68,6 +75,7 @@ class ProductDetailState extends State<ProductDetail> {
                   },
                 ),
                 IconButton(
+                  key: ValueKey("Product_cart_icon"),
                   icon: Icon(
                     Icons.shopping_cart,
                     color: Colors.white,
@@ -159,6 +167,7 @@ class ProductDetailState extends State<ProductDetail> {
                           max: _product.quantity.toDouble(),
                           onChanged: setCounter),
                       Container(
+                          key: ValueKey("Product_quantity_text"),
                           child: Center(
                               child: Text("$counter",
                                   style: TextStyle(
@@ -173,10 +182,15 @@ class ProductDetailState extends State<ProductDetail> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         child: FlatButton(
+                          key: ValueKey("Product_addToCart_button"),
                           textColor: Colors.white,
                           onPressed: () async {
-                            productManager.addInTheCart(counter);
-                            //POP UP put in the cart
+                            //if we have something to insert...
+                            if (counter != 0) {
+                              productManager.addInTheCart(counter);
+                              resetCounter();
+                              //POP UP put in the cart
+                            }
                           }
                           //TODO
                           //send product and quantity to the cart

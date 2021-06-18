@@ -58,6 +58,7 @@ class _CreditCardsState extends State<CreditCards> {
                         margin: EdgeInsets.only(
                             left: 30.0, right: 30, top: 5, bottom: 5),
                         child: TextFormField(
+                            key: ValueKey("CreditCard_cvc_text"),
                             validator: (value) =>
                                 value.isEmpty ? "Enter the cvc" : null,
                             onChanged: (val) {
@@ -73,6 +74,7 @@ class _CreditCardsState extends State<CreditCards> {
                         margin: EdgeInsets.only(
                             left: 30.0, right: 30, top: 5, bottom: 5),
                         child: TextFormField(
+                            key: ValueKey("CreditCard_expirationDate_text"),
                             validator: (value) => value.isEmpty
                                 ? "Enter the expiration Date"
                                 : null,
@@ -89,6 +91,7 @@ class _CreditCardsState extends State<CreditCards> {
                         margin: EdgeInsets.only(
                             left: 30.0, right: 30, top: 5, bottom: 5),
                         child: TextFormField(
+                            key: ValueKey("CreditCard_number_text"),
                             validator: (value) =>
                                 value.isEmpty ? "Enter the number" : null,
                             onChanged: (val) {
@@ -108,6 +111,7 @@ class _CreditCardsState extends State<CreditCards> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                           child: FlatButton(
+                            key: ValueKey("CreditCard_insert_button"),
                             textColor: Colors.white,
                             onPressed: () => {
                               if (_formKey.currentState.validate())

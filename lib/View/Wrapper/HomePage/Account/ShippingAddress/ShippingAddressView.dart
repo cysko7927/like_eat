@@ -53,6 +53,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
+                        key: ValueKey("SA_state_text"),
                         validator: (value) =>
                             value.isEmpty ? "Enter a state" : null,
                         onChanged: (val) {
@@ -68,6 +69,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
+                        key: ValueKey("SA_address_text"),
                         validator: (value) =>
                             value.isEmpty ? "Enter an address" : null,
                         onChanged: (val) {
@@ -83,6 +85,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
+                        key: ValueKey("SA_city_text"),
                         validator: (value) =>
                             value.isEmpty ? "Enter a city" : null,
                         onChanged: (val) {
@@ -98,6 +101,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
+                        key: ValueKey("SA_CAP_text"),
                         validator: (value) =>
                             value.isEmpty ? "Enter a CAP" : null,
                         onChanged: (val) {
@@ -114,6 +118,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                     margin: EdgeInsets.only(
                         left: 30.0, right: 30, top: 5, bottom: 5),
                     child: TextFormField(
+                        key: ValueKey("SA_number_text"),
                         validator: (value) =>
                             value.isEmpty ? "Enter the number" : null,
                         onChanged: (val) {
@@ -132,6 +137,7 @@ class _ShippingAddressesState extends State<ShippingAddresses> {
                           border: Border.all(),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: FlatButton(
+                        key: ValueKey("SA_insert_button"),
                         textColor: Colors.white,
                         onPressed: () => {
                           if (_formKey.currentState.validate())

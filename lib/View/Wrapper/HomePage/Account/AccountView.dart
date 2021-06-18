@@ -97,6 +97,7 @@ class _AccountState extends State<Account> {
                   border: Border.all(),
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
+                key: ValueKey("Account_ShippingAddress_Button"),
                 textColor: Colors.white,
                 onPressed: () {
                   Navigator.pushNamed(context, 'Address');
@@ -120,6 +121,7 @@ class _AccountState extends State<Account> {
                   border: Border.all(),
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: FlatButton(
+                key: ValueKey("Account_CreditCard_Button"),
                 textColor: Colors.white,
                 onPressed: () {
                   Navigator.pushNamed(context, 'CreditCard');
