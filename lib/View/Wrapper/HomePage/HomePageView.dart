@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
+                    key: ValueKey("Home_cartButton"),
                     onPressed: () {
                       Navigator.pushNamed(context, 'Cart');
                     },
@@ -104,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
+                    key: ValueKey("Home_historyButton"),
                     onPressed: () {
                       Navigator.pushNamed(context, 'History');
                     },
@@ -158,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Container(
                     child: FlatButton(
+                  key: ValueKey("Home_ObservedButton"),
                   onPressed: () {
                     Navigator.pushNamed(context, 'Observed');
                   },

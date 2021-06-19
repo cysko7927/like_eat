@@ -45,6 +45,7 @@ class _CatalogState extends State<Catalog> {
         backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          key: ValueKey("Catalog_appBarKey"),
           title: Text('Catalog'),
         ),
         body: SingleChildScrollView(

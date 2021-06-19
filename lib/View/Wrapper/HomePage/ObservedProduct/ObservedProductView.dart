@@ -13,6 +13,7 @@ class _ObservedProductState extends State<ObservedProduct> {
       backgroundColor: Colors.lightBlue[100],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        key: ValueKey("Observed_appBarKey"),
         title: Text('Observed Product'),
       ),
       body: SingleChildScrollView(

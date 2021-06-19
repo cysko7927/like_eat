@@ -94,7 +94,7 @@ void main() {
       await driver.tap(signUpNicknameText);
       await driver.enterText("Cesna");
       await driver.tap(signUpEmailTextForm);
-      await driver.enterText("Matteo@ciao.it");
+      await driver.enterText("Matteo@ciaociao.it");
       await driver.tap(signUpPassword1TextForm);
       await driver.enterText("Cecini124");
       await driver.tap(signUpPassword2TextForm);

@@ -146,18 +146,18 @@ class _State extends State<SignIn> {
                 child: Text(error,
                     style: TextStyle(color: Colors.red, fontSize: 14.0)),
               ),
-              Container(child: Text("Or use one of your social profiles")),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     padding: EdgeInsets.all(8.0),
                     child: FlatButton(
-                      color: Colors.red[200],
+                      color: Colors.blue[400],
                       textColor: Colors.white,
                       disabledColor: Colors.grey,
                       disabledTextColor: Colors.black,
-                      splashColor: Colors.redAccent,
+                      padding: EdgeInsets.all(8.0),
+                      splashColor: Colors.blueAccent,
                       onPressed: () {
                         Navigator.pushNamed(context, 'LostPassword');
                       },
@@ -169,11 +169,12 @@ class _State extends State<SignIn> {
                   ),
                   Container(
                       child: FlatButton(
-                    color: Colors.red[200],
+                    color: Colors.blue[400],
                     textColor: Colors.white,
                     disabledColor: Colors.grey,
                     disabledTextColor: Colors.black,
-                    splashColor: Colors.redAccent,
+                    padding: EdgeInsets.all(8.0),
+                    splashColor: Colors.blueAccent,
                     onPressed: () {
                       widget
                           .goToSignUp(); //If the user press the button SignUp,ask to the widget Authenticate to built the SignUp widget

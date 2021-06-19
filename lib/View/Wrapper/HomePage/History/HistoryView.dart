@@ -18,6 +18,7 @@ class _HistoryState extends State<History> {
       backgroundColor: Colors.lightBlue[100],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        key: ValueKey("History_appBarKey"),
         title: Text('History'),
       ),
       body: SingleChildScrollView(

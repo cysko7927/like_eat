@@ -15,11 +15,19 @@ class _CartListState extends State<CartList> {
   Widget build(BuildContext context) {
     final List<Product> products = Provider.of<List<Product>>(context);
     if (products != null) {
-      return ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            return CartTile(products.elementAt(index), index);
-          });
+      if (products.isEmpty) {
+        return Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [Text("Empty Cart")]));
+      } else {
+        return ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return CartTile(products.elementAt(index), index);
+            });
+      }
     } else {
       return ListView.builder(
           itemCount: new List<Product>().length,

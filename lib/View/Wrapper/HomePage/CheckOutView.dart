@@ -8,8 +8,8 @@ import 'package:like_eat/ViewModel/CheckoutManager.dart';
 import 'package:like_eat/ViewModel/CreditCardManager.dart';
 import 'package:provider/provider.dart';
 
-int globalCardIndex;
-int globalAddressIndex;
+int globalCardIndex = -1;
+int globalAddressIndex = -1;
 
 class CheckOut extends StatefulWidget {
   CheckOutManager checkOutManager;
@@ -104,26 +104,20 @@ class _CheckOutState extends State<CheckOut> {
                         border: Border.all(),
                       ),
                       child: FlatButton(
+                        key: ValueKey("CheckOut_proceedPayment_button"),
                         textColor: Colors.white,
                         onPressed: () async {
-                          checkOutManager.selectCreditCard(globalCardIndex);
-                          checkOutManager.selectAddress(globalAddressIndex);
-
-                          StatusPayment status =
-                              await checkOutManager.performPayment();
-
-                          Widget okButton = FlatButton(
-                            child: Text("Ok"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  'HomePage', ModalRoute.withName('HomePage'));
-                            },
-                          );
-                          if (obtainString(status) == "Payment Done") {
-                            // Create AlertDialog
+                          if (globalAddressIndex == -1 ||
+                              globalCardIndex == -1) {
+                            Widget okButton = FlatButton(
+                              child: Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            );
                             AlertDialog alert = AlertDialog(
-                              title: Text("Order Accepted"),
+                              title: Text(
+                                  "Please select a Shipping Address and a Credit Card"),
                               actions: [
                                 okButton,
                               ],
@@ -137,21 +131,54 @@ class _CheckOutState extends State<CheckOut> {
                               },
                             );
                           } else {
-                            // Create AlertDialog
-                            AlertDialog alert = AlertDialog(
-                              title: Text(obtainString(status)),
-                              actions: [
-                                okButton,
-                              ],
-                            );
+                            checkOutManager.selectCreditCard(globalCardIndex);
+                            checkOutManager.selectAddress(globalAddressIndex);
 
-                            // show the dialog
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return alert;
+                            StatusPayment status =
+                                await checkOutManager.performPayment();
+
+                            Widget okButton = FlatButton(
+                              child: Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    'HomePage',
+                                    ModalRoute.withName('HomePage'));
                               },
                             );
+                            if (obtainString(status) == "Payment Done") {
+                              // Create AlertDialog
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Order Accepted"),
+                                actions: [
+                                  okButton,
+                                ],
+                              );
+
+                              // show the dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            } else {
+                              // Create AlertDialog
+                              AlertDialog alert = AlertDialog(
+                                title: Text(obtainString(status)),
+                                actions: [
+                                  okButton,
+                                ],
+                              );
+
+                              // show the dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
                           }
                         },
                         child: Text(
@@ -182,6 +209,7 @@ class _CreditCardListCheckOutState extends State<CreditCardListCheckOut> {
       itemCount: creditCard.length,
       itemBuilder: (context, index) {
         return RadioListTile(
+          key: ValueKey("CheckOut_card_tile"),
           groupValue: indexSelected,
           title: Text(creditCard.elementAt(index).number),
           value: index,
@@ -214,6 +242,7 @@ class _AddressListCheckOutState extends State<AddressListCheckOut> {
         itemCount: address.length,
         itemBuilder: (context, index) {
           return RadioListTile(
+            key: ValueKey("CheckOut_address_tile"),
             groupValue: indexSelected,
             title: Text(address.elementAt(index).address +
                 " " +
