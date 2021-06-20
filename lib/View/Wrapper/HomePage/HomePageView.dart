@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.lightBlue[100],
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Home Page'),
@@ -35,7 +36,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: Container(
-          color: Colors.lightBlue[100],
           child: GridView.count(
             primary: false,
             padding: const EdgeInsets.all(20),
