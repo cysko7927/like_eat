@@ -47,15 +47,14 @@ class _NicknameChangeState extends State<NicknameChange> {
                   ),
                 ),
                 Container(
-                  margin:
-                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 5, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
-                    color: Colors.blue,
                     textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    splashColor: Colors.blueAccent,
-                    padding: EdgeInsets.all(8.0),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         //TODO: Change nickname for the current user

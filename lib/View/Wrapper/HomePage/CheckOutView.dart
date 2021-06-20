@@ -100,11 +100,11 @@ class _CheckOutState extends State<CheckOut> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 5, bottom: 5),
+                      margin: EdgeInsets.only(top: 5, bottom: 5),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        border: Border.all(),
-                      ),
+                          color: Colors.blue,
+                          border: Border.all(),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: FlatButton(
                         key: ValueKey("CheckOut_proceedPayment_button"),
                         textColor: Colors.white,

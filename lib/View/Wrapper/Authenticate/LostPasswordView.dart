@@ -54,13 +54,14 @@ class _LostPasswordState extends State<LostPassword> {
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
-                    color: Colors.blue,
                     textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    splashColor: Colors.blueAccent,
-                    padding: EdgeInsets.all(8.0),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         _auth.resetPassword(email);

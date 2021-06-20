@@ -40,9 +40,6 @@ class _CreditCardsState extends State<CreditCards> {
             Container(
               margin:
                   EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Form(
                   key: _formKey,
                   child: Column(
@@ -133,22 +130,14 @@ class _CreditCardsState extends State<CreditCards> {
                   )),
             ),
             Container(
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
               margin:
                   EdgeInsets.only(left: 30.0, right: 30, top: 20, bottom: 20),
-              child: Column(children: [
-                Text("List of Credit Card",
-                    style: TextStyle(fontSize: 20.0, color: Colors.black)),
-                Row(
-                  children: [
-                    Expanded(
-                        child:
-                            SizedBox(height: 300.0, child: CreditCardList())),
-                  ],
-                )
-              ]),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: SizedBox(height: 300.0, child: CreditCardList())),
+                ],
+              ),
             )
           ],
         )));

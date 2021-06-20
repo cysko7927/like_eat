@@ -53,12 +53,9 @@ class _SignUpState extends State<SignUp> {
             key: _formKey,
             child: Column(
               children: [
-                Image.asset(
-                  'assets/images/Logo.png',
-                ),
                 Container(
-                  margin:
-                      EdgeInsets.only(left: 30.0, right: 30, top: 5, bottom: 5),
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 30, bottom: 5),
                   child: TextFormField(
                     key: ValueKey("sign_up_name_text"),
                     validator: (value) => value.isEmpty ? "Enter a name" : null,
@@ -185,7 +182,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 SizedBox(height: 12.0),
-                Text(error,
+                Text('$error',
                     style: TextStyle(
                         color: Colors.red,
                         fontSize:
@@ -227,14 +224,15 @@ class _SignUpState extends State<SignUp> {
                 ),
 
                 Container(
+                  margin: EdgeInsets.only(
+                      left: 30.0, right: 30, top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: FlatButton(
                     key: ValueKey("sign_up_register_button"),
-                    color: Colors.blue,
                     textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    splashColor: Colors.blueAccent,
-                    padding: EdgeInsets.all(8.0),
                     onPressed: () async {
                       //If the form is valid
                       if (_formKey.currentState.validate()) {
@@ -272,13 +270,20 @@ class _SignUpState extends State<SignUp> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(child: Text("Have an account?")),
+                    Container(
+                        child: Text(
+                      "Have an account?",
+                      style: TextStyle(fontSize: 20.0),
+                    )),
                     FlatButton(
                         onPressed: () {
                           widget
                               .goToSignIn(); //If the user press the button SignIn,ask to the widget Authenticate to built the SignIn widget
                         },
-                        child: Text("Sign in"))
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(fontSize: 20.0),
+                        ))
                   ],
                 ),
               ],

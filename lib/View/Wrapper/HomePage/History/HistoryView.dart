@@ -26,7 +26,7 @@ class _HistoryState extends State<History> {
           margin: const EdgeInsets.only(top: 5, bottom: 5),
           child: Row(
             children: [
-              Expanded(child: SizedBox(height: 400.0, child: HistoryList())),
+              Expanded(child: SizedBox(height: 800.0, child: HistoryList())),
             ],
           ),
         ),
