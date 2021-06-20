@@ -26,9 +26,13 @@ void main() {
     final productBackIcon = find.byValueKey("Product_backIcon");
 
     final cartGoToPayment = find.byValueKey("Cart_goToPayment_Button");
+    final cartPopUpEmpty = find.byValueKey("CheckOut_emptyCart_PopUp");
 
     final checkOutCardTile = find.byValueKey("CheckOut_card_tile");
     final checkOutAddressTile = find.byValueKey("CheckOut_address_tile");
+
+    final checkOutPopUpError = find.byValueKey("CheckOut_selectStuff_PopUp");
+    final checkOutPopUpOk = find.byValueKey("CheckOut_ok_PopUp");
     final checkOutPaymentButton =
         find.byValueKey("CheckOut_proceedPayment_button");
 
@@ -79,6 +83,12 @@ void main() {
       await driver.tap(cartButton);
       await driver.tap(cartBack);
     });
+    test('You cannot continue with the payment if cart is empty', () async {
+      await driver.tap(cartButton);
+      await driver.tap(cartGoToPayment);
+      await driver.tap(cartPopUpEmpty);
+      await driver.tap(cartBack);
+    });
     test('Put a Product in the cart', () async {
       await driver.tap(catalogButton);
       await driver.tap(inputText);
@@ -91,7 +101,7 @@ void main() {
       await driver.tap(productBackIcon);
       await driver.tap(catalogBack);
     });
-    test('check cart not empty anymore', () async {
+    test('Check cart not empty anymore', () async {
       await driver.tap(cartButton);
       await driver.tap(cartBack);
     });
@@ -107,6 +117,10 @@ void main() {
       await driver.tap(catalogBack);
       await driver.tap(observedButton);
       await driver.tap(observedBack);
+    });
+    test(
+        'Search a Product, remove it from the observed and check if is deleted from Observed List',
+        () async {
       await driver.tap(catalogButton);
       await driver.tap(inputText);
       await driver.enterText("apple");
@@ -123,6 +137,11 @@ void main() {
       await driver.tap(cartButton);
       await driver.tap(cartGoToPayment);
       await driver.tap(checkOutPaymentButton);
+      await driver.tap(checkOutPopUpError);
+      await driver.tap(checkOutCardTile);
+      await driver.tap(checkOutAddressTile);
+      await driver.tap(checkOutPaymentButton);
+      await driver.tap(checkOutPopUpOk);
     });
   });
 }

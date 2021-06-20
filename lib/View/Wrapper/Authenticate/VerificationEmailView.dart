@@ -23,6 +23,7 @@ class _VerificationEmailState extends State<VerificationEmail> {
       appBar: AppBar(
         title: Text('Email Not Verified'),
         leading: IconButton(
+          key: ValueKey("emailVerification_back"),
           icon: Icon(Icons.arrow_back),
           onPressed: () async {
             //The user has tapped the logout button

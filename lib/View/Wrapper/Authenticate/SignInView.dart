@@ -64,6 +64,8 @@ class _State extends State<SignIn> {
                 margin:
                     EdgeInsets.only(left: 30.0, right: 30, top: 15, bottom: 15),
                 child: TextFormField(
+                  key: ValueKey("sign_in_email_text"),
+
                   validator: (value) => value.isEmpty || !emailValid
                       ? "Enter a valid email"
                       : null, //If the email is not valid print at the user to insert a valid Email
@@ -82,6 +84,8 @@ class _State extends State<SignIn> {
                 margin:
                     EdgeInsets.only(left: 30.0, right: 30, top: 15, bottom: 15),
                 child: TextFormField(
+                  key: ValueKey("sign_in_password_text"),
+
                   validator: (value) => value.length < 8
                       ? "Enter a Password greater at least 8 characters"
                       : null, //The password must be greater of 8
@@ -107,6 +111,7 @@ class _State extends State<SignIn> {
               ),
               Container(
                 child: FlatButton(
+                  key: ValueKey("sign_in_login_button"),
                   color: Colors.blue[400],
                   textColor: Colors.white,
                   disabledColor: Colors.grey,
@@ -169,6 +174,7 @@ class _State extends State<SignIn> {
                   ),
                   Container(
                       child: FlatButton(
+                    key: ValueKey("sign_in_enterSignUp_button"),
                     color: Colors.blue[400],
                     textColor: Colors.white,
                     disabledColor: Colors.grey,

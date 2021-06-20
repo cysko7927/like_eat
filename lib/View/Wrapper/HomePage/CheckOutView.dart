@@ -72,6 +72,7 @@ class _CheckOutState extends State<CheckOut> {
                         children: [
                           Expanded(
                               child: SizedBox(
+                            key: ValueKey("CheckOut_card_tile"),
                             height: 200.0,
                             child: CreditCardListCheckOut(cards),
                           )),
@@ -91,6 +92,7 @@ class _CheckOutState extends State<CheckOut> {
                         children: [
                           Expanded(
                               child: SizedBox(
+                            key: ValueKey("CheckOut_address_tile"),
                             height: 200.0,
                             child: AddressListCheckOut(addresses),
                           )),
@@ -110,6 +112,7 @@ class _CheckOutState extends State<CheckOut> {
                           if (globalAddressIndex == -1 ||
                               globalCardIndex == -1) {
                             Widget okButton = FlatButton(
+                              key: ValueKey("CheckOut_selectStuff_PopUp"),
                               child: Text("Ok"),
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -138,6 +141,7 @@ class _CheckOutState extends State<CheckOut> {
                                 await checkOutManager.performPayment();
 
                             Widget okButton = FlatButton(
+                              key: ValueKey("CheckOut_ok_PopUp"),
                               child: Text("Ok"),
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -209,7 +213,6 @@ class _CreditCardListCheckOutState extends State<CreditCardListCheckOut> {
       itemCount: creditCard.length,
       itemBuilder: (context, index) {
         return RadioListTile(
-          key: ValueKey("CheckOut_card_tile"),
           groupValue: indexSelected,
           title: Text(creditCard.elementAt(index).number),
           value: index,
@@ -242,7 +245,6 @@ class _AddressListCheckOutState extends State<AddressListCheckOut> {
         itemCount: address.length,
         itemBuilder: (context, index) {
           return RadioListTile(
-            key: ValueKey("CheckOut_address_tile"),
             groupValue: indexSelected,
             title: Text(address.elementAt(index).address +
                 " " +

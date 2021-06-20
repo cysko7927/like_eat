@@ -47,6 +47,7 @@ class _CartState extends State<Cart> {
                 List<Product> products = checkOutManager.productInTheCart;
                 if (products.isEmpty) {
                   Widget okButton = FlatButton(
+                    key: ValueKey("CheckOut_emptyCart_PopUp"),
                     child: Text("Ok"),
                     onPressed: () {
                       Navigator.of(context).pop();
