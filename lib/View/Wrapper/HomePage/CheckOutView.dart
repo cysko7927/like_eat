@@ -39,14 +39,6 @@ class _CheckOutState extends State<CheckOut> {
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
           title: Text('Check Out'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-              ),
-              onPressed: null,
-            )
-          ],
         ),
         body: SingleChildScrollView(
             child: Column(children: [
@@ -145,9 +137,7 @@ class _CheckOutState extends State<CheckOut> {
                               child: Text("Ok"),
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    'HomePage',
-                                    ModalRoute.withName('HomePage'));
+                                Navigator.of(context).pop();
                               },
                             );
                             if (obtainString(status) == "Payment Done") {
